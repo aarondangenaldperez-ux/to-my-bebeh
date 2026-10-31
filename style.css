@@ -234,11 +234,14 @@ button:focus-visible, a:focus-visible, label:focus-within { outline: 3px solid #
 .lily-stem { fill: none; stroke: #507d52; stroke-width: 6; stroke-linecap: round; }
 .lily-leaf { fill: #80a96e; stroke: #557e58; stroke-width: 1.6; }
 .lily-plant .lily-bloom { transform-box: fill-box; transform-origin: 50% 50%; transform: scale(.42) rotate(-10deg); opacity: .9; transition: transform .8s cubic-bezier(.18,.75,.2,1), opacity .65s; }
-.lily-plant.bloomed .lily-bloom { transform: scale(1) rotate(0); opacity: 1; }
-.petal { fill: #f5b7ca; stroke: #d97f9f; stroke-width: 1.5; stroke-linejoin: round; }
+.lily-plant.bloomed .lily-bloom { transform: scale(1) rotate(0); opacity: 1; filter: drop-shadow(0 5px 5px rgba(139,66,100,.13)); }
+.petal { fill: #f5b7ca; stroke: #c9688c; stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
 .freckles { fill: #bd6688; opacity: .7; pointer-events: none; }
-.p1 { transform: rotate(0deg); fill: #f8d5df; }.p2 { transform: rotate(60deg); fill: #f2a9c1; }.p3 { transform: rotate(120deg); fill: #f8cfdb; }.p4 { transform: rotate(180deg); fill: #eea0ba; }.p5 { transform: rotate(240deg); fill: #f7c1d1; }.p6 { transform: rotate(300deg); fill: #f1a9c0; }
-.lily-center { fill: #e7b45e; }.lily-stamens { fill: none; stroke: #b5813d; stroke-width: 2.5; stroke-linecap: round; }.pollen { fill: #f0d27b; }
+.p1 { fill: #f8d5df; }.p2 { fill: #f2a9c1; }.p3 { fill: #f8cfdb; }.p4 { fill: #eea0ba; }.p5 { fill: #f7c1d1; }.p6 { fill: #f1a9c0; }
+.lily-center { fill: #d7a45a; stroke: #b77b3f; stroke-width: 1.2; }
+.lily-stamens { fill: none; stroke: #a86b38; stroke-width: 2.4; stroke-linecap: round; }
+.lily-pistil { fill: none; stroke: #6f9a63; stroke-width: 3.2; stroke-linecap: round; }
+.pollen { fill: #9b6639; stroke: #f2d18a; stroke-width: .8; }
 .meadow-foreground { position: absolute; z-index: 4; bottom: 4px; left: 0; right: 0; display: flex; justify-content: space-around; color: #fff0cd; text-shadow: 0 2px 3px #587c4a; font-size: 20px; pointer-events: none; }
 .garden-footer { width: min(100%, 900px); display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 13px auto 0; padding: 0 4px; }
 .garden-progress { color: #9e7685; font-size: .8rem; }
@@ -375,4 +378,54 @@ button:focus-visible, a:focus-visible, label:focus-within { outline: 3px solid #
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+
+/* Snoopy Corner: Pinterest-sourced postcard scrapbook */
+.snoopy-section { overflow: hidden; }
+.snoopy-section .snoopy-tabs { margin: 24px auto 26px; }
+.snoopy-section .snoopy-tab { min-width: 104px; }
+.snoopy-scene { min-height: 0; padding: 25px clamp(14px,3.5vw,32px) 27px; background: radial-gradient(circle at 8% 12%, #fff 0 4px, transparent 5px), linear-gradient(145deg,#fff5f7 0%,#fffaf6 66%,#f0f4e9 100%); }
+.scene-copy h3 { margin: 5px 0 17px; }
+.scene-number { display: inline-block; color: #bd8499; font-size: .62rem; letter-spacing: 3px; font-weight: 700; }
+.peanuts-postcard, .doghouse-postcard { position: relative; width: min(100%, 560px); margin: 0 auto 17px; padding: 16px 16px 10px; border: 1px solid #ead4da; border-radius: 8px; background: #fffefa; box-shadow: 0 12px 27px rgba(126,77,95,.12); transform: rotate(-.45deg); }
+.fifi-postcard { transform: rotate(.45deg); }
+.postcard-tape { position: absolute; z-index: 4; top: -9px; left: calc(50% - 34px); width: 68px; height: 20px; background: rgba(231,185,199,.72); transform: rotate(-2deg); box-shadow: 0 2px 5px rgba(110,70,80,.06); }
+.postcard-stamp { position: absolute; z-index: 4; top: 14px; right: 17px; width: 34px; height: 34px; display: grid; place-items: center; border: 1px dashed #d9a5b8; border-radius: 50%; color: #c77e9b; background: rgba(255,250,251,.9); font-size: 20px; }
+.character-art { display: block; width: 100%; height: clamp(230px, 40vw, 350px); object-fit: contain; mix-blend-mode: normal; filter: drop-shadow(0 4px 3px rgba(105,73,84,.08)); }
+.peanuts-postcard figcaption, .doghouse-postcard figcaption { margin-top: 7px; color: #ad8290; font: italic .78rem "Playfair Display",serif; text-align: center; }
+.artwork-fallback { min-height: 230px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; border: 1px dashed #deb6c5; border-radius: 5px; color: #a66b84; background: linear-gradient(145deg,#fff4f7,#f8f0eb); text-align: center; }
+.artwork-fallback span { font-size: 46px; }
+.artwork-fallback b { font: 600 1.1rem "Playfair Display",serif; }
+.artwork-fallback small { max-width: 270px; color: #a98a95; font-size: .73rem; }
+.snoopy-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 9px 13px; margin: 12px auto 0; }
+.snoopy-actions .heart-button { margin: 0; }
+.artwork-upload { display: inline-flex; align-items: center; min-height: 38px; padding: 8px 14px; border: 1px dashed #dbadbd; border-radius: 30px; color: #a46b82; background: #fff9fb; font-size: .76rem; font-weight: 700; cursor: pointer; }
+.pin-source { color: #a46b82; font-size: .74rem; text-decoration: underline; text-underline-offset: 3px; }
+.pin-source:hover { color: #bd5f86; }
+.video-source::before { content: "▶ "; font-size: .65rem; }
+.doghouse-layout { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); align-items: center; gap: clamp(14px,3vw,25px); width: min(100%, 820px); margin: 0 auto; }
+.doghouse-postcard { width: 100%; margin: 0; transform: rotate(-.5deg); }
+.doghouse-postcard img { display: block; width: 100%; height: 275px; object-fit: contain; background: #fff; }
+.doghouse-postcard .pin-source { display: block; margin: 9px 0 2px; text-align: center; }
+.doghouse-interaction { min-width: 0; text-align: center; }
+.doghouse-garden { width: 100%; height: 250px; }
+.doghouse-button { transform: translateX(-50%) scale(.86); transform-origin: bottom center; }
+.doghouse-button:hover { transform: translateX(-50%) translateY(-3px) scale(.86); }
+.doghouse-interaction .pill-button { margin-top: 4px; }
+
+@media (max-width: 760px) {
+  .doghouse-layout { grid-template-columns: 1fr; max-width: 540px; }
+  .doghouse-postcard img { height: 245px; }
+  .doghouse-interaction { width: min(100%, 430px); margin: 0 auto; }
+  .snoopy-scene { padding: 22px 14px; }
+}
+@media (max-width: 480px) {
+  .peanuts-postcard, .doghouse-postcard { padding: 12px 12px 9px; }
+  .character-art { height: 255px; }
+  .doghouse-postcard img { height: 220px; }
+  .snoopy-actions { gap: 8px; }
+  .snoopy-actions .heart-button { width: 100%; justify-content: center; }
+  .artwork-upload, .pin-source { font-size: .71rem; }
+  .lily-plant svg { overflow: visible; }
 }

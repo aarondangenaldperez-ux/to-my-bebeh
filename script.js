@@ -272,11 +272,15 @@
   const artworkImages = [$("#homeArtworkPreview"), $("#woodstockArtworkPreview"), $("#fifiArtworkPreview")];
 
   // If you add these image files to the repository, everyone visiting the site can see them.
+  function artworkFallback(image, visible) {
+    const frame = image.closest("[data-artwork-frame]");
+    const fallback = frame ? $(".artwork-fallback", frame) : null;
+    if (fallback) fallback.hidden = !visible;
+  }
+
   function revealPublicArtwork(image) {
     image.classList.remove("hidden");
-    const frame = image.closest("label");
-    const placeholder = frame ? $(".character-placeholder", frame) : null;
-    if (placeholder) placeholder.classList.add("hidden");
+    artworkFallback(image, false);
     if (image.id === "homeArtworkPreview") $("#coverBouquet")?.classList.add("hidden");
   }
 
@@ -284,11 +288,11 @@
     if (!image) return;
     image.addEventListener("load", () => revealPublicArtwork(image));
     image.addEventListener("error", () => {
-      // A missing optional artwork file leaves the decorative placeholder visible.
       image.classList.add("hidden");
+      artworkFallback(image, true);
     });
-    // Also handle images that finished loading before this deferred script ran.
     if (image.complete && image.naturalWidth > 0) revealPublicArtwork(image);
+    else if (image.complete && image.naturalWidth === 0 && image.id !== "homeArtworkPreview") artworkFallback(image, true);
   });
 
   function applyArtwork(imageId, dataUrl) {
@@ -296,12 +300,25 @@
     if (!image || !dataUrl) return;
     image.src = dataUrl;
     image.classList.remove("hidden");
-    const frame = image.closest("label");
-    const placeholder = frame ? $(".character-placeholder", frame) : null;
-    if (placeholder) placeholder.classList.add("hidden");
+    artworkFallback(image, false);
     if (imageId === "homeArtworkPreview") {
       const bouquet = $("#coverBouquet");
       if (bouquet) bouquet.classList.add("hidden");
+    }
+  }
+
+  const doghousePinArt = $("#doghousePinArt");
+  if (doghousePinArt) {
+    doghousePinArt.addEventListener("error", () => {
+      doghousePinArt.classList.add("hidden");
+      $(".doghouse-art-fallback")?.removeAttribute("hidden");
+    });
+    doghousePinArt.addEventListener("load", () => {
+      $(".doghouse-art-fallback")?.setAttribute("hidden", "");
+      doghousePinArt.classList.remove("hidden");
+    });
+    if (doghousePinArt.complete && doghousePinArt.naturalWidth === 0) {
+      $(".doghouse-art-fallback")?.removeAttribute("hidden");
     }
   }
 
