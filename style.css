@@ -451,3 +451,20 @@ button:focus-visible, a:focus-visible, label:focus-within { outline: 3px solid #
 .snoopy-personal-message p { margin: 0; }
 .snoopy-personal-message p + p { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e9c8d5; }
 .snoopy-youtube-target { width: 100%; height: 100%; }
+
+
+/* Four short Peanuts moments: video disappears before its personal note appears. */
+.snoopy-moments { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; width: min(100%, 680px); margin: 15px auto 0; }
+.snoopy-moment { min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+.snoopy-moment .play-moment-button { width: 100%; min-height: 42px; }
+.snoopy-moment .snoopy-video-player { width: 100%; margin: 9px 0 0; padding: 9px; }
+.snoopy-moment .video-player-heading { margin-bottom: 7px; }
+.snoopy-moment .video-player-title { display: none; }
+.snoopy-personal-message[hidden] { display: none !important; }
+.snoopy-personal-message { width: min(100%, 680px); margin: 12px auto 2px; padding: 17px 19px; border: 1px solid #efd0dc; border-radius: 15px; background: linear-gradient(135deg, #fff5f9, #fffdfd); color: #765565; font: 400 .94rem/1.8 "DM Sans", sans-serif; text-align: center; box-shadow: 0 10px 24px rgba(132,78,100,.11); transform-origin: 50% 70%; }
+.snoopy-personal-message p { margin: 0; }
+.message-pop-in { animation: message-pop-in .62s cubic-bezier(.18,.89,.32,1.28) both; }
+@keyframes message-pop-in { 0% { opacity: 0; transform: translateY(18px) scale(.82); } 65% { opacity: 1; transform: translateY(-3px) scale(1.035); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+.doghouse-moments { width: min(100%, 520px); }
+@media (max-width: 520px) { .snoopy-moments { grid-template-columns: 1fr; gap: 9px; } .snoopy-personal-message { padding: 15px 14px; font-size: .88rem; } }
+@media (prefers-reduced-motion: reduce) { .message-pop-in { animation: none; } }

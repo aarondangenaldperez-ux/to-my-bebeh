@@ -42,8 +42,11 @@
       target.className = "snoopy-youtube-target";
       frameContainer.appendChild(target);
     }
-    const message = $(".snoopy-personal-message", playerElement);
-    if (message) message.hidden = true;
+    const message = $(".snoopy-personal-message", playerElement.parentElement);
+    if (message) {
+      message.hidden = true;
+      message.classList.remove("message-pop-in");
+    }
     if (hide) playerElement.hidden = true;
   }
 
@@ -311,8 +314,7 @@
         const isSelected = scene.id === sceneId;
         scene.hidden = !isSelected;
         if (!isSelected) {
-          const player = $(".snoopy-video-player", scene);
-          if (player) stopSnoopyVideo(player);
+          $$(".snoopy-video-player", scene).forEach(player => stopSnoopyVideo(player));
         }
       });
     });
@@ -433,35 +435,29 @@
     }
   });
 
-  // Play curated Peanuts moments. A personal message appears only when the video ends.
+  // Four short official Peanuts clips, each paired with exactly one user-written message.
   $$('[data-play-snoopy-video]').forEach(button => {
+    const moment = button.closest(".snoopy-moment");
     const scene = button.closest(".snoopy-scene");
-    const playerElement = scene?.querySelector(".snoopy-video-player");
+    const playerElement = moment?.querySelector(".snoopy-video-player");
     const frameContainer = playerElement?.querySelector(".snoopy-video-frame");
     const title = playerElement?.querySelector(".video-player-title");
-    const credit = playerElement?.querySelector(".video-credit");
     const stopButton = playerElement?.querySelector(".stop-moment-button");
-    const personalMessage = playerElement?.querySelector(".snoopy-personal-message");
-    if (!scene || !playerElement || !frameContainer || !stopButton) return;
+    const personalMessage = moment?.querySelector(".snoopy-personal-message");
+    if (!moment || !scene || !playerElement || !frameContainer || !stopButton || !personalMessage) return;
 
     const videoId = button.dataset.playSnoopyVideo;
-    const videoTitle = button.dataset.videoTitle || "A little Snoopy moment";
+    const videoTitle = button.dataset.videoTitle || "A little Peanuts moment";
 
     button.addEventListener("click", async () => {
-      // Stop every other clip first so only one video can play at a time.
-      $$(".snoopy-video-player").forEach(otherPlayer => {
-        if (otherPlayer !== playerElement) stopSnoopyVideo(otherPlayer);
-      });
-      stopSnoopyVideo(playerElement, false);
+      // Only one clip or message is visible at a time.
+      $$(".snoopy-video-player").forEach(otherPlayer => stopSnoopyVideo(otherPlayer));
       if (title) title.textContent = videoTitle;
-      if (credit) credit.href = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`;
-      if (personalMessage) personalMessage.hidden = true;
       playerElement.hidden = false;
       playerElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
       try {
         const YT = await loadYouTubeIframeApi();
-        // Ignore a late API response if the visitor has already left this scene.
         if (playerElement.hidden || scene.hidden) return;
         const target = document.createElement("div");
         target.className = "snoopy-youtube-target";
@@ -474,12 +470,17 @@
           events: {
             onReady: event => event.target.playVideo(),
             onStateChange: event => {
-              if (event.data === YT.PlayerState.ENDED && personalMessage && !scene.hidden && !playerElement.hidden) {
+              if (event.data === YT.PlayerState.ENDED && !scene.hidden && !playerElement.hidden) {
+                // Remove the video first, then reveal the personal note as its own animated popup.
+                stopSnoopyVideo(playerElement, true);
                 personalMessage.hidden = false;
-                personalMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                personalMessage.classList.remove("message-pop-in");
+                void personalMessage.offsetWidth;
+                personalMessage.classList.add("message-pop-in");
+                personalMessage.scrollIntoView({ behavior: "smooth", block: "center" });
               }
             },
-            onError: event => console.warn("This YouTube video could not be played here.", event.data)
+            onError: event => console.warn("This Peanuts clip could not be played here.", event.data)
           }
         });
         snoopyPlayers.set(playerElement, player);
