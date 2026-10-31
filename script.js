@@ -305,6 +305,8 @@
   snoopyTabs.forEach(tab => {
     tab.addEventListener("click", () => {
       const sceneId = tab.dataset.scene;
+      // Changing character artwork also stops any currently playing personal clip.
+      $$(".snoopy-video-player", $("#snoopy")).forEach(player => stopSnoopyVideo(player));
       snoopyTabs.forEach(item => {
         const active = item === tab;
         item.classList.toggle("active", active);
@@ -438,13 +440,13 @@
   // Four short official Peanuts clips, each paired with exactly one user-written message.
   $$('[data-play-snoopy-video]').forEach(button => {
     const moment = button.closest(".snoopy-moment");
-    const scene = button.closest(".snoopy-scene");
+    const scene = button.closest(".snoopy-scene"); // The four shared moment cards sit outside the character tabs.
     const playerElement = moment?.querySelector(".snoopy-video-player");
     const frameContainer = playerElement?.querySelector(".snoopy-video-frame");
     const title = playerElement?.querySelector(".video-player-title");
     const stopButton = playerElement?.querySelector(".stop-moment-button");
     const personalMessage = moment?.querySelector(".snoopy-personal-message");
-    if (!moment || !scene || !playerElement || !frameContainer || !stopButton || !personalMessage) return;
+    if (!moment || !playerElement || !frameContainer || !stopButton || !personalMessage) return;
 
     const videoId = button.dataset.playSnoopyVideo;
     const videoTitle = button.dataset.videoTitle || "A little Peanuts moment";
@@ -458,7 +460,7 @@
 
       try {
         const YT = await loadYouTubeIframeApi();
-        if (playerElement.hidden || scene.hidden) return;
+        if (playerElement.hidden || (scene && scene.hidden)) return;
         const target = document.createElement("div");
         target.className = "snoopy-youtube-target";
         frameContainer.replaceChildren(target);
@@ -470,7 +472,7 @@
           events: {
             onReady: event => event.target.playVideo(),
             onStateChange: event => {
-              if (event.data === YT.PlayerState.ENDED && !scene.hidden && !playerElement.hidden) {
+              if (event.data === YT.PlayerState.ENDED && (!scene || !scene.hidden) && !playerElement.hidden) {
                 // Remove the video first, then reveal the personal note as its own animated popup.
                 stopSnoopyVideo(playerElement, true);
                 personalMessage.hidden = false;
