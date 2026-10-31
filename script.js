@@ -1,24 +1,14 @@
-// ======================================
-// BUTTON-ONLY SECTION NAVIGATION
-// ======================================
+// SECTION NAVIGATION
 
 const sections = document.querySelectorAll(".page-section");
 const navigationButtons = document.querySelectorAll("[data-section]");
-const navButtons = document.querySelectorAll(".nav-button");
 
 function openSection(sectionId) {
-  const target = document.getElementById(sectionId);
-
-  if (!target || !target.classList.contains("page-section")) {
-    return;
-  }
-
   sections.forEach(section => {
     section.hidden = section.id !== sectionId;
-    section.classList.toggle("active", section.id === sectionId);
   });
 
-  navButtons.forEach(button => {
+  navigationButtons.forEach(button => {
     button.classList.toggle(
       "active",
       button.dataset.section === sectionId
@@ -38,116 +28,168 @@ navigationButtons.forEach(button => {
 });
 
 
-// ======================================
-// OUR MEMORIES - PHOTO GALLERY
-// ======================================
+// PHOTO GALLERY
 
-const photoCards = document.querySelectorAll(".photo-card");
-const photoViewer = document.getElementById("photo-viewer");
-const enlargedPhoto = document.getElementById("enlarged-photo");
+const photoButtons = document.querySelectorAll(".memory-photo");
+const photoViewer = document.getElementById("photoViewer");
+const expandedPhoto = document.getElementById("expandedPhoto");
+const closeViewer = document.getElementById("closeViewer");
+const previousPhoto = document.getElementById("previousPhoto");
+const nextPhoto = document.getElementById("nextPhoto");
 
-let currentPhoto = 0;
+const photoSources = Array.from(photoButtons).map(button => {
+  return button.querySelector("img").getAttribute("src");
+});
+
+let currentPhotoIndex = 0;
 
 function showPhoto(index) {
-  if (!photoCards.length) return;
+  currentPhotoIndex =
+    (index + photoSources.length) % photoSources.length;
 
-  currentPhoto =
-    (index + photoCards.length) % photoCards.length;
-
-  const image = photoCards[currentPhoto].querySelector("img");
-
-  enlargedPhoto.src = image.src;
-  enlargedPhoto.alt = image.alt;
-
-  photoViewer.hidden = false;
+  expandedPhoto.src = photoSources[currentPhotoIndex];
 }
 
-photoCards.forEach((card, index) => {
-  card.addEventListener("click", () => {
+photoButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    const index = Number(button.dataset.photo);
     showPhoto(index);
+    photoViewer.hidden = false;
   });
 });
 
-document.getElementById("close-photo").addEventListener("click", () => {
+closeViewer.addEventListener("click", () => {
   photoViewer.hidden = true;
 });
 
-document.getElementById("previous-photo").addEventListener("click", () => {
-  showPhoto(currentPhoto - 1);
+previousPhoto.addEventListener("click", () => {
+  showPhoto(currentPhotoIndex - 1);
 });
 
-document.getElementById("next-photo").addEventListener("click", () => {
-  showPhoto(currentPhoto + 1);
+nextPhoto.addEventListener("click", () => {
+  showPhoto(currentPhotoIndex + 1);
 });
 
 
-// ======================================
-// LOVE LETTER - OPEN AND CLOSE
-// ======================================
+// LOVE LETTER
 
 const envelope = document.getElementById("envelope");
-const letterContent = document.getElementById("letter-content");
+const openLetterButton = document.getElementById("openLetter");
+const closeLetterButton = document.getElementById("closeLetter");
+const letterContent = document.getElementById("letterContent");
 
-envelope.addEventListener("click", () => {
-  letterContent.hidden = false;
-  envelope.hidden = true;
+openLetterButton.addEventListener("click", () => {
+  envelope.classList.add("open");
+
+  setTimeout(() => {
+    letterContent.hidden = false;
+    openLetterButton.hidden = true;
+  }, 450);
 });
 
-document.getElementById("close-letter").addEventListener("click", () => {
+closeLetterButton.addEventListener("click", () => {
   letterContent.hidden = true;
-  envelope.hidden = false;
+  openLetterButton.hidden = false;
+  envelope.classList.remove("open");
 });
 
 
-// ======================================
-// LILY GARDEN - BLOOMING LILIES
-// ======================================
+// LILY GARDEN
 
-const lilies = document.querySelectorAll(".lily-button");
-const gardenMessage = document.getElementById("garden-message");
+const lilies = document.querySelectorAll(".lily-plant");
+const gardenPopup = document.getElementById("gardenPopup");
+const closeGardenPopup = document.getElementById("closeGardenPopup");
 
-lilies.forEach((lily, index) => {
+let bloomedLilies = new Set();
+let gardenPopupShown = false;
+
+lilies.forEach(lily => {
   lily.addEventListener("click", () => {
-    const hasBloomed = lily.classList.toggle("bloomed");
+    const lilyIndex = Number(lily.dataset.lily);
 
-    lily.setAttribute(
-      "aria-pressed",
-      hasBloomed ? "true" : "false"
-    );
+    if (lily.classList.contains("bloomed")) {
+      return;
+    }
 
-    const bloomedCount =
-      document.querySelectorAll(".lily-button.bloomed").length;
+    lily.classList.add("bloomed");
+    lily.setAttribute("aria-pressed", "true");
+    bloomedLilies.add(lilyIndex);
 
-    gardenMessage.textContent = hasBloomed
-      ? `Lily ${index + 1} has bloomed.`
-      : `Lily ${index + 1} is closed.`;
+    if (
+      bloomedLilies.size === lilies.length &&
+      !gardenPopupShown
+    ) {
+      gardenPopupShown = true;
 
-    if (bloomedCount === lilies.length) {
-      gardenMessage.textContent = "All the lilies have bloomed.";
+      setTimeout(() => {
+        gardenPopup.hidden = false;
+      }, 1000);
     }
   });
 });
 
+closeGardenPopup.addEventListener("click", () => {
+  gardenPopup.hidden = true;
+});
 
-// ======================================
-// DAYS TOGETHER - LIVE COUNTER
-// Start date: August 14, 2025
-// ======================================
+gardenPopup.addEventListener("click", event => {
+  if (event.target === gardenPopup) {
+    gardenPopup.hidden = true;
+  }
+});
 
-const startDate = new Date(2025, 7, 14);
+
+// PLAYLIST
+
+const songAudio = document.getElementById("songAudio");
+const playSongButton = document.getElementById("playSong");
+const pauseSongButton = document.getElementById("pauseSong");
+const audioStatus = document.getElementById("audioStatus");
+
+playSongButton.addEventListener("click", async () => {
+  try {
+    await songAudio.play();
+    audioStatus.textContent = "";
+  } catch (error) {
+    audioStatus.textContent =
+      "Add your authorized song audio file to the audio folder.";
+  }
+});
+
+pauseSongButton.addEventListener("click", () => {
+  songAudio.pause();
+});
+
+
+// CALENDAR COUNTER
+
+const relationshipStart = new Date(2025, 7, 14);
 
 function updateCounter() {
-  const now = new Date();
+  const today = new Date();
 
-  const today = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate()
+  const startOfToday = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
   );
 
-  let years = today.getFullYear() - startDate.getFullYear();
-  let months = today.getMonth() - startDate.getMonth();
-  let days = today.getDate() - startDate.getDate();
+  const totalMilliseconds =
+    startOfToday - relationshipStart;
+
+  const totalDays = Math.max(
+    0,
+    Math.floor(totalMilliseconds / (1000 * 60 * 60 * 24))
+  );
+
+  let years =
+    today.getFullYear() - relationshipStart.getFullYear();
+
+  let months =
+    today.getMonth() - relationshipStart.getMonth();
+
+  let days =
+    today.getDate() - relationshipStart.getDate();
 
   if (days < 0) {
     months--;
@@ -166,68 +208,22 @@ function updateCounter() {
     months += 12;
   }
 
-  const totalDays = Math.floor(
-    (today - startDate) / 86400000
-  );
-
-  document.getElementById("total-days").textContent =
-    Math.max(0, totalDays).toLocaleString();
-
-  document.getElementById("years").textContent =
-    Math.max(0, years);
-
-  document.getElementById("months").textContent =
-    Math.max(0, months);
-
-  document.getElementById("remaining-days").textContent =
-    Math.max(0, days);
+  document.getElementById("totalDays").textContent = totalDays;
+  document.getElementById("years").textContent = years;
+  document.getElementById("months").textContent = months;
+  document.getElementById("days").textContent = days;
 }
 
 updateCounter();
-setInterval(updateCounter, 60000);
 
 
-// ======================================
-// SECRET SURPRISE - GIFT BOX
-// ======================================
+// SECRET GIFT
 
-const giftBox = document.getElementById("gift-box");
-const surpriseMessage = document.getElementById("surprise-message");
+const giftButton = document.getElementById("giftButton");
+const secretMessage = document.getElementById("secretMessage");
 
-giftBox.addEventListener("click", () => {
-  const isOpening = surpriseMessage.hidden;
-
-  surpriseMessage.hidden = !isOpening;
-  giftBox.classList.toggle("opened", isOpening);
-
-  giftBox.querySelector(".gift-label").textContent =
-    isOpening ? "Close gift" : "Open gift";
+giftButton.addEventListener("click", () => {
+  giftButton.classList.add("opened");
+  secretMessage.hidden = false;
+  giftButton.disabled = true;
 });
-
-
-// ======================================
-// PHOTO VIEWER - KEYBOARD SUPPORT
-// ======================================
-
-document.addEventListener("keydown", event => {
-  if (photoViewer.hidden) return;
-
-  if (event.key === "Escape") {
-    photoViewer.hidden = true;
-  }
-
-  if (event.key === "ArrowLeft") {
-    showPhoto(currentPhoto - 1);
-  }
-
-  if (event.key === "ArrowRight") {
-    showPhoto(currentPhoto + 1);
-  }
-});
-
-
-// ======================================
-// INITIAL PAGE
-// ======================================
-
-openSection("home");
