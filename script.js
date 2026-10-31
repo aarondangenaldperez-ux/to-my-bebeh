@@ -1,119 +1,99 @@
-"use strict";
+document.addEventListener("DOMContentLoaded", () => {
 
-(() => {
+  /* =====================================
+     PAGE NAVIGATION
+  ===================================== */
 
-  const $ = (selector, root = document) =>
-    root.querySelector(selector);
+  const homeScreen = document.getElementById("home");
+  const site = document.getElementById("site");
+  const openSiteButton = document.getElementById("openSite");
+  const navigation = document.getElementById("navigation");
 
-  const $$ = (selector, root = document) =>
-    [...root.querySelectorAll(selector)];
+  const sections = document.querySelectorAll(".page-section");
+  const navigationButtons = document.querySelectorAll("[data-page]");
 
+  function showPage(pageName) {
 
-  /* ======================================
-     1. NAVIGATION
-  ====================================== */
-
-  const home = $("#home");
-  const siteHeader = $("#siteHeader");
-
-  const pages = $$(".page-section");
-  const navButtons = $$(".nav-button");
-
-  function showPage(id) {
-
-    if (id === "home") {
-
-      siteHeader.hidden = true;
-      home.hidden = false;
-
-      pages.forEach(page => {
-        page.hidden = true;
-      });
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
+    if (pageName === "home") {
+      site.classList.add("hidden");
+      homeScreen.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    const target = document.getElementById(id);
+    const selectedSection = document.getElementById(pageName);
 
-    if (!target || !pages.includes(target)) {
+    if (!selectedSection) {
+      console.warn("Page not found:", pageName);
       return;
     }
 
-    home.hidden = true;
-    siteHeader.hidden = false;
+    homeScreen.classList.add("hidden");
+    site.classList.remove("hidden");
 
-    pages.forEach(page => {
-      page.hidden = page !== target;
+    sections.forEach(section => {
+      section.classList.add("hidden");
     });
 
-    navButtons.forEach(button => {
+    selectedSection.classList.remove("hidden");
 
-      const active = button.dataset.page === id;
-
-      button.classList.toggle("active", active);
-
-      if (active) {
-        button.setAttribute("aria-current", "page");
-      } else {
-        button.removeAttribute("aria-current");
-      }
-
+    navigationButtons.forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.page === pageName
+      );
     });
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-
-  $("#openSite").addEventListener("click", () => {
+  openSiteButton.addEventListener("click", () => {
     showPage("playlist");
   });
 
-
-  $("#navigation").addEventListener("click", event => {
-
+  navigation.addEventListener("click", event => {
     const button = event.target.closest("[data-page]");
 
     if (!button) return;
 
     showPage(button.dataset.page);
-
   });
 
 
-  $$('[data-go="home"]').forEach(link => {
+  /* =====================================
+     LETTER OPEN / CLOSE
+  ===================================== */
 
-    link.addEventListener("click", event => {
+  const openLetterButton = document.getElementById("openLetter");
+  const letterText = document.getElementById("letterText");
+  const envelope = document.getElementById("envelope");
 
-      event.preventDefault();
+  openLetterButton.addEventListener("click", () => {
 
-      showPage("home");
+    const isHidden = letterText.classList.contains("hidden");
 
-    });
+    letterText.classList.toggle("hidden");
 
-  });
-
-
-
-  /* ======================================
-     2. YOUTUBE PLAYER
-  ====================================== */
-
-  const songPlayer = $("#songPlayer");
-
-  function sendPlayerCommand(command) {
-
-    if (!songPlayer?.contentWindow) {
-      return;
+    if (isHidden) {
+      openLetterButton.textContent = "Close Letter";
+      envelope.classList.add("letter-open");
+    } else {
+      openLetterButton.textContent = "Open Letter";
+      envelope.classList.remove("letter-open");
     }
+
+  });
+
+
+  /* =====================================
+     SONG PLAY / PAUSE
+  ===================================== */
+
+  const songPlayer = document.getElementById("songPlayer");
+  const playSongButton = document.getElementById("playSong");
+  const pauseSongButton = document.getElementById("pauseSong");
+
+  function sendSongCommand(command) {
 
     songPlayer.contentWindow.postMessage(
       JSON.stringify({
@@ -121,740 +101,309 @@
         func: command,
         args: []
       }),
-      "https://www.youtube-nocookie.com"
+      "*"
     );
 
   }
 
+  playSongButton.addEventListener("click", () => {
+    sendSongCommand("playVideo");
+  });
 
-  $("#playSong").addEventListener("click", () => {
-    sendPlayerCommand("playVideo");
+  pauseSongButton.addEventListener("click", () => {
+    sendSongCommand("pauseVideo");
   });
 
 
-  $("#pauseSong").addEventListener("click", () => {
-    sendPlayerCommand("pauseVideo");
-  });
+  /* =====================================
+     ANNIVERSARY COUNTER
+     START DATE: AUGUST 14, 2025
+  ===================================== */
 
-
-
-  /* ======================================
-     3. LOVE LETTER
-  ====================================== */
-
-  const envelope = $("#envelope");
-  const letterContent = $("#letterContent");
-  const openLetterButton = $("#openLetter");
-
-
-  openLetterButton.addEventListener("click", () => {
-
-    envelope.classList.add("open");
-
-    openLetterButton.hidden = true;
-
-    window.setTimeout(() => {
-
-      letterContent.hidden = false;
-
-      letterContent.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
-      });
-
-    }, 420);
-
-  });
-
-
-  $("#closeLetter").addEventListener("click", () => {
-
-    letterContent.hidden = true;
-
-    envelope.classList.remove("open");
-
-    openLetterButton.hidden = false;
-
-  });
-
-
-
-  /* ======================================
-     4. ANNIVERSARY COUNTER
-     Starting date: August 14, 2025
-  ====================================== */
-
-  const relationshipStart = new Date(2025, 7, 14);
-
-
-  function addMonthsClamped(date, amount) {
-
-    const result = new Date(
-      date.getFullYear(),
-      date.getMonth() + amount,
-      1
-    );
-
-    const finalDay = new Date(
-      result.getFullYear(),
-      result.getMonth() + 1,
-      0
-    ).getDate();
-
-    result.setDate(
-      Math.min(date.getDate(), finalDay)
-    );
-
-    return result;
-
-  }
-
+  const startDate = new Date(2025, 7, 14);
 
   function updateCounter() {
 
-    const now = new Date();
+    const today = new Date();
 
-    const today = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
+    const todayDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
     );
+
+    const totalMilliseconds = todayDate - startDate;
 
     const totalDays = Math.max(
       0,
-      Math.floor(
-        (today - relationshipStart) / 86400000
-      )
+      Math.floor(totalMilliseconds / 86400000)
     );
 
+    let years =
+      todayDate.getFullYear() - startDate.getFullYear();
 
-    let elapsedMonths = Math.max(
-      0,
-      (today.getFullYear() - relationshipStart.getFullYear()) * 12
-      + today.getMonth()
-      - relationshipStart.getMonth()
-    );
+    let months =
+      todayDate.getMonth() - startDate.getMonth();
 
+    let days =
+      todayDate.getDate() - startDate.getDate();
 
-    let lastAnniversary = addMonthsClamped(
-      relationshipStart,
-      elapsedMonths
-    );
+    if (days < 0) {
+      months--;
 
+      const previousMonthDays = new Date(
+        todayDate.getFullYear(),
+        todayDate.getMonth(),
+        0
+      ).getDate();
 
-    if (lastAnniversary > today) {
-
-      elapsedMonths--;
-
-      lastAnniversary = addMonthsClamped(
-        relationshipStart,
-        elapsedMonths
-      );
-
+      days += previousMonthDays;
     }
 
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
 
-    const elapsedYears = Math.floor(
-      elapsedMonths / 12
-    );
-
-    const remainingMonths = elapsedMonths % 12;
-
-    const remainingDays = Math.max(
-      0,
-      Math.floor(
-        (today - lastAnniversary) / 86400000
-      )
-    );
-
-
-    $("#totalDays").textContent =
-      totalDays.toLocaleString();
-
-    $("#years").textContent = elapsedYears;
-
-    $("#months").textContent = remainingMonths;
-
-    $("#days").textContent = remainingDays;
+    document.getElementById("totalDays").textContent = totalDays;
+    document.getElementById("years").textContent = years;
+    document.getElementById("months").textContent = months;
+    document.getElementById("days").textContent = days;
 
   }
-
 
   updateCounter();
 
 
+  /* =====================================
+     MEMORY PHOTO UPLOADS
+  ===================================== */
 
-  /* ======================================
-     5. LILY GARDEN
-  ====================================== */
+  const memoryFiles = document.querySelectorAll("[data-memory-file]");
+  const memoryPreviews = document.querySelectorAll("[data-memory-index]");
 
-  const lilies = $$(".lily-plant");
+  const memoryImages = new Array(6).fill(null);
+  let currentMemoryIndex = 0;
 
-  const gardenPopup = $("#gardenPopup");
+  const photoViewer = document.getElementById("photoViewer");
+  const largePhoto = document.getElementById("largePhoto");
 
-  const bloomCount = $("#bloomCount");
+  function openMemoryViewer(index) {
 
-  let popupTimer = null;
+    if (!memoryImages[index]) return;
 
+    currentMemoryIndex = index;
+    largePhoto.src = memoryImages[index];
 
-  function updateBloomCount() {
-
-    const bloomed = lilies.filter(lily =>
-      lily.classList.contains("bloomed")
-    ).length;
-
-
-    bloomCount.textContent =
-      `${bloomed} of ${lilies.length} lilies bloomed`;
-
-    return bloomed;
+    photoViewer.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
 
   }
 
+  function updateViewerImage() {
+
+    if (!memoryImages[currentMemoryIndex]) return;
+
+    largePhoto.src = memoryImages[currentMemoryIndex];
+
+  }
+
+  memoryFiles.forEach(input => {
+
+    input.addEventListener("change", event => {
+
+      const file = event.target.files[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        alert("Please select an image file.");
+        input.value = "";
+        return;
+      }
+
+      const index = Number(input.dataset.memoryFile);
+      const reader = new FileReader();
+
+      reader.onload = () => {
+
+        memoryImages[index] = reader.result;
+
+        const preview = document.querySelector(
+          `.memory-preview[data-memory-index="${index}"]`
+        );
+
+        const image = preview.querySelector(".memory-image");
+        const placeholder = preview.querySelector(".memory-placeholder");
+
+        image.src = reader.result;
+        image.hidden = false;
+        placeholder.hidden = true;
+
+      };
+
+      reader.readAsDataURL(file);
+
+    });
+
+  });
+
+  memoryPreviews.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const index = Number(button.dataset.memoryIndex);
+      openMemoryViewer(index);
+
+    });
+
+  });
+
+  function closeMemoryViewer() {
+
+    photoViewer.classList.add("hidden");
+    document.body.style.overflow = "";
+
+  }
+
+  document.getElementById("closePhoto").addEventListener(
+    "click",
+    closeMemoryViewer
+  );
+
+  document.getElementById("viewerBackdrop").addEventListener(
+    "click",
+    closeMemoryViewer
+  );
+
+  document.getElementById("previousPhoto").addEventListener("click", () => {
+
+    for (let step = 1; step <= memoryImages.length; step++) {
+
+      const index =
+        (currentMemoryIndex - step + memoryImages.length) %
+        memoryImages.length;
+
+      if (memoryImages[index]) {
+        currentMemoryIndex = index;
+        updateViewerImage();
+        return;
+      }
+
+    }
+
+  });
+
+  document.getElementById("nextPhoto").addEventListener("click", () => {
+
+    for (let step = 1; step <= memoryImages.length; step++) {
+
+      const index =
+        (currentMemoryIndex + step) % memoryImages.length;
+
+      if (memoryImages[index]) {
+        currentMemoryIndex = index;
+        updateViewerImage();
+        return;
+      }
+
+    }
+
+  });
+
+  document.addEventListener("keydown", event => {
+
+    if (photoViewer.classList.contains("hidden")) return;
+
+    if (event.key === "Escape") {
+      closeMemoryViewer();
+    }
+
+    if (event.key === "ArrowLeft") {
+      document.getElementById("previousPhoto").click();
+    }
+
+    if (event.key === "ArrowRight") {
+      document.getElementById("nextPhoto").click();
+    }
+
+  });
+
+
+  /* =====================================
+     LILY GARDEN
+  ===================================== */
+
+  const lilies = document.querySelectorAll("[data-lily]");
+  const gardenReward = document.getElementById("gardenReward");
+
+  const closeGardenReward =
+    document.getElementById("closeGardenReward");
+
+  const resetGardenButton =
+    document.getElementById("resetGarden");
+
+  let bloomedLilies = 0;
+  let rewardShown = false;
 
   lilies.forEach(lily => {
 
     lily.addEventListener("click", () => {
 
-      if (lily.classList.contains("bloomed")) {
-        return;
-      }
+      if (lily.classList.contains("bloomed")) return;
 
       lily.classList.add("bloomed");
+      bloomedLilies++;
 
-      lily.setAttribute("aria-pressed", "true");
-
-      const count = updateBloomCount();
-
-
-      if (count === lilies.length) {
-
-        window.clearTimeout(popupTimer);
-
-        popupTimer = window.setTimeout(() => {
-
-          gardenPopup.hidden = false;
-
-        }, 850);
-
+      if (bloomedLilies === lilies.length && !rewardShown) {
+        rewardShown = true;
+        gardenReward.classList.remove("hidden");
       }
 
     });
 
   });
 
-
-  function closeGardenPopup() {
-    gardenPopup.hidden = true;
-  }
-
-
-  $("#closeGardenPopup").addEventListener(
-    "click",
-    closeGardenPopup
-  );
-
-
-  gardenPopup.addEventListener("click", event => {
-
-    if (event.target === gardenPopup) {
-      closeGardenPopup();
-    }
-
+  closeGardenReward.addEventListener("click", () => {
+    gardenReward.classList.add("hidden");
   });
 
-
-  $("#resetGarden").addEventListener("click", () => {
-
-    window.clearTimeout(popupTimer);
+  resetGardenButton.addEventListener("click", () => {
 
     lilies.forEach(lily => {
-
       lily.classList.remove("bloomed");
-
-      lily.setAttribute("aria-pressed", "false");
-
     });
 
-    updateBloomCount();
+    bloomedLilies = 0;
+    rewardShown = false;
 
-    closeGardenPopup();
+    gardenReward.classList.add("hidden");
 
   });
-
-
-  updateBloomCount();
-
-
-
-  /* ======================================
-     6. IMAGE DATABASE
-     Saves uploaded images in this browser.
-  ====================================== */
-
-  const DB_NAME = "monthsary-scrapbook-media";
-  const DB_STORE = "images";
-
-  let dbPromise = null;
-
-
-  function openDatabase() {
-
-    if (!("indexedDB" in window)) {
-      return Promise.resolve(null);
-    }
-
-    if (dbPromise) {
-      return dbPromise;
-    }
-
-    dbPromise = new Promise(resolve => {
-
-      let request;
-
-      try {
-
-        request = indexedDB.open(DB_NAME, 1);
-
-      } catch (error) {
-
-        resolve(null);
-
-        return;
-
-      }
-
-
-      request.onupgradeneeded = () => {
-
-        const db = request.result;
-
-        if (!db.objectStoreNames.contains(DB_STORE)) {
-
-          db.createObjectStore(DB_STORE);
-
-        }
-
-      };
-
-
-      request.onsuccess = () => {
-        resolve(request.result);
-      };
-
-
-      request.onerror = () => {
-        resolve(null);
-      };
-
-
-      request.onblocked = () => {
-        resolve(null);
-      };
-
-    });
-
-    return dbPromise;
-
-  }
-
-
-  async function saveLocalImage(key, blob) {
-
-    const db = await openDatabase();
-
-    if (!db) return false;
-
-    return new Promise(resolve => {
-
-      const transaction = db.transaction(
-        DB_STORE,
-        "readwrite"
-      );
-
-      transaction.objectStore(DB_STORE).put(
-        blob,
-        key
-      );
-
-      transaction.oncomplete = () => resolve(true);
-
-      transaction.onerror = () => resolve(false);
-
-      transaction.onabort = () => resolve(false);
-
-    });
-
-  }
-
-
-  async function getLocalImage(key) {
-
-    const db = await openDatabase();
-
-    if (!db) return null;
-
-    return new Promise(resolve => {
-
-      const request = db
-        .transaction(DB_STORE, "readonly")
-        .objectStore(DB_STORE)
-        .get(key);
-
-      request.onsuccess = () => {
-        resolve(request.result || null);
-      };
-
-      request.onerror = () => {
-        resolve(null);
-      };
-
-    });
-
-  }
-
-
-  const objectUrls = new Map();
-
-
-  function setImageSource(image, blob, key) {
-
-    const oldUrl = objectUrls.get(key);
-
-    if (oldUrl) {
-      URL.revokeObjectURL(oldUrl);
-    }
-
-    const url = URL.createObjectURL(blob);
-
-    objectUrls.set(key, url);
-
-    image.src = url;
-    image.hidden = false;
-
-
-    const placeholder = image.parentElement.querySelector(
-      ".memory-empty, .artwork-empty"
-    );
-
-    if (placeholder) {
-      placeholder.hidden = true;
-    }
-
-
-    const memoryCard = image.closest(".memory-card");
-
-    if (memoryCard) {
-      memoryCard.classList.add("has-image");
-    }
-
-  }
-
-
-
-  /* ======================================
-     7. MEMORY GALLERY
-  ====================================== */
-
-  const memoryCards = $$("[data-memory-card]");
-
-  const memoryImages = memoryCards.map(card =>
-    $("img", card)
-  );
-
-
-  memoryImages.forEach((image, index) => {
-
-    const card = memoryCards[index];
-
-
-    image.addEventListener("load", () => {
-
-      if (image.naturalWidth > 0) {
-
-        card.classList.add("has-image");
-
-      }
-
-    });
-
-
-    image.addEventListener("error", () => {
-
-      card.classList.remove("has-image");
-
-    });
-
-
-    if (image.complete && image.naturalWidth > 0) {
-
-      card.classList.add("has-image");
-
-    }
-
-  });
-
-
-  /* Restore previously uploaded pictures */
-
-  async function restoreLocalImages() {
-
-    for (let index = 0; index < memoryImages.length; index++) {
-
-      const blob = await getLocalImage(
-        `memory-${index}`
-      );
-
-      if (blob) {
-
-        setImageSource(
-          memoryImages[index],
-          blob,
-          `memory-${index}`
-        );
-
-      }
-
-    }
-
-
-    const characterIds = [
-      "woodstock",
-      "fifi",
-      "doghouse"
-    ];
-
-
-    for (const id of characterIds) {
-
-      const blob = await getLocalImage(
-        `character-${id}`
-      );
-
-      if (blob) {
-
-        applyCharacterImage(id, blob, false);
-
-      }
-
-    }
-
-  }
-
-
-  /* Upload memory photos */
-
-  $$("[data-memory-upload]").forEach(input => {
-
-    input.addEventListener("change", async () => {
-
-      const file = input.files?.[0];
-
-      if (!file) return;
-
-
-      if (!file.type.startsWith("image/")) {
-
-        alert("Please choose an image file.");
-
-        input.value = "";
-
-        return;
-
-      }
-
-
-      const index = Number(
-        input.dataset.memoryUpload
-      );
-
-
-      if (
-        !Number.isInteger(index) ||
-        !memoryImages[index]
-      ) {
-        return;
-      }
-
-
-      setImageSource(
-        memoryImages[index],
-        file,
-        `memory-${index}`
-      );
-
-      await saveLocalImage(
-        `memory-${index}`,
-        file
-      );
-
-    });
-
-  });
-    /* ======================================
-     8. PHOTO VIEWER
-  ====================================== */
-
-  const photoViewer = $("#photoViewer");
-  const expandedPhoto = $("#expandedPhoto");
-
-  let currentPhotoIndex = 0;
-
-
-  function availablePhotoIndexes() {
-
-    return memoryImages
-      .map((image, index) => ({
-        image,
-        index
-      }))
-      .filter(item =>
-        item.image.complete &&
-        item.image.naturalWidth > 0
-      )
-      .map(item => item.index);
-
-  }
-
-
-  function showPhoto(index) {
-
-    const available = availablePhotoIndexes();
-
-    if (!available.length) {
-      return;
-    }
-
-    const position = available.indexOf(index);
-
-    if (position < 0) {
-      return;
-    }
-
-    currentPhotoIndex = available[position];
-
-    expandedPhoto.src =
-      memoryImages[currentPhotoIndex].src;
-
-    photoViewer.hidden = false;
-
-  }
-
-
-  $$(".memory-open").forEach(button => {
-
-    button.addEventListener("click", () => {
-
-      const index = Number(button.dataset.photo);
-
-      if (memoryImages[index]?.naturalWidth) {
-
-        showPhoto(index);
-
-      }
-
-    });
-
-  });
-
-
-  function movePhoto(direction) {
-
-    const available = availablePhotoIndexes();
-
-    if (!available.length) {
-      return;
-    }
-
-    const position = available.indexOf(
-      currentPhotoIndex
-    );
-
-    const next =
-      (position + direction + available.length) %
-      available.length;
-
-    showPhoto(available[next]);
-
-  }
-
-
-  $("#previousPhoto").addEventListener("click", () => {
-    movePhoto(-1);
-  });
-
-
-  $("#nextPhoto").addEventListener("click", () => {
-    movePhoto(1);
-  });
-
-
-  function closePhotoViewer() {
-
-    photoViewer.hidden = true;
-    expandedPhoto.src = "";
-
-  }
-
-
-  $("#closeViewer").addEventListener(
-    "click",
-    closePhotoViewer
-  );
-
-
-  photoViewer.addEventListener("click", event => {
-
-    if (event.target === photoViewer) {
-      closePhotoViewer();
-    }
-
-  });
-
-
-
-  /* ======================================
-     9. SNOOPY SCENE TABS
-  ====================================== */
-
-  const snoopyTabs = $$(".snoopy-tab");
-
-  const snoopyScenes = $$(".snoopy-scene");
-
-
-  snoopyTabs.forEach(tab => {
+    /* =====================================
+     SNOOPY CORNER TABS
+  ===================================== */
+
+  const comicTabs = document.querySelectorAll("[data-scene]");
+
+  const comicScenes = {
+    woodstock: document.getElementById("scene-woodstock"),
+    fifi: document.getElementById("scene-fifi"),
+    doghouse: document.getElementById("scene-doghouse")
+  };
+
+  comicTabs.forEach(tab => {
 
     tab.addEventListener("click", () => {
 
-      const id = tab.dataset.scene;
+      const selectedScene = tab.dataset.scene;
 
-
-      snoopyTabs.forEach(item => {
-
-        const selected = item === tab;
-
-        item.classList.toggle("active", selected);
-
-        item.setAttribute(
-          "aria-selected",
-          String(selected)
-        );
-
+      comicTabs.forEach(button => {
+        button.classList.toggle("active", button === tab);
       });
 
-
-      snoopyScenes.forEach(scene => {
-
-        const selected =
-          scene.id === `scene-${id}`;
-
-        scene.hidden = !selected;
-
-        scene.classList.toggle(
-          "active",
-          selected
-        );
-
+      Object.entries(comicScenes).forEach(([name, scene]) => {
+        scene.classList.toggle("hidden", name !== selectedScene);
       });
 
     });
@@ -862,236 +411,132 @@
   });
 
 
+  /* =====================================
+     WOODSTOCK AND FIFI PHOTO UPLOADS
+  ===================================== */
 
-  /* ======================================
-     10. SNOOPY IMAGE UPLOADS
-  ====================================== */
+  const characterInputs = document.querySelectorAll(
+    "[data-character-image]"
+  );
 
-  function applyCharacterImage(id, blob, save = true) {
+  characterInputs.forEach(input => {
 
-    const image = document.getElementById(
-      `${id}Image`
-    );
+    input.addEventListener("change", event => {
 
-    if (!image || !blob) {
-      return;
-    }
+      const file = event.target.files[0];
 
-
-    const key = `character-${id}`;
-
-    const oldUrl = objectUrls.get(key);
-
-    if (oldUrl) {
-      URL.revokeObjectURL(oldUrl);
-    }
-
-
-    const url = URL.createObjectURL(blob);
-
-    objectUrls.set(key, url);
-
-
-    image.src = url;
-    image.hidden = false;
-
-
-    const empty = image.parentElement.querySelector(
-      ".artwork-empty"
-    );
-
-    if (empty) {
-      empty.hidden = true;
-    }
-
-
-    if (save) {
-      saveLocalImage(key, blob);
-    }
-
-  }
-
-
-  $$("[data-character]").forEach(input => {
-
-    input.addEventListener("change", () => {
-
-      const file = input.files?.[0];
-
-      if (!file) {
-        return;
-      }
-
+      if (!file) return;
 
       if (!file.type.startsWith("image/")) {
-
-        alert("Please choose an image file.");
-
+        alert("Please select an image file.");
         input.value = "";
-
         return;
-
       }
 
+      const characterName = input.dataset.characterImage;
 
-      applyCharacterImage(
-        input.dataset.character,
-        file
+      const image = document.getElementById(
+        characterName + "Image"
       );
+
+      const placeholder = input
+        .closest(".side-character")
+        .querySelector(".character-placeholder");
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+
+        image.src = reader.result;
+        image.hidden = false;
+        placeholder.hidden = true;
+
+      };
+
+      reader.readAsDataURL(file);
 
     });
 
   });
 
 
+  /* =====================================
+     SNOOPY CORNER HEART COUNTERS
+  ===================================== */
 
-  /* ======================================
-     11. FLOATING HEARTS
-  ====================================== */
+  const heartButtons = document.querySelectorAll("[data-hearts]");
 
-  $$("[data-heart-target]").forEach(button => {
+  const heartCounts = {
+    woodstock: 0,
+    fifi: 0
+  };
+
+  heartButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-      const layer = document.getElementById(
-        button.dataset.heartTarget
+      const character = button.dataset.hearts;
+
+      heartCounts[character]++;
+
+      const counter = document.getElementById(
+        character + "Hearts"
       );
 
-      if (!layer) {
-        return;
-      }
+      counter.textContent = heartCounts[character];
 
+      button.classList.add("heart-clicked");
 
-      layer.innerHTML = "";
-
-
-      ["♡", "♥", "♡", "♥", "♡"].forEach(
-        (symbol, index) => {
-
-          const heart = document.createElement("span");
-
-          heart.className = "float-heart";
-          heart.textContent = symbol;
-
-          heart.style.left =
-            `${16 + index * 16}%`;
-
-          heart.style.animationDelay =
-            `${index * 90}ms`;
-
-
-          layer.appendChild(heart);
-
-
-          window.setTimeout(() => {
-            heart.remove();
-          }, 2100);
-
-        }
-      );
+      setTimeout(() => {
+        button.classList.remove("heart-clicked");
+      }, 250);
 
     });
 
   });
 
 
+  /* =====================================
+     SNOOPY DOGHOUSE
+  ===================================== */
 
-  /* ======================================
-     12. DOGHOUSE INTERACTION
-  ====================================== */
+  const doghouse = document.getElementById("doghouse");
 
-  const doghouse = $("#doghouseIllustration");
+  const openDoghouseButton =
+    document.getElementById("openDoghouse");
 
-  const doghouseButton = $("#openDoghouse");
+  openDoghouseButton.addEventListener("click", () => {
 
+    const isOpen = doghouse.classList.toggle("open");
 
-  doghouseButton.addEventListener("click", () => {
-
-    const isOpen =
-      doghouse.classList.toggle("opened");
-
-    doghouseButton.textContent = isOpen
-      ? "Close the doghouse"
-      : "Open the doghouse";
+    openDoghouseButton.textContent = isOpen
+      ? "Close doghouse ♡"
+      : "Open doghouse ♡";
 
   });
 
 
+  /* =====================================
+     SECRET GIFT
+  ===================================== */
 
-  /* ======================================
-     13. SECRET GIFT
-  ====================================== */
+  const giftBox = document.getElementById("giftBox");
+  const secretMessage = document.getElementById("secretMessage");
 
-  const giftButton = $("#giftButton");
+  giftBox.addEventListener("click", () => {
 
-  const secretMessage = $("#secretMessage");
+    const isOpened = giftBox.classList.toggle("opened");
 
-
-  giftButton.addEventListener("click", () => {
-
-    giftButton.classList.add("opened");
-
-    giftButton.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-
-    secretMessage.hidden = false;
-
-    giftButton.disabled = true;
-
-    giftButton.setAttribute(
-      "aria-label",
-      "Gift opened"
-    );
+    secretMessage.classList.toggle("hidden", !isOpened);
 
   });
 
 
+  /* =====================================
+     INITIAL PAGE STATE
+  ===================================== */
 
-  /* ======================================
-     14. KEYBOARD CONTROLS
-  ====================================== */
+  homeScreen.classList.remove("hidden");
+  site.classList.add("hidden");
 
-  document.addEventListener("keydown", event => {
-
-    if (event.key === "Escape") {
-
-      closePhotoViewer();
-
-      closeGardenPopup();
-
-    }
-
-
-    if (
-      photoViewer.hidden === false &&
-      event.key === "ArrowRight"
-    ) {
-
-      movePhoto(1);
-
-    }
-
-
-    if (
-      photoViewer.hidden === false &&
-      event.key === "ArrowLeft"
-    ) {
-
-      movePhoto(-1);
-
-    }
-
-  });
-
-
-
-  /* ======================================
-     15. RESTORE SAVED PHOTOS
-  ====================================== */
-
-  restoreLocalImages();
-
-
-})();
+});
