@@ -1,205 +1,104 @@
-// SECTION NAVIGATION
+const openButton = document.getElementById("openButton");
+const navigation = document.getElementById("navigation");
+const mainContent = document.getElementById("mainContent");
 
-const sections = document.querySelectorAll(".page-section");
-const navigationButtons = document.querySelectorAll("[data-section]");
-
-function openSection(sectionId) {
-  sections.forEach(section => {
-    section.hidden = section.id !== sectionId;
+function showSection(sectionId) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
   });
 
-  navigationButtons.forEach(button => {
+  document.getElementById(sectionId).classList.add("active");
+
+  document.querySelectorAll(".nav-button").forEach(button => {
     button.classList.toggle(
       "active",
       button.dataset.section === sectionId
     );
   });
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
 }
 
-navigationButtons.forEach(button => {
+openButton.addEventListener("click", () => {
+  document.getElementById("home").classList.remove("active");
+  navigation.classList.remove("hidden");
+  mainContent.classList.remove("hidden");
+  showSection("memories");
+});
+
+document.querySelectorAll(".nav-button").forEach(button => {
   button.addEventListener("click", () => {
-    openSection(button.dataset.section);
+    showSection(button.dataset.section);
   });
 });
 
+// Photo gallery uploads
+document.querySelectorAll(".photo-slot input").forEach(input => {
+  input.addEventListener("change", event => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-// PHOTO GALLERY
+    const reader = new FileReader();
 
-const photoButtons = document.querySelectorAll(".memory-photo");
-const photoViewer = document.getElementById("photoViewer");
-const expandedPhoto = document.getElementById("expandedPhoto");
-const closeViewer = document.getElementById("closeViewer");
-const previousPhoto = document.getElementById("previousPhoto");
-const nextPhoto = document.getElementById("nextPhoto");
+    reader.onload = e => {
+      const slot = event.target.parentElement;
+      let img = slot.querySelector("img");
 
-const photoSources = Array.from(photoButtons).map(button => {
-  return button.querySelector("img").getAttribute("src");
-});
+      if (!img) {
+        img = document.createElement("img");
+        slot.appendChild(img);
+      }
 
-let currentPhotoIndex = 0;
+      img.src = e.target.result;
+      slot.querySelector("span").style.display = "none";
+    };
 
-function showPhoto(index) {
-  currentPhotoIndex =
-    (index + photoSources.length) % photoSources.length;
-
-  expandedPhoto.src = photoSources[currentPhotoIndex];
-}
-
-photoButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    const index = Number(button.dataset.photo);
-    showPhoto(index);
-    photoViewer.hidden = false;
+    reader.readAsDataURL(file);
   });
 });
 
-closeViewer.addEventListener("click", () => {
-  photoViewer.hidden = true;
+// Love letter
+document.getElementById("letterButton").addEventListener("click", () => {
+  document.getElementById("envelope").classList.add("hidden");
+  document.getElementById("letterContent").classList.remove("hidden");
 });
 
-previousPhoto.addEventListener("click", () => {
-  showPhoto(currentPhotoIndex - 1);
-});
-
-nextPhoto.addEventListener("click", () => {
-  showPhoto(currentPhotoIndex + 1);
-});
-
-
-// LOVE LETTER
-
-const envelope = document.getElementById("envelope");
-const openLetterButton = document.getElementById("openLetter");
-const closeLetterButton = document.getElementById("closeLetter");
-const letterContent = document.getElementById("letterContent");
-
-openLetterButton.addEventListener("click", () => {
-  envelope.classList.add("open");
-
-  setTimeout(() => {
-    letterContent.hidden = false;
-    openLetterButton.hidden = true;
-  }, 450);
-});
-
-closeLetterButton.addEventListener("click", () => {
-  letterContent.hidden = true;
-  openLetterButton.hidden = false;
-  envelope.classList.remove("open");
-});
-
-
-// LILY GARDEN
-
-const lilies = document.querySelectorAll(".lily-plant");
-const gardenPopup = document.getElementById("gardenPopup");
-const closeGardenPopup = document.getElementById("closeGardenPopup");
-
-let bloomedLilies = new Set();
-let gardenPopupShown = false;
+// Lily garden
+const lilies = document.querySelectorAll(".lily");
 
 lilies.forEach(lily => {
   lily.addEventListener("click", () => {
-    const lilyIndex = Number(lily.dataset.lily);
-
-    if (lily.classList.contains("bloomed")) {
-      return;
-    }
-
     lily.classList.add("bloomed");
-    lily.setAttribute("aria-pressed", "true");
-    bloomedLilies.add(lilyIndex);
 
-    if (
-      bloomedLilies.size === lilies.length &&
-      !gardenPopupShown
-    ) {
-      gardenPopupShown = true;
+    const allBloomed = [...lilies].every(item =>
+      item.classList.contains("bloomed")
+    );
 
-      setTimeout(() => {
-        gardenPopup.hidden = false;
-      }, 1000);
+    if (allBloomed) {
+      document.getElementById("gardenMessage").classList.remove("hidden");
     }
   });
 });
 
-closeGardenPopup.addEventListener("click", () => {
-  gardenPopup.hidden = true;
-});
-
-gardenPopup.addEventListener("click", event => {
-  if (event.target === gardenPopup) {
-    gardenPopup.hidden = true;
-  }
-});
-
-
-// PLAYLIST
-
-const songAudio = document.getElementById("songAudio");
-const playSongButton = document.getElementById("playSong");
-const pauseSongButton = document.getElementById("pauseSong");
-const audioStatus = document.getElementById("audioStatus");
-
-playSongButton.addEventListener("click", async () => {
-  try {
-    await songAudio.play();
-    audioStatus.textContent = "";
-  } catch (error) {
-    audioStatus.textContent =
-      "Add your authorized song audio file to the audio folder.";
-  }
-});
-
-pauseSongButton.addEventListener("click", () => {
-  songAudio.pause();
-});
-
-
-// CALENDAR COUNTER
-
-const relationshipStart = new Date(2025, 7, 14);
-
+// Calendar counter
 function updateCounter() {
+  const startDate = new Date(2025, 7, 14);
   const today = new Date();
 
-  const startOfToday = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
+  const totalDays = Math.floor(
+    (new Date(today.getFullYear(), today.getMonth(), today.getDate()) -
+    startDate) / 86400000
   );
 
-  const totalMilliseconds =
-    startOfToday - relationshipStart;
-
-  const totalDays = Math.max(
-    0,
-    Math.floor(totalMilliseconds / (1000 * 60 * 60 * 24))
-  );
-
-  let years =
-    today.getFullYear() - relationshipStart.getFullYear();
-
-  let months =
-    today.getMonth() - relationshipStart.getMonth();
-
-  let days =
-    today.getDate() - relationshipStart.getDate();
+  let years = today.getFullYear() - startDate.getFullYear();
+  let months = today.getMonth() - startDate.getMonth();
+  let days = today.getDate() - startDate.getDate();
 
   if (days < 0) {
     months--;
-
     const previousMonthDays = new Date(
       today.getFullYear(),
       today.getMonth(),
       0
     ).getDate();
-
     days += previousMonthDays;
   }
 
@@ -208,22 +107,49 @@ function updateCounter() {
     months += 12;
   }
 
-  document.getElementById("totalDays").textContent = totalDays;
-  document.getElementById("years").textContent = years;
-  document.getElementById("months").textContent = months;
-  document.getElementById("days").textContent = days;
+  document.getElementById("totalDays").textContent =
+    `${totalDays.toLocaleString()} days`;
+
+  document.getElementById("timeTogether").textContent =
+    `${years} years, ${months} months, and ${days} days`;
 }
 
 updateCounter();
 
-
-// SECRET GIFT
-
-const giftButton = document.getElementById("giftButton");
-const secretMessage = document.getElementById("secretMessage");
-
-giftButton.addEventListener("click", () => {
-  giftButton.classList.add("opened");
-  secretMessage.hidden = false;
-  giftButton.disabled = true;
+// Secret gift
+document.getElementById("giftButton").addEventListener("click", () => {
+  document.getElementById("giftButton").classList.add("hidden");
+  document.getElementById("secretMessage").classList.remove("hidden");
 });
+
+// Music: YouTube player
+let youtubeReady = false;
+let player;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player("youtubePlayer", {
+    height: "0",
+    width: "0",
+    videoId: "REPLACE_WITH_OFFICIAL_VIDEO_ID",
+    playerVars: {
+      playsinline: 1
+    },
+    events: {
+      onReady: () => {
+        youtubeReady = true;
+      }
+    }
+  });
+}
+
+document.getElementById("playButton").addEventListener("click", () => {
+  if (youtubeReady) player.playVideo();
+});
+
+document.getElementById("pauseButton").addEventListener("click", () => {
+  if (youtubeReady) player.pauseVideo();
+});
+
+const youtubeScript = document.createElement("script");
+youtubeScript.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(youtubeScript);
