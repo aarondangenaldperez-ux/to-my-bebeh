@@ -1,507 +1,391 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f9dce7">
-  <title>1 Year and 3 Months ♡</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <meta name="theme-color" content="#fff2f5">
+  <meta name="description" content="A little pink scrapbook for a special monthsary.">
+  <title>1 Year and 3 Months</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20261031-fix2">
+  <script src="script.js?v=20261031-fix2" defer></script>
 </head>
 <body>
+  <div class="paper-grain" aria-hidden="true"></div>
+  <div class="ambient-flower flower-left" aria-hidden="true">✿</div>
+  <div class="ambient-flower flower-right" aria-hidden="true">❀</div>
 
-  <div class="page-decoration decoration-one">♡</div>
-  <div class="page-decoration decoration-two">✿</div>
-  <div class="page-decoration decoration-three">♡</div>
+  <!-- COVER / HOMEPAGE -->
+  <section id="home" class="home-screen" aria-label="Homepage">
+    <div class="cover-card">
+      <span class="cover-corner corner-one" aria-hidden="true">❀</span>
+      <span class="cover-corner corner-two" aria-hidden="true">✿</span>
+      <span class="cover-corner corner-three" aria-hidden="true">✿</span>
+      <span class="cover-corner corner-four" aria-hidden="true">❀</span>
 
-  <!-- HOMEPAGE -->
-  <main id="home" class="home-screen">
-    <div class="home-card">
+      <div class="cover-topline"><span></span><b>♡</b><span></span></div>
 
-      <div class="home-top-label">a little something for you ♡</div>
+      <label class="cover-art" for="homeArtworkInput" aria-label="Choose a cover picture">
+        <div class="cover-bouquet" id="coverBouquet" aria-hidden="true">
+          <svg viewBox="0 0 300 250" role="img" aria-label="Illustration of a pink lily bouquet">
+            <defs>
+              <linearGradient id="coverPetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0f5"/><stop offset=".58" stop-color="#f2b0c7"/><stop offset="1" stop-color="#d9789e"/></linearGradient>
+              <linearGradient id="coverLeaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b3c99e"/><stop offset="1" stop-color="#628967"/></linearGradient>
+            </defs>
+            <g fill="none" stroke="#648b68" stroke-width="5" stroke-linecap="round">
+              <path d="M148 225 Q135 158 104 98"/><path d="M151 225 Q160 143 176 76"/><path d="M151 225 Q186 165 226 128"/>
+            </g>
+            <g fill="url(#coverLeaf)" stroke="#648b68" stroke-width="1.4">
+              <path d="M136 183 Q76 132 66 162 Q93 196 136 183Z"/><path d="M158 174 Q214 119 241 144 Q215 181 158 174Z"/><path d="M145 204 Q95 174 88 194 Q117 222 145 204Z"/>
+            </g>
+            <g transform="translate(103 86)">
+              <g fill="url(#coverPetal)" stroke="#d77e9d" stroke-width="1.4">
+                <ellipse cx="0" cy="-28" rx="15" ry="39"/><ellipse cx="0" cy="-28" rx="15" ry="39" transform="rotate(60)"/><ellipse cx="0" cy="-28" rx="15" ry="39" transform="rotate(120)"/><ellipse cx="0" cy="-28" rx="15" ry="39" transform="rotate(180)"/><ellipse cx="0" cy="-28" rx="15" ry="39" transform="rotate(240)"/><ellipse cx="0" cy="-28" rx="15" ry="39" transform="rotate(300)"/>
+              </g><circle r="9" fill="#e7b75d"/><g stroke="#bc8642" stroke-width="2"><path d="M0 0L-18 -25M0 0L17 -30M0 0L0 -34"/></g>
+            </g>
+            <g transform="translate(177 65) scale(.78)">
+              <g fill="url(#coverPetal)" stroke="#d77e9d" stroke-width="1.5"><ellipse cy="-28" rx="15" ry="39"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(60)"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(120)"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(180)"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(240)"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(300)"/></g><circle r="9" fill="#e7b75d"/>
+            </g>
+            <g transform="translate(230 126) scale(.56)">
+              <g fill="url(#coverPetal)" stroke="#d77e9d" stroke-width="1.7"><ellipse cy="-28" rx="15" ry="39"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(60)"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(120)"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(180)"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(240)"/><ellipse cy="-28" rx="15" ry="39" transform="rotate(300)"/></g><circle r="9" fill="#e7b75d"/>
+            </g>
+          </svg>
+        </div>
+        <img id="homeArtworkPreview" class="uploaded-artwork hidden" src="https://i.pinimg.com/originals/52/6f/48/526f48db07768d9ec36b36c8865f1aa8.jpg" alt="Snoopy holding a pink lily">
+        <span class="cover-art-hint">Add picture</span>
+        <input id="homeArtworkInput" class="visually-hidden" type="file" accept="image/*" data-artwork="homeArtworkPreview">
+      </label>
 
-      <div class="home-flower flower-left">✿</div>
-      <div class="home-flower flower-right">✿</div>
-
-      <div class="home-art">
-        <img
-          src="https://i.pinimg.com/originals/52/6f/48/526f48db07768d9ec36b36c8865f1aa8.jpg"
-          alt="Snoopy holding a pink lily"
-          class="home-snoopy"
-        >
-      </div>
-
-      <p class="home-date">A LITTLE CELEBRATION OF US</p>
+      <div class="cover-date" aria-hidden="true">✿　♡　✿</div>
       <h1>1 Year and 3 Months</h1>
-      <p class="home-greeting">happey monthsarrryyyy :P</p>
+      <p class="cover-greeting">happey monthsarrryyyy :P</p>
 
-      <button type="button" class="main-button" id="openSite">
-        Open <span>♡</span>
+      <button class="open-button" id="openSite" type="button">
+        <span>Open</span><span class="button-heart" aria-hidden="true">♡</span>
       </button>
 
-      <div class="home-bottom-decoration">♡ &nbsp; ✿ &nbsp; ♡</div>
+      <div class="cover-bottomline"><span>✿</span><span>♡</span><span>✿</span></div>
     </div>
-  </main>
+  </section>
 
-  <!-- WEBSITE -->
-  <div id="site" class="site hidden">
-
-    <!-- NAVIGATION -->
-    <header class="site-header" id="siteHeader">
-      <div class="header-brand">for us ♡</div>
-
-      <nav class="navigation" id="navigation">
-        <button type="button" data-page="playlist">kanta ni bugoy</button>
-        <button type="button" data-page="letters">letterzzz</button>
-        <button type="button" data-page="memories">Our Memories</button>
-        <button type="button" data-page="calendar">calendar of us</button>
-        <button type="button" data-page="garden">Lily Garden</button>
-        <button type="button" data-page="snoopy">Snoopy Corner</button>
-        <button type="button" data-page="secret">secret</button>
-        <button type="button" data-page="home" class="home-nav">Home</button>
+  <!-- ALL OTHER PAGES -->
+  <div id="site" class="site-shell" hidden>
+    <header class="site-header">
+      <a class="mini-brand" href="#home" data-go="home" aria-label="Go to homepage"><span>✿</span><span>♡</span></a>
+      <nav class="navigation" id="navigation" aria-label="Website sections">
+        <button class="nav-button" data-back type="button">Back</button>
+        <button class="nav-button" data-go="home" type="button">Home</button>
+        <button class="nav-button" data-go="playlist" type="button">kanta ni bugoy</button>
+        <button class="nav-button" data-go="letters" type="button">letterzzz</button>
+        <button class="nav-button" data-go="memories" type="button">Our Memories</button>
+        <button class="nav-button" data-go="calendar" type="button">calendar of us</button>
+        <button class="nav-button" data-go="garden" type="button">Lily Garden</button>
+        <button class="nav-button" data-go="snoopy" type="button">Snoopy Corner</button>
+        <button class="nav-button" data-go="secret" type="button">secret</button>
       </nav>
     </header>
 
-    <main class="content-wrapper">
-
+    <main class="content-wrap">
       <!-- KANTA NI BUGOY -->
-      <section class="page-section hidden" id="playlist">
-        <div class="section-heading">
-          <span class="heading-flower">✿</span>
-          <p class="eyebrow">our little soundtrack</p>
+      <section id="playlist" class="page-section" hidden>
+        <div class="section-card music-section">
+          <div class="section-kicker" aria-hidden="true"><span>✿</span>　♡　<span>✿</span></div>
           <h2>kanta ni bugoy</h2>
-        </div>
+          <p class="section-subtitle">parang kahapon lang grade 10 pa tayo..</p>
 
-        <div class="music-card">
-          <div class="record-decoration">
-            <div class="record">
-              <div class="record-center">♡</div>
+          <div class="music-layout">
+            <div class="vinyl-stage" aria-hidden="true">
+              <div class="vinyl-record"><div class="vinyl-label">J</div></div>
+              <div class="vinyl-flower">✿</div>
+              <span class="music-note note-one">♪</span><span class="music-note note-two">♫</span>
+            </div>
+            <div class="song-panel">
+              <span class="song-overline" aria-hidden="true">✿　♡</span>
+              <h3>Janice</h3>
+              <p class="song-artist">Dilaw</p>
+              <div class="video-frame">
+                <iframe id="songPlayer" src="https://www.youtube-nocookie.com/embed/-sNgBet587k?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Janice by Dilaw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <div class="player-controls">
+                <button class="pill-button primary" id="playSong" type="button">▶ &nbsp; Play</button>
+                <button class="pill-button" id="pauseSong" type="button">Ⅱ &nbsp; Pause</button>
+              </div>
             </div>
           </div>
-
-          <div class="music-information">
-            <p class="music-label">OUR SONG</p>
-            <h3>Janice</h3>
-            <p class="music-artist">Dilaw</p>
-
-            <div class="music-controls">
-              <button type="button" id="playSong">▶ Play</button>
-              <button type="button" id="pauseSong">Ⅱ Pause</button>
-            </div>
-          </div>
-
-          <iframe
-            id="songPlayer"
-            class="song-player"
-            src="https://www.youtube-nocookie.com/embed/-sNgBet587k?enablejsapi=1"
-            title="Janice by Dilaw"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            referrerpolicy="strict-origin-when-cross-origin"
-          ></iframe>
+          <div class="page-flourish" aria-hidden="true">❀　♡　❀</div>
         </div>
       </section>
 
       <!-- LETTERZZZ -->
-      <section class="page-section hidden" id="letters">
-        <div class="section-heading">
-          <span class="heading-flower">✿</span>
-          <p class="eyebrow">hehehehe :P</p>
+      <section id="letters" class="page-section" hidden>
+        <div class="section-card letter-section">
+          <div class="section-kicker" aria-hidden="true"><span>✿</span>　♡　<span>✿</span></div>
           <h2>letterzzz</h2>
-        </div>
+          <p class="section-subtitle">hehehehe :P</p>
 
-        <div class="letter-area">
-          <div class="envelope" id="envelope">
-            <div class="envelope-back"></div>
-            <div class="envelope-paper"></div>
-            <div class="envelope-flap"></div>
-            <div class="envelope-heart">♡</div>
+          <div class="letter-stage">
+            <div class="envelope" id="envelope" aria-hidden="true">
+              <div class="envelope-back"></div>
+              <div class="envelope-paper"><span>♡</span><i></i><i></i><i></i></div>
+              <div class="envelope-pocket left"></div>
+              <div class="envelope-pocket right"></div>
+              <div class="envelope-pocket bottom"></div>
+              <div class="envelope-flap"></div>
+              <div class="envelope-seal">♡</div>
+            </div>
+            <button class="pill-button primary letter-open" id="openLetter" type="button">Open Letter</button>
           </div>
 
-          <button type="button" class="main-button" id="openLetter">
-            Open Letter
-          </button>
-
-          <article class="letter-paper hidden" id="letterText">
-            <p>
-              I'm sorry ngayon na lang ulit ako nakapagbigay ng gifts and
-              efforts sa monthsary natin. I've just been feeling very
-              unmotivated these past few months, and it's been a little
-              difficult for me to keep up with things. But nevertheless,
-              you still deserve to receive gifts and little letters from me,
-              no matter what. Please bear with me while I'm trying my best
-              to keep myself together and get back on track, bebe. I hope
-              you know that even when I'm not at my best, I still want to
-              make you feel loved and appreciated. I may not always have
-              the energy to do everything I want to, but I'll keep trying.
-              I love you pow, bebe. :P
-            </p>
+          <article class="letter-paper hidden" id="letterContent">
+            <div class="letter-paper-top"><span>♡</span><span>♡</span><span>♡</span></div>
+            <p>I'm sorry ngayon na lang ulit ako nakapagbigay ng gifts and efforts sa monthsary natin. I've just been feeling very unmotivated these past few months, and it's been a little difficult for me to keep up with things. But nevertheless, you still deserve to receive gifts and little letters from me, no matter what. Please bear with me while I'm trying my best to keep myself together and get back on track, bebe. I hope you know that even when I'm not at my best, I still want to make you feel loved and appreciated. I may not always have the energy to do everything I want to, but I'll keep trying. I love you pow, bebe. :P</p>
+            <div class="letter-signoff">♡</div>
+            <button class="text-button" id="closeLetter" type="button">Close letter</button>
           </article>
         </div>
       </section>
-            <!-- OUR MEMORIES -->
-      <section class="page-section hidden" id="memories">
-        <div class="section-heading">
-          <span class="heading-flower">✿</span>
-          <p class="eyebrow">my paborito sa tindahan ng mga alaala</p>
+
+      <!-- OUR MEMORIES -->
+      <section id="memories" class="page-section" hidden>
+        <div class="section-card memories-section">
+          <div class="section-kicker" aria-hidden="true"><span>✿</span>　♡　<span>✿</span></div>
           <h2>Our Memories</h2>
+          <p class="section-subtitle">my paborito sa tindahan ng mga alaala</p>
+
+          <div class="memory-grid">
+            <button class="memory-photo" data-photo="0" type="button" aria-label="Open memory photo 1"><span class="photo-tape"></span><img src="photos/photo1.jpg" alt="Memory 1" loading="lazy"><span class="photo-placeholder">♡</span></button>
+            <button class="memory-photo" data-photo="1" type="button" aria-label="Open memory photo 2"><span class="photo-tape"></span><img src="photos/photo2.jpg" alt="Memory 2" loading="lazy"><span class="photo-placeholder">✿</span></button>
+            <button class="memory-photo" data-photo="2" type="button" aria-label="Open memory photo 3"><span class="photo-tape"></span><img src="photos/photo3.jpg" alt="Memory 3" loading="lazy"><span class="photo-placeholder">♡</span></button>
+            <button class="memory-photo" data-photo="3" type="button" aria-label="Open memory photo 4"><span class="photo-tape"></span><img src="photos/photo4.jpg" alt="Memory 4" loading="lazy"><span class="photo-placeholder">❀</span></button>
+            <button class="memory-photo" data-photo="4" type="button" aria-label="Open memory photo 5"><span class="photo-tape"></span><img src="photos/photo5.jpg" alt="Memory 5" loading="lazy"><span class="photo-placeholder">♡</span></button>
+            <button class="memory-photo" data-photo="5" type="button" aria-label="Open memory photo 6"><span class="photo-tape"></span><img src="photos/photo6.jpg" alt="Memory 6" loading="lazy"><span class="photo-placeholder">✿</span></button>
+          </div>
         </div>
 
-        <div class="memory-grid">
-
-          <div class="memory-card">
-            <button type="button" class="memory-preview" data-memory-index="0">
-              <span class="memory-placeholder">♡</span>
-              <img class="memory-image" alt="Memory photo 1" hidden>
-            </button>
-            <label class="upload-label">
-              Add photo
-              <input type="file" accept="image/*" data-memory-file="0">
-            </label>
+        <div class="photo-viewer hidden" id="photoViewer" hidden aria-hidden="true" style="display:none!important" role="dialog" aria-modal="true" aria-label="Memory photo viewer">
+          <button class="viewer-close" id="closeViewer" type="button">Close</button>
+          <div class="viewer-inner">
+            <button class="viewer-arrow" id="previousPhoto" type="button">Previous</button>
+            <img id="expandedPhoto" src="" alt="Selected memory">
+            <button class="viewer-arrow" id="nextPhoto" type="button">Next</button>
           </div>
-
-          <div class="memory-card">
-            <button type="button" class="memory-preview" data-memory-index="1">
-              <span class="memory-placeholder">♡</span>
-              <img class="memory-image" alt="Memory photo 2" hidden>
-            </button>
-            <label class="upload-label">
-              Add photo
-              <input type="file" accept="image/*" data-memory-file="1">
-            </label>
-          </div>
-
-          <div class="memory-card">
-            <button type="button" class="memory-preview" data-memory-index="2">
-              <span class="memory-placeholder">♡</span>
-              <img class="memory-image" alt="Memory photo 3" hidden>
-            </button>
-            <label class="upload-label">
-              Add photo
-              <input type="file" accept="image/*" data-memory-file="2">
-            </label>
-          </div>
-
-          <div class="memory-card">
-            <button type="button" class="memory-preview" data-memory-index="3">
-              <span class="memory-placeholder">♡</span>
-              <img class="memory-image" alt="Memory photo 4" hidden>
-            </button>
-            <label class="upload-label">
-              Add photo
-              <input type="file" accept="image/*" data-memory-file="3">
-            </label>
-          </div>
-
-          <div class="memory-card">
-            <button type="button" class="memory-preview" data-memory-index="4">
-              <span class="memory-placeholder">♡</span>
-              <img class="memory-image" alt="Memory photo 5" hidden>
-            </button>
-            <label class="upload-label">
-              Add photo
-              <input type="file" accept="image/*" data-memory-file="4">
-            </label>
-          </div>
-
-          <div class="memory-card">
-            <button type="button" class="memory-preview" data-memory-index="5">
-              <span class="memory-placeholder">♡</span>
-              <img class="memory-image" alt="Memory photo 6" hidden>
-            </button>
-            <label class="upload-label">
-              Add photo
-              <input type="file" accept="image/*" data-memory-file="5">
-            </label>
-          </div>
-
         </div>
       </section>
 
       <!-- CALENDAR OF US -->
-      <section class="page-section hidden" id="calendar">
-        <div class="section-heading">
-          <span class="heading-flower">✿</span>
-          <p class="eyebrow">parang kahapon lang grade 10 pa tayo..</p>
+      <section id="calendar" class="page-section" hidden>
+        <div class="section-card calendar-section">
+          <div class="section-kicker" aria-hidden="true"><span>✿</span>　♡　<span>✿</span></div>
           <h2>calendar of us</h2>
-        </div>
+          <p class="section-subtitle">parang kahapon lang grade 10 pa tayo..</p>
 
-        <div class="calendar-card">
-          <div class="calendar-heart">♡</div>
-
-          <p class="calendar-label">WE HAVE BEEN TOGETHER FOR</p>
-
-          <div class="days-counter">
-            <span id="totalDays">0</span>
-            <small>days</small>
-          </div>
-
-          <div class="date-breakdown">
-            <div class="date-unit">
-              <strong id="years">0</strong>
-              <span>years</span>
-            </div>
-
-            <div class="date-unit">
-              <strong id="months">0</strong>
-              <span>months</span>
-            </div>
-
-            <div class="date-unit">
-              <strong id="days">0</strong>
-              <span>days</span>
+          <div class="calendar-composition">
+            <div class="calendar-binding"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="calendar-page">
+              <div class="calendar-topline"><span>♡</span><span>♡</span></div>
+              <div class="calendar-month">AUGUST</div>
+              <div class="calendar-day">14</div>
+              <div class="calendar-year">2025</div>
+              <div class="calendar-stamp">✿</div>
+              <div class="calendar-paper-bottom">✿　♡　✿</div>
             </div>
           </div>
 
-          <div class="calendar-start">
-            Since August 14, 2025 ♡
+          <div class="counter-area">
+            <div class="total-days"><strong id="totalDays">0</strong><span>TOTAL DAYS</span></div>
+            <div class="time-breakdown">
+              <div class="time-unit"><strong id="years">0</strong><span>YEARS</span></div>
+              <div class="time-unit"><strong id="months">0</strong><span>MONTHS</span></div>
+              <div class="time-unit"><strong id="days">0</strong><span>DAYS</span></div>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- LILY GARDEN -->
-      <section class="page-section hidden" id="garden">
-        <div class="section-heading">
-          <span class="heading-flower">✿</span>
+      <section id="garden" class="page-section" hidden>
+        <div class="section-card garden-section">
+          <div class="section-kicker" aria-hidden="true"><span>✿</span>　♡　<span>✿</span></div>
           <h2>Lily Garden</h2>
-        </div>
 
-        <div class="garden-container">
-
-          <div class="garden-ground">
-
-            <button type="button" class="lily" data-lily="0" aria-label="Bloom lily 1">
-              <span class="flower-head">
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="flower-center"></i>
-              </span>
-              <span class="flower-stem"></span>
-              <span class="flower-leaf leaf-left"></span>
-              <span class="flower-leaf leaf-right"></span>
-            </button>
-
-            <button type="button" class="lily" data-lily="1" aria-label="Bloom lily 2">
-              <span class="flower-head">
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="flower-center"></i>
-              </span>
-              <span class="flower-stem"></span>
-              <span class="flower-leaf leaf-left"></span>
-              <span class="flower-leaf leaf-right"></span>
-            </button>
-
-            <button type="button" class="lily" data-lily="2" aria-label="Bloom lily 3">
-              <span class="flower-head">
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="flower-center"></i>
-              </span>
-              <span class="flower-stem"></span>
-              <span class="flower-leaf leaf-left"></span>
-              <span class="flower-leaf leaf-right"></span>
-            </button>
-
-            <button type="button" class="lily" data-lily="3" aria-label="Bloom lily 4">
-              <span class="flower-head">
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="flower-center"></i>
-              </span>
-              <span class="flower-stem"></span>
-              <span class="flower-leaf leaf-left"></span>
-              <span class="flower-leaf leaf-right"></span>
-            </button>
-
-            <button type="button" class="lily" data-lily="4" aria-label="Bloom lily 5">
-              <span class="flower-head">
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="petal"></i><i class="petal"></i>
-                <i class="flower-center"></i>
-              </span>
-              <span class="flower-stem"></span>
-              <span class="flower-leaf leaf-left"></span>
-              <span class="flower-leaf leaf-right"></span>
-            </button>
-
+          <div class="garden-frame">
+            <div class="garden-sky">
+              <span class="garden-cloud cloud-a"></span>
+              <span class="garden-cloud cloud-b"></span>
+              <span class="garden-sparkle sparkle-a">✧</span>
+              <span class="garden-sparkle sparkle-b">✧</span>
+              <span class="garden-butterfly butterfly-a">❀</span>
+              <span class="garden-butterfly butterfly-b">♡</span>
+            </div>
+            <div class="garden-hills"><span></span><span></span></div>
+            <div class="garden-meadow">
+              <div class="garden-back-leaves"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="lily-row">
+                <button class="lily-plant small" data-lily="0" type="button" aria-label="Bloom pink lily 1" aria-pressed="false">
+                  <svg viewBox="0 0 160 245" aria-hidden="true"><path class="lily-stem" d="M80 238 Q75 175 80 92"/><path class="lily-leaf" d="M78 190 Q22 146 14 166 Q34 205 78 190Z"/><path class="lily-leaf" d="M80 164 Q127 122 145 144 Q122 182 80 164Z"/><g class="lily-bloom">
+                    <path class="petal p1" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z"/>
+                    <path class="petal p2" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(60 80 83)"/>
+                    <path class="petal p3" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(120 80 83)"/>
+                    <path class="petal p4" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(180 80 83)"/>
+                    <path class="petal p5" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(240 80 83)"/>
+                    <path class="petal p6" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(300 80 83)"/>
+                    <g class="freckles"><circle cx="70" cy="43" r="2.1"/><circle cx="75" cy="55" r="1.7"/><circle cx="66" cy="58" r="1.5"/><circle cx="88" cy="43" r="1.8"/><circle cx="93" cy="55" r="1.5"/></g>
+                    <circle class="lily-center" cx="80" cy="79" r="10"/>
+                    <path class="lily-stamens" d="M80 78L60 42M80 78L100 42M80 78L80 34"/>
+                    <g class="pollen"><circle cx="60" cy="42" r="3.5"/><circle cx="100" cy="42" r="3.5"/><circle cx="80" cy="34" r="3.5"/></g>
+                  </g></svg>
+                </button>
+                <button class="lily-plant tall" data-lily="1" type="button" aria-label="Bloom pink lily 2" aria-pressed="false">
+                  <svg viewBox="0 0 160 245" aria-hidden="true"><path class="lily-stem" d="M80 238 Q87 170 80 92"/><path class="lily-leaf" d="M82 186 Q25 143 15 168 Q40 205 82 186Z"/><path class="lily-leaf" d="M80 162 Q130 120 145 144 Q119 179 80 162Z"/><g class="lily-bloom">
+                    <path class="petal p1" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z"/>
+                    <path class="petal p2" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(60 80 83)"/>
+                    <path class="petal p3" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(120 80 83)"/>
+                    <path class="petal p4" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(180 80 83)"/>
+                    <path class="petal p5" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(240 80 83)"/>
+                    <path class="petal p6" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(300 80 83)"/>
+                    <g class="freckles"><circle cx="70" cy="43" r="2.1"/><circle cx="75" cy="55" r="1.7"/><circle cx="66" cy="58" r="1.5"/><circle cx="88" cy="43" r="1.8"/><circle cx="93" cy="55" r="1.5"/></g>
+                    <circle class="lily-center" cx="80" cy="79" r="10"/>
+                    <path class="lily-stamens" d="M80 78L60 42M80 78L100 42M80 78L80 34"/>
+                    <g class="pollen"><circle cx="60" cy="42" r="3.5"/><circle cx="100" cy="42" r="3.5"/><circle cx="80" cy="34" r="3.5"/></g>
+                  </g></svg>
+                </button>
+                <button class="lily-plant" data-lily="2" type="button" aria-label="Bloom pink lily 3" aria-pressed="false">
+                  <svg viewBox="0 0 160 245" aria-hidden="true"><path class="lily-stem" d="M80 238 Q75 175 80 92"/><path class="lily-leaf" d="M78 190 Q22 146 14 166 Q34 205 78 190Z"/><path class="lily-leaf" d="M80 164 Q127 122 145 144 Q122 182 80 164Z"/><g class="lily-bloom">
+                    <path class="petal p1" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z"/>
+                    <path class="petal p2" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(60 80 83)"/>
+                    <path class="petal p3" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(120 80 83)"/>
+                    <path class="petal p4" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(180 80 83)"/>
+                    <path class="petal p5" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(240 80 83)"/>
+                    <path class="petal p6" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(300 80 83)"/>
+                    <g class="freckles"><circle cx="70" cy="43" r="2.1"/><circle cx="75" cy="55" r="1.7"/><circle cx="66" cy="58" r="1.5"/><circle cx="88" cy="43" r="1.8"/><circle cx="93" cy="55" r="1.5"/></g>
+                    <circle class="lily-center" cx="80" cy="79" r="10"/>
+                    <path class="lily-stamens" d="M80 78L60 42M80 78L100 42M80 78L80 34"/>
+                    <g class="pollen"><circle cx="60" cy="42" r="3.5"/><circle cx="100" cy="42" r="3.5"/><circle cx="80" cy="34" r="3.5"/></g>
+                  </g></svg>
+                </button>
+                <button class="lily-plant tall" data-lily="3" type="button" aria-label="Bloom pink lily 4" aria-pressed="false">
+                  <svg viewBox="0 0 160 245" aria-hidden="true"><path class="lily-stem" d="M80 238 Q87 170 80 92"/><path class="lily-leaf" d="M82 186 Q25 143 15 168 Q40 205 82 186Z"/><path class="lily-leaf" d="M80 162 Q130 120 145 144 Q119 179 80 162Z"/><g class="lily-bloom">
+                    <path class="petal p1" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z"/>
+                    <path class="petal p2" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(60 80 83)"/>
+                    <path class="petal p3" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(120 80 83)"/>
+                    <path class="petal p4" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(180 80 83)"/>
+                    <path class="petal p5" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(240 80 83)"/>
+                    <path class="petal p6" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(300 80 83)"/>
+                    <g class="freckles"><circle cx="70" cy="43" r="2.1"/><circle cx="75" cy="55" r="1.7"/><circle cx="66" cy="58" r="1.5"/><circle cx="88" cy="43" r="1.8"/><circle cx="93" cy="55" r="1.5"/></g>
+                    <circle class="lily-center" cx="80" cy="79" r="10"/>
+                    <path class="lily-stamens" d="M80 78L60 42M80 78L100 42M80 78L80 34"/>
+                    <g class="pollen"><circle cx="60" cy="42" r="3.5"/><circle cx="100" cy="42" r="3.5"/><circle cx="80" cy="34" r="3.5"/></g>
+                  </g></svg>
+                </button>
+                <button class="lily-plant small" data-lily="4" type="button" aria-label="Bloom pink lily 5" aria-pressed="false">
+                  <svg viewBox="0 0 160 245" aria-hidden="true"><path class="lily-stem" d="M80 238 Q75 175 80 92"/><path class="lily-leaf" d="M78 190 Q22 146 14 166 Q34 205 78 190Z"/><path class="lily-leaf" d="M80 164 Q127 122 145 144 Q122 182 80 164Z"/><g class="lily-bloom">
+                    <path class="petal p1" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z"/>
+                    <path class="petal p2" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(60 80 83)"/>
+                    <path class="petal p3" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(120 80 83)"/>
+                    <path class="petal p4" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(180 80 83)"/>
+                    <path class="petal p5" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(240 80 83)"/>
+                    <path class="petal p6" d="M80 83 C49 63 25 29 49 5 C73 13 81 44 80 83Z" transform="rotate(300 80 83)"/>
+                    <g class="freckles"><circle cx="70" cy="43" r="2.1"/><circle cx="75" cy="55" r="1.7"/><circle cx="66" cy="58" r="1.5"/><circle cx="88" cy="43" r="1.8"/><circle cx="93" cy="55" r="1.5"/></g>
+                    <circle class="lily-center" cx="80" cy="79" r="10"/>
+                    <path class="lily-stamens" d="M80 78L60 42M80 78L100 42M80 78L80 34"/>
+                    <g class="pollen"><circle cx="60" cy="42" r="3.5"/><circle cx="100" cy="42" r="3.5"/><circle cx="80" cy="34" r="3.5"/></g>
+                  </g></svg>
+                </button>
+              </div>
+              <div class="meadow-foreground"><span>✿</span><span>❀</span><span>✿</span><span>❀</span><span>✿</span><span>❀</span></div>
+            </div>
           </div>
 
-          <div class="garden-reward hidden" id="gardenReward">
-            <div class="reward-flower">✿</div>
-            <p>Fiel, a lovely poem.</p>
-            <button type="button" id="closeGardenReward">♡</button>
+          <div class="garden-footer">
+            <span class="garden-progress" id="gardenProgress">0 of 5 lilies in bloom</span>
+            <button class="text-button" id="resetGarden" type="button">Start again</button>
           </div>
-
-          <button type="button" class="reset-button" id="resetGarden">
-            Reset garden
-          </button>
-
+          <div class="garden-popup hidden" id="gardenPopup" role="dialog" aria-modal="true" aria-label="A little message">
+            <div class="garden-popup-card"><button class="popup-close" id="closeGardenPopup" type="button" aria-label="Close">×</button><div class="popup-flower">✿</div><p>Fiel, a lovely poem.</p><div class="popup-hearts">♡　♡　♡</div></div>
+          </div>
         </div>
       </section>
 
       <!-- SNOOPY CORNER -->
-      <section class="page-section hidden" id="snoopy">
-        <div class="section-heading">
-          <span class="heading-flower">✿</span>
+      <section id="snoopy" class="page-section" hidden>
+        <div class="section-card snoopy-section">
+          <div class="section-kicker" aria-hidden="true"><span>✿</span>　♡　<span>✿</span></div>
           <h2>Snoopy Corner</h2>
-          <p class="eyebrow">snupeeey</p>
-        </div>
+          <p class="section-subtitle">snupeeey</p>
 
-        <div class="snoopy-card">
-
-          <div class="snoopy-tabs">
-            <button type="button" class="comic-tab active" data-scene="woodstock">
-              Woodstock
-            </button>
-            <button type="button" class="comic-tab" data-scene="fifi">
-              Fifi
-            </button>
-            <button type="button" class="comic-tab" data-scene="doghouse">
-              Doghouse
-            </button>
+          <div class="snoopy-tabs" role="tablist" aria-label="Snoopy scenes">
+            <button class="snoopy-tab active" data-scene="woodstockScene" role="tab" aria-selected="true" type="button">Snoopy &amp; Woodstock</button>
+            <button class="snoopy-tab" data-scene="fifiScene" role="tab" aria-selected="false" type="button">Snoopy &amp; Fifi</button>
+            <button class="snoopy-tab" data-scene="doghouseScene" role="tab" aria-selected="false" type="button">The Doghouse</button>
           </div>
 
-          <!-- WOODSTOCK SCENE -->
-          <div class="comic-scene" id="scene-woodstock">
-            <div class="character-stage">
-              <div class="snoopy-character">
-                <img
-                  src="https://i.pinimg.com/originals/52/6f/48/526f48db07768d9ec36b36c8865f1aa8.jpg"
-                  alt="Snoopy holding a lily"
-                >
-                <span>Snoopy</span>
-              </div>
+          <div class="snoopy-scene active" id="woodstockScene" role="tabpanel">
+            <div class="scene-copy"><h3>Snoopy &amp; Woodstock</h3></div>
+            <label class="character-display" for="woodstockArtworkInput">
+              <span class="scene-cloud scene-cloud-one"></span><span class="scene-cloud scene-cloud-two"></span>
+              <span class="scene-flower scene-flower-one">✿</span><span class="scene-flower scene-flower-two">❀</span>
+              <img id="woodstockArtworkPreview" class="character-art hidden" src="artwork/snoopy-woodstock.png" alt="Snoopy and Woodstock artwork">
+              <span class="character-placeholder"><span>♡</span><b>Place your Snoopy &amp; Woodstock picture here</b><small>Choose an image from your device</small></span>
+              <input id="woodstockArtworkInput" class="visually-hidden" type="file" accept="image/*" data-artwork="woodstockArtworkPreview">
+              <span class="artwork-change">change artwork</span>
+            </label>
+            <button class="pill-button heart-button" data-hearts="woodstockHeartLayer" type="button">Send little hearts ♡</button>
+            <div class="heart-layer" id="woodstockHeartLayer" aria-hidden="true"></div>
+          </div>
 
-              <div class="side-character">
-                <div class="character-placeholder">🐤</div>
-                <img
-                  id="woodstockImage"
-                  class="uploaded-character"
-                  alt="Woodstock"
-                  hidden
-                >
-                <span>Woodstock</span>
+          <div class="snoopy-scene" id="fifiScene" role="tabpanel" hidden>
+            <div class="scene-copy"><h3>Snoopy &amp; Fifi</h3></div>
+            <label class="character-display fifi-display" for="fifiArtworkInput">
+              <span class="scene-cloud scene-cloud-one"></span><span class="scene-cloud scene-cloud-two"></span>
+              <span class="scene-flower scene-flower-one">✿</span><span class="scene-flower scene-flower-two">❀</span>
+              <img id="fifiArtworkPreview" class="character-art hidden" src="artwork/snoopy-fifi.png" alt="Snoopy and Fifi artwork">
+              <span class="character-placeholder"><span>♡</span><b>Place your Snoopy &amp; Fifi picture here</b><small>Choose an image from your device</small></span>
+              <input id="fifiArtworkInput" class="visually-hidden" type="file" accept="image/*" data-artwork="fifiArtworkPreview">
+              <span class="artwork-change">change artwork</span>
+            </label>
+            <button class="pill-button heart-button" data-hearts="fifiHeartLayer" type="button">Send little hearts ♡</button>
+            <div class="heart-layer" id="fifiHeartLayer" aria-hidden="true"></div>
+          </div>
 
-                <label class="character-upload">
-                  Add picture
-                  <input
-                    type="file"
-                    accept="image/*"
-                    data-character-image="woodstock"
-                  >
-                </label>
-              </div>
+          <div class="snoopy-scene" id="doghouseScene" role="tabpanel" hidden>
+            <div class="scene-copy"><h3>Snoopy's Doghouse</h3></div>
+            <div class="doghouse-garden">
+              <span class="doghouse-sun"></span><span class="doghouse-cloud doghouse-cloud-one"></span><span class="doghouse-cloud doghouse-cloud-two"></span>
+              <div class="doghouse-bush bush-left"></div><div class="doghouse-bush bush-right"></div>
+              <button class="doghouse-button" id="doghouseButton" type="button" aria-label="Open Snoopy's doghouse">
+                <span class="doghouse-roof"><i></i></span>
+                <span class="doghouse-wall"><span class="doghouse-name">SNOOPY</span><span class="doghouse-door"><i></i></span></span>
+              </button>
+              <span class="doghouse-daisy daisy-left">✿</span><span class="doghouse-daisy daisy-right">❀</span>
+              <span class="doghouse-grass"></span>
+              <span class="doghouse-heart hidden" id="doghouseHeart">♡</span>
             </div>
-
-            <button type="button" class="heart-button" data-hearts="woodstock">
-              ♡ <span id="woodstockHearts">0</span>
-            </button>
+            <button class="pill-button primary" id="openDoghouse" type="button">Open the Doghouse</button>
           </div>
 
-          <!-- FIFI SCENE -->
-          <div class="comic-scene hidden" id="scene-fifi">
-            <div class="character-stage">
-              <div class="snoopy-character">
-                <img
-                  src="https://i.pinimg.com/originals/52/6f/48/526f48db07768d9ec36b36c8865f1aa8.jpg"
-                  alt="Snoopy holding a lily"
-                >
-                <span>Snoopy</span>
-              </div>
-
-              <div class="side-character">
-                <div class="character-placeholder">🐩</div>
-                <img
-                  id="fifiImage"
-                  class="uploaded-character"
-                  alt="Fifi"
-                  hidden
-                >
-                <span>Fifi</span>
-
-                <label class="character-upload">
-                  Add picture
-                  <input
-                    type="file"
-                    accept="image/*"
-                    data-character-image="fifi"
-                  >
-                </label>
-              </div>
-            </div>
-
-            <button type="button" class="heart-button" data-hearts="fifi">
-              ♡ <span id="fifiHearts">0</span>
-            </button>
-          </div>
-
-          <!-- DOGHOUSE SCENE -->
-          <div class="comic-scene hidden" id="scene-doghouse">
-            <div class="doghouse-area">
-              <div class="doghouse" id="doghouse">
-                <div class="doghouse-roof"></div>
-                <div class="doghouse-body">
-                  <div class="doghouse-door"></div>
-                  <div class="doghouse-name">SNOOPY</div>
-                </div>
-              </div>
-            </div>
-
-            <button type="button" class="main-button" id="openDoghouse">
-              Open doghouse ♡
-            </button>
-          </div>
-
+          <div class="official-link"><a href="https://www.peanuts.com/" target="_blank" rel="noopener noreferrer">Visit the official Peanuts website ↗</a></div>
         </div>
       </section>
 
       <!-- SECRET -->
-      <section class="page-section hidden" id="secret">
-        <div class="section-heading">
-          <span class="heading-flower">✿</span>
+      <section id="secret" class="page-section" hidden>
+        <div class="section-card secret-section">
+          <div class="section-kicker" aria-hidden="true"><span>✿</span>　♡　<span>✿</span></div>
           <h2>secret</h2>
-        </div>
-
-        <div class="secret-card">
-          <button type="button" class="gift-box" id="giftBox" aria-label="Open gift">
-            <span class="gift-lid"></span>
-            <span class="gift-body"></span>
-            <span class="gift-ribbon-vertical"></span>
-            <span class="gift-ribbon-horizontal"></span>
-            <span class="gift-bow">♡</span>
-          </button>
-
-          <p class="secret-message hidden" id="secretMessage">
-            kiss me to get it :PPP
-          </p>
+          <div class="secret-stage">
+            <button class="gift-button" id="giftButton" type="button" aria-label="Open the gift">
+              <span class="gift-bow bow-left"></span><span class="gift-bow bow-right"></span>
+              <span class="gift-knot"></span><span class="gift-lid"></span>
+              <span class="gift-body"></span><span class="gift-ribbon vertical"></span>
+            </button>
+            <div class="secret-message hidden" id="secretMessage" aria-live="polite"><span>♡</span><p>kiss me to get it :PPP</p><span>♡</span></div>
+          </div>
         </div>
       </section>
-
     </main>
-  </div>
-
-  <!-- PHOTO VIEWER -->
-  <div class="photo-viewer hidden" id="photoViewer">
-    <div class="photo-viewer-backdrop" id="viewerBackdrop"></div>
-
-    <div class="photo-viewer-content">
-      <button type="button" class="viewer-close" id="closePhoto">×</button>
-
-      <button type="button" class="viewer-arrow" id="previousPhoto">
-        ‹
-      </button>
-
-      <img id="largePhoto" src="" alt="Selected memory">
-
-      <button type="button" class="viewer-arrow" id="nextPhoto">
-        ›
-      </button>
-    </div>
+    <footer class="empty-footer" aria-hidden="true"></footer>
   </div>
 
 </body>
