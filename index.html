@@ -1,412 +1,913 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fff5f7">
-  <title>1 Year and 3 Months ♡</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1 Year and 3 Months</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #f5b8cc;
+  --light: #fff4f7;
+  --deep: #bd6688;
+  --text: #704858;
+}
 
-  <link rel="stylesheet" href="style.css">
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 10%, #ffe3ec, transparent 35%),
+    linear-gradient(135deg, #fff8fa, #fce8ef);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--deep);
+  outline-offset: 3px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* HOMEPAGE */
+
+#home {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 25px 16px;
+  text-align: center;
+}
+
+.home-card {
+  width: min(100%, 430px);
+  padding: 30px 22px;
+  border: 1px solid #f4cbd8;
+  border-radius: 26px;
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 12px 35px #d99aaf30;
+}
+
+.home-card img {
+  display: block;
+  width: min(100%, 270px);
+  height: 220px;
+  object-fit: contain;
+  margin: 0 auto 15px;
+}
+
+h1 {
+  margin: 8px 0;
+  color: var(--deep);
+  font-size: clamp(2rem, 8vw, 3rem);
+}
+
+.home-card p {
+  margin: 12px 0 22px;
+  font-size: 1.15rem;
+}
+
+/* BUTTONS */
+
+.main-button,
+.nav-button,
+.small-button {
+  border: 0;
+  border-radius: 30px;
+  background: var(--pink);
+  color: #633c4d;
+  padding: 11px 21px;
+  transition: .2s ease;
+}
+
+.main-button:hover,
+.nav-button:hover,
+.small-button:hover {
+  background: #ed9fba;
+  transform: translateY(-2px);
+}
+
+/* WEBSITE AND NAVIGATION */
+
+#site {
+  display: none;
+}
+
+#site.visible {
+  display: block;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 10px;
+  background: #fff8faee;
+  border-bottom: 1px solid #f3d4df;
+  backdrop-filter: blur(10px);
+}
+
+.nav-button {
+  padding: 9px 14px;
+  font-size: .9rem;
+  background: #fce3eb;
+}
+
+.nav-button.active {
+  background: var(--deep);
+  color: white;
+}
+
+main {
+  width: min(100% - 28px, 850px);
+  margin: 28px auto 55px;
+}
+
+.page {
+  display: none;
+  min-height: 65vh;
+  padding: clamp(22px, 5vw, 40px);
+  border: 1px solid #f2cfda;
+  border-radius: 25px;
+  background: rgba(255,255,255,.83);
+  box-shadow: 0 10px 30px #d99aaf20;
+  text-align: center;
+}
+
+.page.active {
+  display: block;
+}
+
+#home.page.active {
+  display: grid;
+}
+
+.page h2 {
+  margin: 0 0 8px;
+  color: var(--deep);
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+}
+
+.subtitle {
+  margin: 0 0 28px;
+  color: #a8798b;
+  font-style: italic;
+}
+
+.page-content {
+  max-width: 680px;
+  margin: 22px auto;
+  line-height: 1.7;
+}
+
+/* MEMORIES */
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin-top: 22px;
+}
+
+.photo-slot {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  padding: 10px;
+  border: 2px dashed #e9b6c8;
+  border-radius: 16px;
+  background: #fff5f8;
+  color: #a8798b;
+}
+
+.photo-slot img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.photo-slot input {
+  width: 95%;
+  font-size: .75rem;
+}
+
+/* LETTER */
+
+.letter-paper {
+  max-width: 620px;
+  margin: 25px auto;
+  padding: 25px;
+  border: 1px solid #f1d1dc;
+  border-radius: 16px;
+  background: #fff9f5;
+  text-align: left;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+/* PHOTO VIEWER */
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #321c28ee;
+}
+
+.viewer img {
+  max-width: 95%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.viewer-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+}
+
+/* LILY GARDEN */
+
+.garden {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: end;
+  gap: 22px;
+  min-height: 260px;
+  padding: 30px 12px;
+  border-radius: 20px;
+  background: linear-gradient(#f8edf4 0 65%, #dcebd5 65%);
+}
+
+.lily {
+  position: relative;
+  width: 85px;
+  height: 115px;
+  border: 0;
+  background: transparent;
+}
+
+.lily .stem {
+  position: absolute;
+  width: 5px;
+  height: 65px;
+  left: 40px;
+  bottom: 0;
+  border-radius: 5px;
+  background: #6e9b69;
+}
+
+.lily .bloom {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  left: 6px;
+  top: 2px;
+  transform: scale(.45);
+  transition: transform .5s ease;
+}
+
+.lily.bloomed .bloom {
+  transform: scale(1);
+}
+
+.lily .petal {
+  position: absolute;
+  width: 27px;
+  height: 43px;
+  left: 23px;
+  top: 0;
+  border-radius: 80% 80% 45% 45%;
+  transform-origin: 50% 36px;
+  background: #f4a9c5;
+  border: 1px solid #e78eae;
+}
+
+.lily .petal:nth-child(1) { transform: rotate(0deg); }
+.lily .petal:nth-child(2) { transform: rotate(60deg); }
+.lily .petal:nth-child(3) { transform: rotate(120deg); }
+.lily .petal:nth-child(4) { transform: rotate(180deg); }
+.lily .petal:nth-child(5) { transform: rotate(240deg); }
+.lily .petal:nth-child(6) { transform: rotate(300deg); }
+
+.lily .center {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  left: 30px;
+  top: 28px;
+  border-radius: 50%;
+  background: #f5d36b;
+}
+
+/* SNOOPY */
+
+.image-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.image-pair img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 15px;
+  background: #fff4f7;
+}
+
+/* PLAYLIST */
+
+.song-frame {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 15px;
+}
+
+/* CALENDAR */
+
+.counter {
+  margin: 28px 0;
+  color: var(--deep);
+  font-size: clamp(1.3rem, 5vw, 2rem);
+  line-height: 1.6;
+}
+
+/* SECRET */
+
+.secret-box {
+  display: inline-grid;
+  place-items: center;
+  width: 150px;
+  height: 130px;
+  margin: 30px auto;
+  border: 0;
+  border-radius: 18px;
+  background: #f8c5d6;
+  color: #8d4e69;
+  font-size: 3.5rem;
+}
+
+.secret-message {
+  color: var(--deep);
+  font-size: 1.5rem;
+  margin-top: 15px;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+  nav {
+    gap: 6px;
+  }
+
+  .nav-button {
+    padding: 8px 10px;
+    font-size: .85rem;
+  }
+
+  .photo-grid,
+  .image-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-slot img {
+    height: 240px;
+  }
+}
+</style>
 </head>
-
 <body>
 
-  <!-- HOMEPAGE -->
-  <section id="home" class="page home-page active">
-    <div class="home-card">
+<!-- HOMEPAGE -->
+<section id="home" class="page active">
+  <div class="home-card">
+    <img
+      src="https://i.pinimg.com/originals/52/6f/48/526f48db07768d9ec36b36c8865f1aa8.jpg"
+      alt="Snoopy holding a flower"
+      onerror="this.style.display='none'"
+    >
 
-      <div class="home-art">
-        <img
-          src="https://i.pinimg.com/originals/52/6f/48/526f48db07768d9ec36b36c8865f1aa8.jpg"
-          alt="Snoopy holding pink lilies"
-        >
-      </div>
+    <h1>1 Year and 3 Months</h1>
+    <p>happey monthsarrryyyy :P</p>
+    <button class="main-button" id="openSite">Open</button>
+  </div>
+</section>
 
-      <div class="home-copy">
-        <h1>1 Year and 3 Months</h1>
-        <p>happey monthsarrryyyy :P</p>
-        <button id="openButton" class="primary-button">Open</button>
-      </div>
-
-    </div>
-  </section>
-
+<!-- MAIN WEBSITE -->
+<div id="site">
 
   <!-- NAVIGATION -->
-  <nav id="navigation" class="navigation hidden">
-
-    <button class="nav-button" data-page="home">Home</button>
-    <button class="nav-button" data-page="memories">Our Memories</button>
-    <button class="nav-button" data-page="letters">letterzzz</button>
-    <button class="nav-button" data-page="garden">Lily Garden</button>
-    <button class="nav-button" data-page="snoopy">Snoopy Corner</button>
-    <button class="nav-button" data-page="playlist">kanta ni bugoy</button>
-    <button class="nav-button" data-page="calendar">calendar of us</button>
-    <button class="nav-button" data-page="secret">secret</button>
-
+  <nav id="navigation">
+    <button class="nav-button" data-go="memories">Memories</button>
+    <button class="nav-button" data-go="letters">Letters</button>
+    <button class="nav-button" data-go="garden">Garden</button>
+    <button class="nav-button" data-go="snoopy">Snoopy</button>
+    <button class="nav-button" data-go="playlist">Playlist</button>
+    <button class="nav-button" data-go="calendar">Calendar</button>
+    <button class="nav-button" data-go="secret">Secret</button>
+    <button class="nav-button" data-go="home">Home</button>
   </nav>
 
-
-  <!-- WEBSITE CONTENT -->
-  <main id="mainContent" class="hidden">
-
+  <main id="mainContent">
 
     <!-- OUR MEMORIES -->
-    <section id="memories" class="page content-page">
+    <section class="page" id="memories">
+      <h2>Our Memories</h2>
+      <p class="subtitle">my paborito sa tindahan ng mga alaala</p>
 
-      <div class="section-heading">
-        <h2>Our Memories</h2>
-        <p class="subtitle">my paborito sa tindahan ng mga alaala</p>
-      </div>
+      <div class="photo-grid">
 
-      <div class="memory-grid">
-
-        <div class="photo-tile">
-          <label class="photo-upload">
-            <input type="file" accept="image/*">
-            <span class="upload-symbol">+</span>
-            <img alt="Memory photo 1" hidden>
+        <div class="photo-slot">
+          <img class="memory-image hidden" alt="Memory 1">
+          <label>Choose photo 1
+            <input type="file" accept="image/*" data-photo="0">
           </label>
-          <button class="view-photo" hidden>↗</button>
         </div>
 
-        <div class="photo-tile">
-          <label class="photo-upload">
-            <input type="file" accept="image/*">
-            <span class="upload-symbol">+</span>
-            <img alt="Memory photo 2" hidden>
+        <div class="photo-slot">
+          <img class="memory-image hidden" alt="Memory 2">
+          <label>Choose photo 2
+            <input type="file" accept="image/*" data-photo="1">
           </label>
-          <button class="view-photo" hidden>↗</button>
         </div>
 
-        <div class="photo-tile">
-          <label class="photo-upload">
-            <input type="file" accept="image/*">
-            <span class="upload-symbol">+</span>
-            <img alt="Memory photo 3" hidden>
+        <div class="photo-slot">
+          <img class="memory-image hidden" alt="Memory 3">
+          <label>Choose photo 3
+            <input type="file" accept="image/*" data-photo="2">
           </label>
-          <button class="view-photo" hidden>↗</button>
         </div>
 
-        <div class="photo-tile">
-          <label class="photo-upload">
-            <input type="file" accept="image/*">
-            <span class="upload-symbol">+</span>
-            <img alt="Memory photo 4" hidden>
+        <div class="photo-slot">
+          <img class="memory-image hidden" alt="Memory 4">
+          <label>Choose photo 4
+            <input type="file" accept="image/*" data-photo="3">
           </label>
-          <button class="view-photo" hidden>↗</button>
         </div>
 
-        <div class="photo-tile">
-          <label class="photo-upload">
-            <input type="file" accept="image/*">
-            <span class="upload-symbol">+</span>
-            <img alt="Memory photo 5" hidden>
+        <div class="photo-slot">
+          <img class="memory-image hidden" alt="Memory 5">
+          <label>Choose photo 5
+            <input type="file" accept="image/*" data-photo="4">
           </label>
-          <button class="view-photo" hidden>↗</button>
         </div>
 
-        <div class="photo-tile">
-          <label class="photo-upload">
-            <input type="file" accept="image/*">
-            <span class="upload-symbol">+</span>
-            <img alt="Memory photo 6" hidden>
+        <div class="photo-slot">
+          <img class="memory-image hidden" alt="Memory 6">
+          <label>Choose photo 6
+            <input type="file" accept="image/*" data-photo="5">
           </label>
-          <button class="view-photo" hidden>↗</button>
         </div>
 
       </div>
     </section>
 
+    <!-- PHOTO VIEWER -->
+    <div id="photoViewer" class="viewer hidden">
+      <img id="largePhoto" src="" alt="Selected memory">
 
-    <!-- LETTERS -->
-    <section id="letters" class="page content-page">
-
-      <div class="section-heading">
-        <h2>letterzzz</h2>
-        <p class="subtitle">hehehehe :P</p>
+      <div class="viewer-buttons">
+        <button class="small-button" id="previousPhoto">Previous</button>
+        <button class="small-button" id="nextPhoto">Next</button>
+        <button class="small-button" id="closePhoto">Close</button>
       </div>
+    </div>
 
-      <div id="envelope" class="envelope">
-        <div class="envelope-heart">♡</div>
-        <button id="letterButton" class="primary-button">
-          Open Letter
-        </button>
-      </div>
+    <!-- LOVE LETTERS -->
+    <section class="page" id="letters">
+      <h2>letterzzz</h2>
+      <p class="subtitle">hehehehe :P</p>
 
-      <article id="letterContent" class="letter-paper hidden">
+      <button class="main-button" id="openLetter">Open Letter</button>
 
-        <div class="letter-decoration">♡</div>
-
-        <p>
-          I'm sorry ngayon na lang ulit ako nakapagbigay ng gifts and efforts sa monthsary natin.
-          I've just been feeling very unmotivated these past few months, and it's been a little
-          difficult for me to keep up with things. But nevertheless, you still deserve to receive
-          gifts and little letters from me, no matter what. Please bear with me while I'm trying
-          my best to keep myself together and get back on track, bebe. I hope you know that even
-          when I'm not at my best, I still want to make you feel loved and appreciated. I may not
-          always have the energy to do everything I want to, but I'll keep trying. I love you pow,
-          bebe. :P
-        </p>
-
-      </article>
+      <div class="letter-paper hidden" id="letterText">I'm sorry ngayon na lang ulit ako nakapagbigay ng gifts and efforts sa monthsary natin. I've just been feeling very unmotivated these past few months, and it's been a little difficult for me to keep up with things. But nevertheless, you still deserve to receive gifts and little letters from me, no matter what. Please bear with me while I'm trying my best to keep myself together and get back on track, bebe. I hope you know that even when I'm not at my best, I still want to make you feel loved and appreciated. I may not always have the energy to do everything I want to, but I'll keep trying. I love you pow, bebe. :P</div>
     </section>
-
 
     <!-- LILY GARDEN -->
-    <section id="garden" class="page content-page">
+    <section class="page" id="garden">
+      <h2>Lily Garden</h2>
 
-      <div class="section-heading">
-        <h2>Lily Garden</h2>
+      <div class="garden" id="lilyGarden">
+
+        <button class="lily" aria-label="Pink lily 1">
+          <span class="bloom">
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="center"></span>
+          </span>
+          <span class="stem"></span>
+        </button>
+
+        <button class="lily" aria-label="Pink lily 2">
+          <span class="bloom">
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="center"></span>
+          </span>
+          <span class="stem"></span>
+        </button>
+
+        <button class="lily" aria-label="Pink lily 3">
+          <span class="bloom">
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="center"></span>
+          </span>
+          <span class="stem"></span>
+        </button>
+
+        <button class="lily" aria-label="Pink lily 4">
+          <span class="bloom">
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="center"></span>
+          </span>
+          <span class="stem"></span>
+        </button>
+
+        <button class="lily" aria-label="Pink lily 5">
+          <span class="bloom">
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="petal"></span><span class="petal"></span>
+            <span class="center"></span>
+          </span>
+          <span class="stem"></span>
+        </button>
+
       </div>
-
-      <div class="garden-scene">
-
-        <div class="garden-sky">
-          <span class="garden-cloud cloud-one"></span>
-          <span class="garden-cloud cloud-two"></span>
-        </div>
-
-        <div class="garden-ground">
-          <div class="flower-row">
-
-            <button class="lily" aria-label="Bloom lily">
-              <span class="lily-stem"></span>
-              <span class="lily-leaf leaf-left"></span>
-              <span class="lily-leaf leaf-right"></span>
-              <span class="lily-flower">
-                <i class="petal p1"></i>
-                <i class="petal p2"></i>
-                <i class="petal p3"></i>
-                <i class="petal p4"></i>
-                <i class="petal p5"></i>
-                <i class="petal p6"></i>
-                <i class="flower-center"></i>
-              </span>
-            </button>
-
-            <button class="lily lily-tall" aria-label="Bloom lily">
-              <span class="lily-stem"></span>
-              <span class="lily-leaf leaf-left"></span>
-              <span class="lily-leaf leaf-right"></span>
-              <span class="lily-flower">
-                <i class="petal p1"></i>
-                <i class="petal p2"></i>
-                <i class="petal p3"></i>
-                <i class="petal p4"></i>
-                <i class="petal p5"></i>
-                <i class="petal p6"></i>
-                <i class="flower-center"></i>
-              </span>
-            </button>
-
-            <button class="lily" aria-label="Bloom lily">
-              <span class="lily-stem"></span>
-              <span class="lily-leaf leaf-left"></span>
-              <span class="lily-leaf leaf-right"></span>
-              <span class="lily-flower">
-                <i class="petal p1"></i>
-                <i class="petal p2"></i>
-                <i class="petal p3"></i>
-                <i class="petal p4"></i>
-                <i class="petal p5"></i>
-                <i class="petal p6"></i>
-                <i class="flower-center"></i>
-              </span>
-            </button>
-
-            <button class="lily lily-tall" aria-label="Bloom lily">
-              <span class="lily-stem"></span>
-              <span class="lily-leaf leaf-left"></span>
-              <span class="lily-leaf leaf-right"></span>
-              <span class="lily-flower">
-                <i class="petal p1"></i>
-                <i class="petal p2"></i>
-                <i class="petal p3"></i>
-                <i class="petal p4"></i>
-                <i class="petal p5"></i>
-                <i class="petal p6"></i>
-                <i class="flower-center"></i>
-              </span>
-            </button>
-
-            <button class="lily" aria-label="Bloom lily">
-              <span class="lily-stem"></span>
-              <span class="lily-leaf leaf-left"></span>
-              <span class="lily-leaf leaf-right"></span>
-              <span class="lily-flower">
-                <i class="petal p1"></i>
-                <i class="petal p2"></i>
-                <i class="petal p3"></i>
-                <i class="petal p4"></i>
-                <i class="petal p5"></i>
-                <i class="petal p6"></i>
-                <i class="flower-center"></i>
-              </span>
-            </button>
-
-          </div>
-        </div>
-      </div>
-
-      <p id="gardenMessage" class="garden-message hidden">
-        Fiel, a lovely poem.
-      </p>
-
     </section>
-
 
     <!-- SNOOPY CORNER -->
-    <section id="snoopy" class="page content-page">
+    <section class="page" id="snoopy">
+      <h2>Snoopy Corner</h2>
+      <p class="subtitle">snupeeey</p>
 
-      <div class="section-heading">
-        <h2>Snoopy Corner</h2>
-        <p class="subtitle">snupeeey</p>
-      </div>
+      <div class="image-pair">
+        <img
+          src="https://getdrawings.com/watercolors/snoopy-watercolor-11.jpg"
+          alt="Snoopy and Woodstock"
+        >
 
-      <div class="snoopy-gallery">
-
-        <figure class="snoopy-picture">
-          <img
-            src="https://getdrawings.com/watercolors/snoopy-watercolor-11.jpg"
-            alt="Snoopy and Woodstock"
-            loading="lazy"
-          >
-        </figure>
-
-        <figure class="snoopy-picture">
-          <img
-            src="https://i.pinimg.com/736x/fc/6a/fc/fc6afc3138ed23c5160e80bc8a88ca4f.jpg"
-            alt="Snoopy and Fifi"
-            loading="lazy"
-          >
-        </figure>
-
+        <img
+          src="https://i.pinimg.com/736x/fc/6a/fc/fc6afc3138ed23c5160e80bc8a88ca4f.jpg"
+          alt="Snoopy and Fifi"
+        >
       </div>
     </section>
-
 
     <!-- PLAYLIST -->
-    <section id="playlist" class="page content-page">
+    <section class="page" id="playlist">
+      <h2>kanta ni bugoy</h2>
 
-      <div class="section-heading">
-        <h2>kanta ni bugoy</h2>
-      </div>
+      <div class="page-content">
+        <iframe
+          id="songPlayer"
+          class="song-frame"
+          src="https://www.youtube-nocookie.com/embed/-sNgBet587k?enablejsapi=1"
+          title="Janice by Dilaw"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen>
+        </iframe>
 
-      <div class="music-card">
-
-        <div class="record-art">
-          <div class="record" id="record">
-            <div class="record-label">♫</div>
-          </div>
+        <div style="display:flex;justify-content:center;gap:12px;margin-top:15px">
+          <button class="small-button" id="playSong">Play</button>
+          <button class="small-button" id="pauseSong">Pause</button>
         </div>
-
-        <div class="song-info">
-          <h3>Janice</h3>
-          <p>Dilaw</p>
-        </div>
-
-        <div class="music-controls">
-          <button id="playButton" class="primary-button">Play</button>
-          <button id="pauseButton" class="secondary-button">Pause</button>
-        </div>
-
-        <div class="video-frame">
-          <iframe
-            id="youtubePlayer"
-            title="Janice by Dilaw"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-
       </div>
     </section>
-
 
     <!-- CALENDAR -->
-    <section id="calendar" class="page content-page">
+    <section class="page" id="calendar">
+      <h2>calendar of us</h2>
+      <p class="subtitle">parang kahapon lang grade 10 pa tayo..</p>
 
-      <div class="section-heading">
-        <h2>calendar of us</h2>
-        <p class="subtitle">parang kahapon lang grade 10 pa tayo..</p>
-      </div>
-
-      <div class="calendar-card">
-
-        <div class="calendar-top">
-          <span>♡</span>
-          <span>♡</span>
-          <span>♡</span>
-        </div>
-
-        <div class="calendar-date">
-          <span class="calendar-month">AUGUST</span>
-          <strong>14</strong>
-          <span class="calendar-year">2025</span>
-        </div>
-
-        <div class="calendar-divider"></div>
-
-        <div class="counter-area">
-          <strong id="totalDays">0</strong>
-          <span>days</span>
-        </div>
-
-        <p id="timeTogether" class="time-together"></p>
-
+      <div class="counter">
+        <p><span id="totalDays">0</span> days</p>
+        <p id="calendarTime">0 years, 0 months, 0 days</p>
       </div>
     </section>
 
-
     <!-- SECRET -->
-    <section id="secret" class="page content-page">
+    <section class="page" id="secret">
+      <h2>secret</h2>
 
-      <div class="section-heading">
-        <h2>secret</h2>
-      </div>
-
-      <button id="giftButton" class="gift-button" aria-label="Open the gift">
-        <span class="gift-box">
-          <span class="gift-lid"></span>
-          <span class="gift-ribbon"></span>
-          <span class="gift-bow"></span>
-        </span>
+      <button class="secret-box" id="giftBox" aria-label="Open gift">
+        🎁
       </button>
 
-      <p id="secretMessage" class="secret-message hidden">
+      <p class="secret-message hidden" id="secretMessage">
         kiss me to get it :PPP
       </p>
-
     </section>
 
   </main>
+</div>
+<script>
+/* PAGE NAVIGATION */
 
+const home = document.getElementById("home");
+const site = document.getElementById("site");
+const pages = document.querySelectorAll("#site .page");
+const navButtons = document.querySelectorAll(".nav-button");
 
-  <!-- PHOTO VIEWER -->
-  <div id="lightbox" class="lightbox hidden">
+function showPage(pageId) {
+  if (pageId === "home") {
+    site.classList.remove("visible");
+    home.classList.add("active");
+    return;
+  }
 
-    <button id="closeLightbox" class="lightbox-close" aria-label="Close">
-      ×
-    </button>
+  const target = document.getElementById(pageId);
 
-    <button id="previousPhoto" class="lightbox-arrow" aria-label="Previous photo">
-      ‹
-    </button>
+  if (!target || !target.classList.contains("page")) {
+    return;
+  }
 
-    <img id="lightboxImage" src="" alt="Enlarged memory photo">
+  home.classList.remove("active");
+  site.classList.add("visible");
 
-    <button id="nextPhoto" class="lightbox-arrow" aria-label="Next photo">
-      ›
-    </button>
+  pages.forEach(page => {
+    page.classList.toggle("active", page.id === pageId);
+  });
 
-  </div>
+  navButtons.forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.go === pageId
+    );
+  });
 
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-  <script src="script.js"></script>
+/* OPEN BUTTON */
+
+document.getElementById("openSite").addEventListener("click", () => {
+  showPage("memories");
+});
+
+/* NAVIGATION BUTTONS */
+
+document.getElementById("navigation").addEventListener("click", event => {
+  const button = event.target.closest("[data-go]");
+
+  if (!button) return;
+
+  showPage(button.dataset.go);
+});
+
+/* LOVE LETTER */
+
+document.getElementById("openLetter").addEventListener("click", () => {
+  document.getElementById("letterText").classList.toggle("hidden");
+});
+
+/* LILY GARDEN */
+
+const lilies = document.querySelectorAll(".lily");
+let gardenPopupShown = false;
+
+lilies.forEach(lily => {
+  lily.addEventListener("click", () => {
+    lily.classList.add("bloomed");
+
+    const allBloomed = [...lilies].every(item =>
+      item.classList.contains("bloomed")
+    );
+
+    if (allBloomed && !gardenPopupShown) {
+      gardenPopupShown = true;
+      alert("Fiel, a lovely poem.");
+    }
+  });
+});
+
+/* SNOOPY / PLAYLIST CONTROLS */
+
+const songPlayer = document.getElementById("songPlayer");
+
+function controlSong(command) {
+  songPlayer.contentWindow.postMessage(
+    JSON.stringify({
+      event: "command",
+      func: command,
+      args: []
+    }),
+    "*"
+  );
+}
+
+document.getElementById("playSong").addEventListener("click", () => {
+  controlSong("playVideo");
+});
+
+document.getElementById("pauseSong").addEventListener("click", () => {
+  controlSong("pauseVideo");
+});
+
+/* SECRET GIFT */
+
+document.getElementById("giftBox").addEventListener("click", () => {
+  document.getElementById("secretMessage").classList.remove("hidden");
+});
+
+/* ANNIVERSARY COUNTER */
+
+function updateCounter() {
+  const start = new Date(2025, 7, 14);
+  const today = new Date();
+
+  start.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const totalDays = Math.max(
+    0,
+    Math.floor((today - start) / 86400000)
+  );
+
+  let years = today.getFullYear() - start.getFullYear();
+  let months = today.getMonth() - start.getMonth();
+  let days = today.getDate() - start.getDate();
+
+  if (days < 0) {
+    months--;
+    const previousMonthDays = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      0
+    ).getDate();
+
+    days += previousMonthDays;
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  document.getElementById("totalDays").textContent = totalDays;
+
+  document.getElementById("calendarTime").textContent =
+    `${years} years, ${months} months, ${days} days`;
+}
+
+updateCounter();
+
+/* MEMORY PHOTO UPLOADS */
+
+const photoInputs = document.querySelectorAll("[data-photo]");
+const photoViewer = document.getElementById("photoViewer");
+const largePhoto = document.getElementById("largePhoto");
+
+let memoryPhotos = [];
+let currentPhotoIndex = 0;
+
+photoInputs.forEach(input => {
+  input.addEventListener("change", () => {
+    const file = input.files[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please choose an image file.");
+      input.value = "";
+      return;
+    }
+
+    const index = Number(input.dataset.photo);
+    const image = input.closest(".photo-slot").querySelector("img");
+
+    if (memoryPhotos[index]) {
+      URL.revokeObjectURL(memoryPhotos[index]);
+    }
+
+    const imageURL = URL.createObjectURL(file);
+    memoryPhotos[index] = imageURL;
+
+    image.src = imageURL;
+    image.classList.remove("hidden");
+  });
+});
+
+/* OPEN PHOTO VIEWER */
+
+document.querySelectorAll(".memory-image").forEach(image => {
+  image.addEventListener("click", () => {
+    const images = [...document.querySelectorAll(".memory-image")]
+      .filter(item => !item.classList.contains("hidden"));
+
+    const selectedURL = image.src;
+
+    currentPhotoIndex = images.findIndex(item =>
+      item.src === selectedURL
+    );
+
+    updateLargePhoto(images);
+    photoViewer.classList.remove("hidden");
+  });
+});
+
+function updateLargePhoto(images) {
+  if (!images.length || currentPhotoIndex < 0) return;
+
+  largePhoto.src = images[currentPhotoIndex].src;
+}
+
+function getUploadedImages() {
+  return [...document.querySelectorAll(".memory-image")]
+    .filter(image => !image.classList.contains("hidden"));
+}
+
+/* PREVIOUS PHOTO */
+
+document.getElementById("previousPhoto").addEventListener("click", () => {
+  const images = getUploadedImages();
+
+  if (!images.length) return;
+
+  currentPhotoIndex =
+    (currentPhotoIndex - 1 + images.length) % images.length;
+
+  updateLargePhoto(images);
+});
+
+/* NEXT PHOTO */
+
+document.getElementById("nextPhoto").addEventListener("click", () => {
+  const images = getUploadedImages();
+
+  if (!images.length) return;
+
+  currentPhotoIndex =
+    (currentPhotoIndex + 1) % images.length;
+
+  updateLargePhoto(images);
+});
+
+/* CLOSE PHOTO VIEWER */
+
+document.getElementById("closePhoto").addEventListener("click", () => {
+  photoViewer.classList.add("hidden");
+  largePhoto.src = "";
+});
+
+/* CLOSE VIEWER BY TAPPING OUTSIDE THE PHOTO */
+
+photoViewer.addEventListener("click", event => {
+  if (event.target === photoViewer) {
+    photoViewer.classList.add("hidden");
+    largePhoto.src = "";
+  }
+});
+
+/* KEYBOARD SUPPORT */
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    photoViewer.classList.add("hidden");
+  }
+});
+</script>
+
 </body>
-      </html>
+</html>
