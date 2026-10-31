@@ -3,185 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ffe4ed">
+  <meta name="theme-color" content="#fbe5ec">
   <title>1 Year and 3 Months</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- HOME -->
-  <header id="home" class="hero">
-    <div class="scrapbook-decoration">♡</div>
+  <div class="background-decoration decoration-one"></div>
+  <div class="background-decoration decoration-two"></div>
 
-    <p class="eyebrow">A little scrapbook made with love</p>
-    <h1>1 Year and 3 Months</h1>
-    <h2>happey monthsarrryyyy :P</h2>
-
-    <div class="hero-art">
-      <!-- Add your Snoopy holding a pink lily image here -->
-      <img
-        src="images/snoopy-lily.png"
-        alt="Snoopy holding a pink lily"
-      >
-    </div>
-
-    <a class="main-button" href="#memories">Explore our scrapbook</a>
-  </header>
-
+  <!-- MAIN NAVIGATION -->
   <nav class="navbar">
-    <a href="#home">Home</a>
-    <a href="#memories">Memories</a>
-    <a href="#letters">Letters</a>
-    <a href="#garden">Lily Garden</a>
-    <a href="#snoopy">Snoopy</a>
-    <a href="#playlist">Playlist</a>
-    <a href="#days">Days Together</a>
-    <a href="#surprise">Surprise</a>
+    <button class="nav-button active" data-section="home">Home</button>
+    <button class="nav-button" data-section="memories">Our Memories</button>
+    <button class="nav-button" data-section="letters">Love Letters</button>
+    <button class="nav-button" data-section="garden">Lily Garden</button>
+    <button class="nav-button" data-section="snoopy">Snoopy Corner</button>
+    <button class="nav-button" data-section="playlist">Our Playlist</button>
+    <button class="nav-button" data-section="days">Days Together</button>
+    <button class="nav-button" data-section="surprise">Secret Surprise</button>
   </nav>
 
   <main>
 
-    <!-- OUR MEMORIES -->
-    <section id="memories" class="section memories-section">
-      <p class="eyebrow">Little moments, kept forever</p>
-      <h2>Our Memories</h2>
+    <!-- HOME -->
+    <section id="home" class="page-section active">
+      <div class="hero scrapbook-paper">
+        <div class="tape tape-top"></div>
+        <p class="eyebrow">A little scrapbook made with love</p>
 
-      <div class="photo-gallery">
-        <!-- Add your photos inside the photos folder -->
-        <button class="photo-card" type="button">
-          <img src="photos/photo1.jpg" alt="Memory photo 1">
-        </button>
+        <h1>1 Year and 3 Months</h1>
+        <h2>happey monthsarrryyyy :P</h2>
 
-        <button class="photo-card" type="button">
-          <img src="photos/photo2.jpg" alt="Memory photo 2">
-        </button>
+        <div class="hero-art polaroid">
+          <img src="images/snoopy-lily.png" alt="Snoopy holding a pink lily">
+          <p>Our little scrapbook</p>
+        </div>
 
-        <button class="photo-card" type="button">
-          <img src="photos/photo3.jpg" alt="Memory photo 3">
+        <p class="hero-caption">A collection of little things and memories.</p>
+
+        <button class="primary-button" data-section="memories">
+          Open our scrapbook
         </button>
       </div>
+    </section>
 
-      <p class="small-note">Your photos will go here.</p>
+    <!-- OUR MEMORIES -->
+    <section id="memories" class="page-section" hidden>
+      <div class="section-card scrapbook-paper">
+        <p class="eyebrow">Little moments, kept forever</p>
+        <h2>Our Memories</h2>
+        <p class="section-description">A little gallery of our moments.</p>
 
-      <div id="photo-viewer" class="photo-viewer" hidden>
-        <button id="close-photo" type="button" aria-label="Close photo">×</button>
-        <button id="previous-photo" type="button" aria-label="Previous photo">‹</button>
-        <img id="enlarged-photo" src="" alt="Selected memory">
-        <button id="next-photo" type="button" aria-label="Next photo">›</button>
+        <div class="photo-gallery">
+          <button class="photo-card" data-photo="0" aria-label="View memory 1">
+            <img src="photos/photo1.jpg" alt="Memory 1">
+            <span>Memory 01</span>
+          </button>
+
+          <button class="photo-card" data-photo="1" aria-label="View memory 2">
+            <img src="photos/photo2.jpg" alt="Memory 2">
+            <span>Memory 02</span>
+          </button>
+
+          <button class="photo-card" data-photo="2" aria-label="View memory 3">
+            <img src="photos/photo3.jpg" alt="Memory 3">
+            <span>Memory 03</span>
+          </button>
+
+          <button class="photo-card" data-photo="3" aria-label="View memory 4">
+            <img src="photos/photo4.jpg" alt="Memory 4">
+            <span>Memory 04</span>
+          </button>
+        </div>
+
+        <div id="photo-viewer" class="photo-viewer" hidden>
+          <button id="close-photo" class="close-button">Close</button>
+          <button id="previous-photo" class="secondary-button">Previous</button>
+          <img id="enlarged-photo" src="" alt="Selected memory">
+          <button id="next-photo" class="secondary-button">Next</button>
+        </div>
       </div>
     </section>
 
     <!-- LOVE LETTERS -->
-    <section id="letters" class="section letters-section">
-      <p class="eyebrow">A letter for you</p>
-      <h2>Love Letters</h2>
+    <section id="letters" class="page-section" hidden>
+      <div class="section-card scrapbook-paper">
+        <p class="eyebrow">A little letter for you</p>
+        <h2>Love Letters</h2>
 
-      <button id="envelope" class="envelope" type="button">
-        <span class="envelope-label">Open me</span>
-        <span class="envelope-heart">♡</span>
-      </button>
+        <div class="letter-decoration">
+          <svg viewBox="0 0 240 170" role="img" aria-label="Pink lily decorated envelope">
+            <rect x="20" y="38" width="200" height="115" rx="9" fill="#f7bfd0" stroke="#c97f9b" stroke-width="3"/>
+            <path d="M22 45 L120 113 L218 45" fill="#ffe9ef" stroke="#c97f9b" stroke-width="3"/>
+            <path d="M22 150 L91 92 M218 150 L149 92" stroke="#c97f9b" stroke-width="3" fill="none"/>
+            <path d="M120 112 L120 150" stroke="#c97f9b" stroke-width="2"/>
+            <path d="M120 112 C108 100 101 102 105 112 C110 119 117 119 120 112" fill="#d987a5"/>
+            <path d="M120 112 C132 100 139 102 135 112 C130 119 123 119 120 112" fill="#d987a5"/>
+          </svg>
+        </div>
 
-      <article id="letter-content" class="letter-content" hidden>
-        <h3>For Bebe</h3>
+        <button id="envelope" class="primary-button">
+          Open your letter
+        </button>
 
-        <p>
-          I'm sorry ngayon na lang ulit ako nakapagbigay ng gifts and efforts sa monthsary natin. I've just been feeling very unmotivated these past few months, and it's been a little difficult for me to keep up with things. But nevertheless, you still deserve to receive gifts and little letters from me, no matter what. Please bear with me while I'm trying my best to keep myself together and get back on track, bebe. I hope you know that even when I'm not at my best, I still want to make you feel loved and appreciated. I may not always have the energy to do everything I want to, but I'll keep trying. I love you pow, bebe. :P
-        </p>
-      </article>
+        <article id="letter-content" class="letter-content" hidden>
+          <h3>For Bebe</h3>
+          <p>
+            I'm sorry ngayon na lang ulit ako nakapagbigay ng gifts and efforts sa monthsary natin. I've just been feeling very unmotivated these past few months, and it's been a little difficult for me to keep up with things. But nevertheless, you still deserve to receive gifts and little letters from me, no matter what. Please bear with me while I'm trying my best to keep myself together and get back on track, bebe. I hope you know that even when I'm not at my best, I still want to make you feel loved and appreciated. I may not always have the energy to do everything I want to, but I'll keep trying. I love you pow, bebe. :P
+          </p>
+          <button id="close-letter" class="secondary-button">Close letter</button>
+        </article>
+      </div>
     </section>
 
     <!-- LILY GARDEN -->
-    <section id="garden" class="section garden-section">
-      <p class="eyebrow">A little garden of lilies</p>
-      <h2>Lily Garden</h2>
+    <section id="garden" class="page-section" hidden>
+      <div class="section-card garden-card scrapbook-paper">
+        <p class="eyebrow">A garden of pink lilies</p>
+        <h2>Lily Garden</h2>
+        <p class="section-description">Tap each flower and watch it bloom.</p>
 
-      <p class="small-note">Tap a lily to make it bloom.</p>
+        <div class="garden-scene">
+          <div class="garden-sky">
+            <div class="garden-sun"></div>
+            <div class="garden-hill hill-back"></div>
+            <div class="garden-hill hill-front"></div>
+          </div>
 
-      <div class="lily-garden">
-        <button class="lily" type="button" aria-label="Bloom lily 1">🌷</button>
-        <button class="lily" type="button" aria-label="Bloom lily 2">🌷</button>
-        <button class="lily" type="button" aria-label="Bloom lily 3">🌷</button>
-        <button class="lily" type="button" aria-label="Bloom lily 4">🌷</button>
-        <button class="lily" type="button" aria-label="Bloom lily 5">🌷</button>
+          <div class="garden-flowers">
+
+            <button class="lily-button" aria-label="Bloom first lily">
+              <svg class="lily-illustration" viewBox="0 0 130 190">
+                <path class="stem" d="M65 75 Q62 120 66 180"/>
+                <path class="leaf" d="M65 130 Q22 92 15 125 Q37 151 65 130Z"/>
+                <path class="leaf" d="M65 151 Q101 111 117 137 Q99 160 65 151Z"/>
+                <g class="flower-head">
+                  <path class="petal petal-one" d="M65 72 Q22 53 39 15 Q62 23 65 72Z"/>
+                  <path class="petal petal-two" d="M65 72 Q38 30 58 7 Q78 25 65 72Z"/>
+                  <path class="petal petal-three" d="M65 72 Q69 20 96 15 Q105 46 65 72Z"/>
+                  <path class="petal petal-four" d="M65 72 Q101 35 116 60 Q101 83 65 72Z"/>
+                  <path class="petal petal-five" d="M65 72 Q31 82 20 60 Q43 39 65 72Z"/>
+                  <path class="flower-center" d="M47 65 Q65 52 83 65 Q75 91 65 89 Q54 89 47 65Z"/>
+                  <path class="stamen" d="M65 67 L65 43 M65 54 L51 39 M65 55 L80 38"/>
+                  <circle class="pollen" cx="65" cy="42" r="3"/>
+                  <circle class="pollen" cx="50" cy="38" r="3"/>
+                  <circle class="pollen" cx="81" cy="37" r="3"/>
+                </g>
+              </svg>
+            </button>
+
+            <button class="lily-button" aria-label="Bloom second lily">
+              <svg class="lily-illustration" viewBox="0 0 130 190">
+                <path class="stem" d="M65 75 Q69 120 65 180"/>
+                <path class="leaf" d="M65 130 Q22 92 15 125 Q37 151 65 130Z"/>
+                <path class="leaf" d="M65 151 Q101 111 117 137 Q99 160 65 151Z"/>
+                <g class="flower-head">
+                  <path class="petal petal-one" d="M65 72 Q22 53 39 15 Q62 23 65 72Z"/>
+                  <path class="petal petal-two" d="M65 72 Q38 30 58 7 Q78 25 65 72Z"/>
+                  <path class="petal petal-three" d="M65 72 Q69 20 96 15 Q105 46 65 72Z"/>
+                  <path class="petal petal-four" d="M65 72 Q101 35 116 60 Q101 83 65 72Z"/>
+                  <path class="petal petal-five" d="M65 72 Q31 82 20 60 Q43 39 65 72Z"/>
+                  <path class="flower-center" d="M47 65 Q65 52 83 65 Q75 91 65 89 Q54 89 47 65Z"/>
+                  <path class="stamen" d="M65 67 L65 43 M65 54 L51 39 M65 55 L80 38"/>
+                  <circle class="pollen" cx="65" cy="42" r="3"/>
+                  <circle class="pollen" cx="50" cy="38" r="3"/>
+                  <circle class="pollen" cx="81" cy="37" r="3"/>
+                </g>
+              </svg>
+            </button>
+
+            <button class="lily-button" aria-label="Bloom third lily">
+              <svg class="lily-illustration" viewBox="0 0 130 190">
+                <path class="stem" d="M65 75 Q62 120 66 180"/>
+                <path class="leaf" d="M65 130 Q22 92 15 125 Q37 151 65 130Z"/>
+                <path class="leaf" d="M65 151 Q101 111 117 137 Q99 160 65 151Z"/>
+                <g class="flower-head">
+                  <path class="petal petal-one" d="M65 72 Q22 53 39 15 Q62 23 65 72Z"/>
+                  <path class="petal petal-two" d="M65 72 Q38 30 58 7 Q78 25 65 72Z"/>
+                  <path class="petal petal-three" d="M65 72 Q69 20 96 15 Q105 46 65 72Z"/>
+                  <path class="petal petal-four" d="M65 72 Q101 35 116 60 Q101 83 65 72Z"/>
+                  <path class="petal petal-five" d="M65 72 Q31 82 20 60 Q43 39 65 72Z"/>
+                  <path class="flower-center" d="M47 65 Q65 52 83 65 Q75 91 65 89 Q54 89 47 65Z"/>
+                  <path class="stamen" d="M65 67 L65 43 M65 54 L51 39 M65 55 L80 38"/>
+                  <circle class="pollen" cx="65" cy="42" r="3"/>
+                  <circle class="pollen" cx="50" cy="38" r="3"/>
+                  <circle class="pollen" cx="81" cy="37" r="3"/>
+                </g>
+              </svg>
+            </button>
+
+          </div>
+        </div>
+
+        <p id="garden-message" class="garden-message" aria-live="polite"></p>
       </div>
     </section>
 
     <!-- SNOOPY CORNER -->
-    <section id="snoopy" class="section snoopy-section">
-      <p class="eyebrow">A little Peanuts scrapbook</p>
-      <h2>Snoopy Corner</h2>
+    <section id="snoopy" class="page-section" hidden>
+      <div class="section-card scrapbook-paper">
+        <p class="eyebrow">A little Peanuts scrapbook</p>
+        <h2>Snoopy Corner</h2>
 
-      <div class="snoopy-gallery">
-        <!-- Add authorized Snoopy and Woodstock artwork here -->
-        <img src="images/snoopy-scrapbook.png" alt="Snoopy scrapbook artwork">
-        <img src="images/woodstock-scrapbook.png" alt="Woodstock scrapbook artwork">
+        <div class="snoopy-gallery">
+          <div class="polaroid">
+            <img src="images/snoopy-scrapbook.png" alt="Snoopy artwork">
+            <p>Snoopy</p>
+          </div>
+          <div class="polaroid">
+            <img src="images/woodstock-scrapbook.png" alt="Woodstock artwork">
+            <p>Woodstock</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- PLAYLIST -->
-    <section id="playlist" class="section playlist-section">
-      <p class="eyebrow">One song</p>
-      <h2>Our Playlist</h2>
+    <section id="playlist" class="page-section" hidden>
+      <div class="section-card scrapbook-paper">
+        <p class="eyebrow">One song for this little scrapbook</p>
+        <h2>Our Playlist</h2>
 
-      <div class="playlist-art">
-        <!-- Add your Snoopy and Fifi artwork here -->
-        <img src="images/snoopy-fifi.png" alt="Snoopy and Fifi">
-      </div>
+        <div class="playlist-art polaroid">
+          <img src="images/snoopy-fifi.png" alt="Snoopy and Fifi artwork">
+          <p>A little music corner</p>
+        </div>
 
-      <div class="music-player">
-        <h3>Janice</h3>
-        <p>Dilaw</p>
-
-        <!-- Add an authorized audio source or official music embed later -->
-        <audio id="song-player" controls>
-          Your browser does not support audio playback.
-        </audio>
-
-        <a id="song-link" href="#" target="_blank" rel="noopener">
-          Official song link
-        </a>
+        <div class="music-player">
+          <h3>Janice</h3>
+          <p>Dilaw</p>
+          <audio id="song-player" controls></audio>
+          <a id="song-link" href="#" target="_blank" rel="noopener">
+            Open official song
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- DAYS TOGETHER -->
-    <section id="days" class="section days-section">
-      <p class="eyebrow">Counting every day</p>
-      <h2>Days Together</h2>
+    <section id="days" class="page-section" hidden>
+      <div class="section-card scrapbook-paper">
+        <p class="eyebrow">Every day is a little memory</p>
+        <h2>Days Together</h2>
 
-      <div class="counter-card">
-        <p class="counter-number" id="total-days">0</p>
-        <p>Total days together</p>
+        <div class="counter-card">
+          <p class="counter-number" id="total-days">0</p>
+          <p>Total days together</p>
 
-        <div class="date-counter">
-          <span><strong id="years">0</strong> Years</span>
-          <span><strong id="months">0</strong> Months</span>
-          <span><strong id="remaining-days">0</strong> Days</span>
+          <div class="date-counter">
+            <div><strong id="years">0</strong><span>Years</span></div>
+            <div><strong id="months">0</strong><span>Months</span></div>
+            <div><strong id="remaining-days">0</strong><span>Days</span></div>
+          </div>
+
+          <p class="small-note">Since August 14, 2025</p>
         </div>
-
-        <p class="small-note">Since August 14, 2025</p>
       </div>
     </section>
 
     <!-- SECRET SURPRISE -->
-    <section id="surprise" class="section surprise-section">
-      <p class="eyebrow">A little surprise</p>
-      <h2>Secret Surprise</h2>
+    <section id="surprise" class="page-section" hidden>
+      <div class="section-card scrapbook-paper">
+        <p class="eyebrow">Something is waiting for you</p>
+        <h2>Secret Surprise</h2>
 
-      <button id="gift-box" class="gift-box" type="button">
-        <span>🎁</span>
-        <small>Tap to open</small>
-      </button>
+        <button id="gift-box" class="gift-box">
+          <span class="gift-lid"></span>
+          <span class="gift-body"></span>
+          <span class="gift-ribbon"></span>
+          <span class="gift-label">Open gift</span>
+        </button>
 
-      <div id="surprise-message" class="surprise-message" hidden>
-        <h3>kiss me to get it</h3>
+        <div id="surprise-message" class="surprise-message" hidden>
+          <h3>kiss me to get it</h3>
+        </div>
       </div>
     </section>
 
   </main>
 
+  <!-- HOME BUTTON -->
+  <div class="bottom-navigation">
+    <button class="secondary-button" data-section="home">Back to Home</button>
+  </div>
+
   <footer class="footer">
-    <p>♡</p>
+    <p>Made for Bebe</p>
   </footer>
 
   <script src="script.js"></script>
