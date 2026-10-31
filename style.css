@@ -1,346 +1,163 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 Year and 3 Months ♡</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-:root {
-  --pink: #e98eaa;
-  --dark-pink: #c95f86;
-  --light-pink: #fff0f5;
-  --cream: #fffaf7;
-  --text: #75485a;
-}
+  <section id="home" class="page active">
+    <div class="home-card">
+      <div class="snoopy-home">
+        <!-- Replace this URL with the Snoopy holding a lily image you choose -->
+        <img
+          src="https://placehold.co/300x250/fff0f5/d46b91?text=Snoopy+holding+a+lily"
+          alt="Snoopy holding a lily"
+        >
+      </div>
+      <h1>1 Year and 3 Months</h1>
+      <p>happey monthsarrryyyy :P</p>
+      <button class="main-button" id="openButton">Open</button>
+    </div>
+  </section>
 
-* {
-  box-sizing: border-box;
-}
+  <nav id="navigation" class="navigation hidden">
+    <button class="nav-button" data-section="memories">Memories</button>
+    <button class="nav-button" data-section="letters">Letters</button>
+    <button class="nav-button" data-section="garden">Garden</button>
+    <button class="nav-button" data-section="snoopy">Snoopy</button>
+    <button class="nav-button" data-section="playlist">Playlist</button>
+    <button class="nav-button" data-section="calendar">Calendar</button>
+    <button class="nav-button" data-section="secret">Secret</button>
+  </nav>
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, #ffe0eb, transparent 40%),
-    linear-gradient(135deg, #fff7f8, #ffeaf1);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-}
+  <main id="mainContent" class="hidden">
 
-button {
-  font: inherit;
-  cursor: pointer;
-}
+    <section id="memories" class="page">
+      <h2>Our Memories</h2>
+      <p class="subtitle">my paborito sa tindahan ng mga alaala</p>
 
-.hidden {
-  display: none !important;
-}
+      <div class="photo-grid">
+        <label class="photo-slot">
+          <input type="file" accept="image/*">
+          <span>＋</span>
+        </label>
+        <label class="photo-slot">
+          <input type="file" accept="image/*">
+          <span>＋</span>
+        </label>
+        <label class="photo-slot">
+          <input type="file" accept="image/*">
+          <span>＋</span>
+        </label>
+        <label class="photo-slot">
+          <input type="file" accept="image/*">
+          <span>＋</span>
+        </label>
+        <label class="photo-slot">
+          <input type="file" accept="image/*">
+          <span>＋</span>
+        </label>
+        <label class="photo-slot">
+          <input type="file" accept="image/*">
+          <span>＋</span>
+        </label>
+      </div>
+    </section>
 
-.page {
-  display: none;
-  width: min(900px, 92%);
-  min-height: 75vh;
-  margin: 35px auto;
-  padding: 35px 25px;
-  text-align: center;
-  background: rgba(255, 255, 255, .78);
-  border: 1px solid #f7d4e0;
-  border-radius: 25px;
-  box-shadow: 0 12px 35px rgba(180, 105, 135, .12);
-}
+    <section id="letters" class="page">
+      <h2>letterzzz</h2>
+      <p class="subtitle">hehehehe :P</p>
 
-.page.active {
-  display: block;
-  animation: appear .5s ease;
-}
+      <div class="envelope" id="envelope">
+        <div class="envelope-heart">♡</div>
+        <button id="letterButton">Open Letter</button>
+      </div>
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+      <div class="letter-content hidden" id="letterContent">
+        <p>
+          I'm sorry ngayon na lang ulit ako nakapagbigay ng gifts and efforts sa monthsary natin.
+          I've just been feeling very unmotivated these past few months, and it's been a little
+          difficult for me to keep up with things. But nevertheless, you still deserve to receive
+          gifts and little letters from me, no matter what. Please bear with me while I'm trying
+          my best to keep myself together and get back on track, bebe. I hope you know that even
+          when I'm not at my best, I still want to make you feel loved and appreciated. I may not
+          always have the energy to do everything I want to, but I'll keep trying. I love you pow,
+          bebe. :P
+        </p>
+      </div>
+    </section>
 
-h1, h2 {
-  font-family: 'Playfair Display', serif;
-  color: var(--dark-pink);
-}
+    <section id="garden" class="page">
+      <h2>Lily Garden</h2>
+      <div class="garden">
+        <div class="lily-row">
+          <button class="lily" aria-label="Bloom lily">
+            <span class="stem"></span><span class="flower">✿</span>
+          </button>
+          <button class="lily" aria-label="Bloom lily">
+            <span class="stem"></span><span class="flower">✿</span>
+          </button>
+          <button class="lily" aria-label="Bloom lily">
+            <span class="stem"></span><span class="flower">✿</span>
+          </button>
+          <button class="lily" aria-label="Bloom lily">
+            <span class="stem"></span><span class="flower">✿</span>
+          </button>
+          <button class="lily" aria-label="Bloom lily">
+            <span class="stem"></span><span class="flower">✿</span>
+          </button>
+        </div>
+      </div>
+      <p id="gardenMessage" class="hidden">Fiel, a lovely poem.</p>
+    </section>
 
-h1 {
-  font-size: clamp(2rem, 7vw, 3.4rem);
-}
+    <section id="snoopy" class="page">
+      <h2>Snoopy Corner</h2>
+      <p class="subtitle">snupeeey</p>
+      <div class="snoopy-grid">
+        <img src="YOUR_SNOOPY_WOODSTOCK_IMAGE_URL" alt="Snoopy and Woodstock">
+        <img src="YOUR_SNOOPY_FIFI_IMAGE_URL" alt="Snoopy and Fifi">
+      </div>
+    </section>
 
-h2 {
-  font-size: clamp(2rem, 6vw, 2.8rem);
-  margin-bottom: 8px;
-}
+    <section id="playlist" class="page">
+      <h2>kanta ni bugoy</h2>
+      <div class="music-card">
+        <div class="music-icon">♫</div>
+        <h3>Janice</h3>
+        <p>Dilaw</p>
+        <div class="music-controls">
+          <button id="playButton">Play</button>
+          <button id="pauseButton">Pause</button>
+        </div>
+        <div id="youtubePlayer"></div>
+      </div>
+    </section>
 
-.subtitle {
-  color: #a77b8c;
-  margin-bottom: 30px;
-}
+    <section id="calendar" class="page">
+      <h2>calendar of us</h2>
+      <p class="subtitle">parang kahapon lang grade 10 pa tayo..</p>
+      <div class="calendar-card">
+        <div class="calendar-heart">♡</div>
+        <h3 id="totalDays">0 days</h3>
+        <p id="timeTogether"></p>
+        <p>Since August 14, 2025</p>
+      </div>
+    </section>
 
-.home-card {
-  width: min(600px, 100%);
-  margin: 20px auto;
-  padding: 30px 15px;
-}
+    <section id="secret" class="page">
+      <h2>secret</h2>
+      <button class="gift-box" id="giftButton" aria-label="Open gift">
+        🎁
+      </button>
+      <p id="secretMessage" class="hidden">kiss me to get it :PPP</p>
+    </section>
 
-.snoopy-home img {
-  width: min(300px, 85%);
-  height: 230px;
-  object-fit: contain;
-  border-radius: 20px;
-}
+  </main>
 
-.main-button, .music-controls button, #letterButton {
-  border: 0;
-  background: var(--pink);
-  color: white;
-  padding: 13px 30px;
-  border-radius: 30px;
-  transition: .2s;
-}
-
-.main-button:hover, .music-controls button:hover, #letterButton:hover {
-  background: var(--dark-pink);
-  transform: translateY(-2px);
-}
-
-.navigation {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 9px;
-  padding: 15px 10px;
-}
-
-.nav-button {
-  background: white;
-  border: 1px solid #f1c4d4;
-  border-radius: 30px;
-  padding: 10px 15px;
-  color: var(--text);
-}
-
-.nav-button.active, .nav-button:hover {
-  background: var(--pink);
-  color: white;
-}
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  max-width: 700px;
-  margin: 30px auto;
-}
-
-.photo-slot {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 150px;
-  background: #fff0f5;
-  border: 2px dashed #e8a9bf;
-  border-radius: 15px;
-  overflow: hidden;
-  cursor: pointer;
-  font-size: 35px;
-  color: var(--pink);
-}
-
-.photo-slot input {
-  display: none;
-}
-
-.photo-slot img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.envelope {
-  width: min(400px, 90%);
-  min-height: 180px;
-  margin: 40px auto;
-  display: grid;
-  place-content: center;
-  gap: 15px;
-  background: #ffe2eb;
-  border: 2px solid #efb1c7;
-  border-radius: 18px;
-}
-
-.envelope-heart {
-  font-size: 55px;
-  color: var(--dark-pink);
-}
-
-.letter-content {
-  max-width: 650px;
-  margin: 20px auto;
-  padding: 30px;
-  background: #fff8fa;
-  border: 1px solid #f3c6d5;
-  border-radius: 18px;
-  text-align: left;
-  line-height: 1.9;
-}
-
-.garden {
-  min-height: 350px;
-  margin: 25px auto;
-  padding: 50px 10px;
-  border-radius: 20px;
-  background:
-    radial-gradient(ellipse at bottom, #a7c58b, transparent 70%),
-    linear-gradient(#e8f5e8, #d7e9d0);
-  display: grid;
-  place-items: center;
-}
-
-.lily-row {
-  display: flex;
-  justify-content: center;
-  align-items: end;
-  gap: clamp(5px, 3vw, 30px);
-  width: 100%;
-}
-
-.lily {
-  position: relative;
-  width: 65px;
-  height: 180px;
-  border: 0;
-  background: transparent;
-}
-
-.stem {
-  position: absolute;
-  bottom: 0;
-  left: 31px;
-  width: 5px;
-  height: 115px;
-  background: #5e9a65;
-  border-radius: 10px;
-}
-
-.flower {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 65px;
-  font-size: 48px;
-  color: #dca4c2;
-  transition: .4s;
-  transform: scale(.7);
-}
-
-.lily.bloomed .flower {
-  color: #ed83b1;
-  transform: scale(1.25) rotate(15deg);
-}
-
-#gardenMessage {
-  color: var(--dark-pink);
-  font-family: 'Playfair Display', serif;
-  font-size: 25px;
-}
-
-.snoopy-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  max-width: 650px;
-  margin: 30px auto;
-}
-
-.snoopy-grid img {
-  width: 100%;
-  height: 260px;
-  object-fit: contain;
-  background: #fff0f5;
-  border-radius: 18px;
-}
-
-.music-card, .calendar-card {
-  max-width: 450px;
-  margin: 35px auto;
-  padding: 35px 20px;
-  background: #fff0f5;
-  border: 1px solid #f3c6d5;
-  border-radius: 22px;
-}
-
-.music-icon, .calendar-heart {
-  font-size: 55px;
-  color: var(--pink);
-}
-
-.music-controls {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 25px;
-}
-
-.calendar-card h3 {
-  font-size: 30px;
-  color: var(--dark-pink);
-}
-
-.gift-box {
-  margin: 40px;
-  padding: 25px;
-  border: 0;
-  border-radius: 25px;
-  background: #ffe0eb;
-  font-size: 85px;
-  transition: .3s;
-}
-
-.gift-box:hover {
-  transform: scale(1.1) rotate(-5deg);
-}
-
-#secretMessage {
-  font-family: 'Playfair Display', serif;
-  font-size: 25px;
-  color: var(--dark-pink);
-}
-
-@media (max-width: 600px) {
-  .page {
-    padding: 25px 15px;
-    margin: 15px auto;
-  }
-
-  .photo-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .photo-slot {
-    min-height: 125px;
-  }
-
-  .snoopy-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .snoopy-grid img {
-    height: 220px;
-  }
-
-  .lily {
-    width: 48px;
-  }
-
-  .flower {
-    font-size: 38px;
-    width: 48px;
-  }
-
-  .stem {
-    left: 23px;
-  }
-
-  .letter-content {
-    padding: 20px;
-  }
-}
+  <script src="script.js"></script>
+</body>
+</html>
