@@ -476,7 +476,7 @@ button:focus-visible, a:focus-visible, label:focus-within { outline: 3px solid #
   flex-direction: column;
   align-items: center;
   gap: 18px;
-  width: min(100%, 940px);
+  width: min(100%, 1100px);
   margin: 22px auto 30px;
 }
 .snoopy-all-moments .snoopy-moment {
@@ -495,6 +495,7 @@ button:focus-visible, a:focus-visible, label:focus-within { outline: 3px solid #
 }
 .snoopy-all-moments .snoopy-video-player {
   width: 100%;
+  width: 100%;
   max-width: 100%;
   margin: 12px auto 0;
   padding: 12px;
@@ -502,7 +503,7 @@ button:focus-visible, a:focus-visible, label:focus-within { outline: 3px solid #
 .snoopy-all-moments .snoopy-video-frame {
   width: 100%;
   aspect-ratio: 16 / 9;
-  min-height: 220px;
+  min-height: 0;
   border-width: 4px;
 }
 .snoopy-all-moments .snoopy-youtube-target,
@@ -526,3 +527,20 @@ button:focus-visible, a:focus-visible, label:focus-within { outline: 3px solid #
   .snoopy-all-moments .snoopy-video-frame { min-height: 0; }
   .snoopy-all-moments .snoopy-personal-message { padding: 17px 15px; }
 }
+
+/* Larger, responsive Snoopy clips: use the full available content width. */
+.snoopy-all-moments { width: min(100%, 1100px); }
+.snoopy-all-moments .snoopy-video-player { width: 100%; max-width: 100%; }
+.snoopy-all-moments .snoopy-video-frame { width: 100%; aspect-ratio: 16 / 9; min-height: 0; }
+.snoopy-all-moments .snoopy-video-frame iframe,
+.snoopy-all-moments .snoopy-youtube-target { display: block; width: 100% !important; height: 100% !important; }
+@media (max-width: 600px) {
+  .snoopy-all-moments { width: 100%; }
+  .snoopy-all-moments .snoopy-moment { padding: 9px; }
+  .snoopy-all-moments .snoopy-video-player { padding: 5px; }
+  .snoopy-all-moments .snoopy-video-frame { width: 100%; aspect-ratio: 16 / 9; }
+}
+
+/* Let Snoopy Corner use a wider content area than the other scrapbook pages. */
+.content-wrap:has(#snoopy:not([hidden])) { width: min(100%, 1180px); }
+@media (max-width: 600px) { .content-wrap:has(#snoopy:not([hidden])) { width: 100%; } }
