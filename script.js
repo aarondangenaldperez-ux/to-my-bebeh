@@ -4,6 +4,49 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
+  const snoopyPlayers = new WeakMap();
+  let youtubeApiPromise = null;
+
+  function loadYouTubeIframeApi() {
+    if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+    if (youtubeApiPromise) return youtubeApiPromise;
+    youtubeApiPromise = new Promise((resolve, reject) => {
+      const previousReady = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (typeof previousReady === "function") previousReady();
+        resolve(window.YT);
+      };
+      let apiScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+      if (!apiScript) {
+        apiScript = document.createElement("script");
+        apiScript.src = "https://www.youtube.com/iframe_api";
+        apiScript.async = true;
+        apiScript.onerror = () => reject(new Error("The YouTube player could not be loaded."));
+        document.head.appendChild(apiScript);
+      }
+    });
+    return youtubeApiPromise;
+  }
+
+  function stopSnoopyVideo(playerElement, hide = true) {
+    if (!playerElement) return;
+    const activePlayer = snoopyPlayers.get(playerElement);
+    if (activePlayer) {
+      try { activePlayer.destroy(); } catch (error) { console.warn("Could not stop the embedded video cleanly.", error); }
+      snoopyPlayers.delete(playerElement);
+    }
+    const frameContainer = $(".snoopy-video-frame", playerElement);
+    if (frameContainer) {
+      frameContainer.replaceChildren();
+      const target = document.createElement("div");
+      target.className = "snoopy-youtube-target";
+      frameContainer.appendChild(target);
+    }
+    const message = $(".snoopy-personal-message", playerElement);
+    if (message) message.hidden = true;
+    if (hide) playerElement.hidden = true;
+  }
+
   const home = $("#home");
   const site = $("#site");
   const pages = $$(".page-section");
@@ -48,6 +91,9 @@
   function renderPage(pageId) {
     if (!pageIds.has(pageId)) return;
     closePhotoViewer();
+    if (pageId !== "snoopy") {
+      $$(".snoopy-video-player").forEach(player => stopSnoopyVideo(player));
+    }
 
     if (pageId === "home") {
       site.hidden = true;
@@ -261,7 +307,14 @@
         item.classList.toggle("active", active);
         item.setAttribute("aria-selected", String(active));
       });
-      snoopyScenes.forEach(scene => { scene.hidden = scene.id !== sceneId; });
+      snoopyScenes.forEach(scene => {
+        const isSelected = scene.id === sceneId;
+        scene.hidden = !isSelected;
+        if (!isSelected) {
+          const player = $(".snoopy-video-player", scene);
+          if (player) stopSnoopyVideo(player);
+        }
+      });
     });
   });
 
@@ -380,23 +433,62 @@
     }
   });
 
-  // A gentle heart effect contained inside the selected Snoopy scene.
-  $$('[data-hearts]').forEach(button => {
-    button.addEventListener("click", () => {
-      const layer = document.getElementById(button.dataset.hearts);
-      if (!layer) return;
-      layer.replaceChildren();
-      const symbols = ["♡", "♥", "♡", "♥", "♡", "♥"];
-      symbols.forEach((symbol, index) => {
-        const heart = document.createElement("span");
-        heart.className = "float-heart";
-        heart.textContent = symbol;
-        heart.style.left = `${12 + index * 14}%`;
-        heart.style.animationDelay = `${index * .1}s`;
-        layer.appendChild(heart);
-        window.setTimeout(() => heart.remove(), 2200);
+  // Play curated Peanuts moments. A personal message appears only when the video ends.
+  $$('[data-play-snoopy-video]').forEach(button => {
+    const scene = button.closest(".snoopy-scene");
+    const playerElement = scene?.querySelector(".snoopy-video-player");
+    const frameContainer = playerElement?.querySelector(".snoopy-video-frame");
+    const title = playerElement?.querySelector(".video-player-title");
+    const credit = playerElement?.querySelector(".video-credit");
+    const stopButton = playerElement?.querySelector(".stop-moment-button");
+    const personalMessage = playerElement?.querySelector(".snoopy-personal-message");
+    if (!scene || !playerElement || !frameContainer || !stopButton) return;
+
+    const videoId = button.dataset.playSnoopyVideo;
+    const videoTitle = button.dataset.videoTitle || "A little Snoopy moment";
+
+    button.addEventListener("click", async () => {
+      // Stop every other clip first so only one video can play at a time.
+      $$(".snoopy-video-player").forEach(otherPlayer => {
+        if (otherPlayer !== playerElement) stopSnoopyVideo(otherPlayer);
       });
+      stopSnoopyVideo(playerElement, false);
+      if (title) title.textContent = videoTitle;
+      if (credit) credit.href = `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`;
+      if (personalMessage) personalMessage.hidden = true;
+      playerElement.hidden = false;
+      playerElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+      try {
+        const YT = await loadYouTubeIframeApi();
+        // Ignore a late API response if the visitor has already left this scene.
+        if (playerElement.hidden || scene.hidden) return;
+        const target = document.createElement("div");
+        target.className = "snoopy-youtube-target";
+        frameContainer.replaceChildren(target);
+        const player = new YT.Player(target, {
+          width: "100%",
+          height: "100%",
+          videoId,
+          playerVars: { autoplay: 1, playsinline: 1, rel: 0 },
+          events: {
+            onReady: event => event.target.playVideo(),
+            onStateChange: event => {
+              if (event.data === YT.PlayerState.ENDED && personalMessage && !scene.hidden && !playerElement.hidden) {
+                personalMessage.hidden = false;
+                personalMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              }
+            },
+            onError: event => console.warn("This YouTube video could not be played here.", event.data)
+          }
+        });
+        snoopyPlayers.set(playerElement, player);
+      } catch (error) {
+        console.error("Could not load the YouTube player.", error);
+      }
     });
+
+    stopButton.addEventListener("click", () => stopSnoopyVideo(playerElement));
   });
 
   // The doghouse opens in place; no character is animated out of a white-backed image.
