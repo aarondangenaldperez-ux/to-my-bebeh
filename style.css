@@ -32,6 +32,8 @@ button {
   cursor: pointer;
 }
 
+/* HOMEPAGE */
+
 .hero {
   min-height: 90vh;
   padding: 65px 20px;
@@ -61,14 +63,6 @@ button {
   font-size: 1.3rem;
   font-weight: 500;
   color: #a76c80;
-}
-
-.eyebrow {
-  color: var(--dark-pink);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  font-weight: 700;
 }
 
 .scrapbook-decoration {
@@ -114,6 +108,8 @@ button {
   background: #a94f72;
 }
 
+/* NAVIGATION */
+
 .navbar {
   display: flex;
   justify-content: center;
@@ -139,6 +135,8 @@ button {
   background: #fbe0e9;
 }
 
+/* GENERAL SECTIONS */
+
 .section {
   width: min(950px, 90%);
   margin: 55px auto;
@@ -156,12 +154,20 @@ button {
   margin: 10px 0 30px;
 }
 
+.eyebrow {
+  color: var(--dark-pink);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
 .small-note {
   color: #a17c86;
   font-size: 0.85rem;
 }
 
-/* MEMORIES */
+/* OUR MEMORIES */
 
 .photo-gallery {
   display: grid;
@@ -192,6 +198,8 @@ button {
   object-fit: cover;
 }
 
+/* PHOTO VIEWER */
+
 .photo-viewer {
   position: fixed;
   inset: 0;
@@ -204,10 +212,8 @@ button {
   padding: 20px;
 }
 
-.photo-viewer[hidden],
-.letter-content[hidden],
-.surprise-message[hidden] {
-  display: none;
+.photo-viewer[hidden] {
+  display: none !important;
 }
 
 .photo-viewer img {
@@ -266,6 +272,11 @@ button {
 .letter-content h3 {
   color: var(--dark-pink);
   font-family: 'Playfair Display', serif;
+}
+
+.letter-content[hidden],
+.surprise-message[hidden] {
+  display: none !important;
 }
 
 /* LILY GARDEN */
@@ -422,6 +433,8 @@ button {
   font-size: 2rem;
 }
 
+/* MOBILE RESPONSIVENESS */
+
 @media (max-width: 600px) {
   .navbar {
     gap: 4px;
@@ -439,5 +452,13 @@ button {
 
   .letter-content {
     padding: 20px;
+  }
+
+  .photo-viewer {
+    gap: 7px;
+  }
+
+  .photo-viewer img {
+    max-width: 65%;
   }
 }
