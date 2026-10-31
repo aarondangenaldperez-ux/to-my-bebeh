@@ -1,382 +1,121 @@
-document.addEventListener("DOMContentLoaded", () => {
+"use strict";
 
-  // ELEMENTS
-  const home = document.getElementById("home");
-  const navigation = document.getElementById("navigation");
-  const mainContent = document.getElementById("mainContent");
-  const openButton = document.getElementById("openButton");
+(() => {
 
-  const contentPages = document.querySelectorAll(".content-page");
-  const navButtons = document.querySelectorAll(".nav-button");
+  const $ = (selector, root = document) =>
+    root.querySelector(selector);
+
+  const $$ = (selector, root = document) =>
+    [...root.querySelectorAll(selector)];
 
 
-  // =====================================
-  // PAGE NAVIGATION
-  // =====================================
+  /* ======================================
+     1. NAVIGATION
+  ====================================== */
 
-  function showPage(pageId) {
+  const home = $("#home");
+  const siteHeader = $("#siteHeader");
 
-    // Return to homepage
-    if (pageId === "home") {
-      home.classList.add("active");
-      navigation.classList.add("hidden");
-      mainContent.classList.add("hidden");
+  const pages = $$(".page-section");
+  const navButtons = $$(".nav-button");
 
-      contentPages.forEach(page => {
-        page.classList.remove("active");
+  function showPage(id) {
+
+    if (id === "home") {
+
+      siteHeader.hidden = true;
+      home.hidden = false;
+
+      pages.forEach(page => {
+        page.hidden = true;
       });
 
-      navButtons.forEach(button => {
-        button.classList.remove("active");
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
       });
 
-      window.scrollTo(0, 0);
       return;
     }
 
-    // Find the requested page
-    const selectedPage = document.getElementById(pageId);
+    const target = document.getElementById(id);
 
-    // Stop if no matching page exists
-    if (!selectedPage || !selectedPage.classList.contains("content-page")) {
-      console.error("Page not found:", pageId);
+    if (!target || !pages.includes(target)) {
       return;
     }
 
-    // Hide homepage
-    home.classList.remove("active");
+    home.hidden = true;
+    siteHeader.hidden = false;
 
-    // Display the navigation and main content
-    navigation.classList.remove("hidden");
-    mainContent.classList.remove("hidden");
-
-    // Hide every content page
-    contentPages.forEach(page => {
-      page.classList.remove("active");
+    pages.forEach(page => {
+      page.hidden = page !== target;
     });
 
-    // Display only the selected page
-    selectedPage.classList.add("active");
-
-    // Highlight the matching navigation button
     navButtons.forEach(button => {
-      button.classList.toggle(
-        "active",
-        button.dataset.page === pageId
-      );
-    });
 
-    window.scrollTo(0, 0);
-  }
+      const active = button.dataset.page === id;
 
+      button.classList.toggle("active", active);
 
-  // HOMEPAGE OPEN BUTTON
-  openButton.addEventListener("click", () => {
-    showPage("memories");
-  });
-
-
-  // NAVIGATION BUTTONS
-  navButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      const destination = button.dataset.page;
-
-      if (destination) {
-        showPage(destination);
+      if (active) {
+        button.setAttribute("aria-current", "page");
+      } else {
+        button.removeAttribute("aria-current");
       }
+
     });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  $("#openSite").addEventListener("click", () => {
+    showPage("playlist");
   });
 
 
-  // =====================================
-  // MEMORIES: PHOTO UPLOADS
-  // =====================================
+  $("#navigation").addEventListener("click", event => {
 
-  const STORAGE_KEY = "monthsaryMemories";
-  const photoTiles = [...document.querySelectorAll(".photo-tile")];
+    const button = event.target.closest("[data-page]");
 
-  let savedPhotos = [];
+    if (!button) return;
 
-  function displayPhoto(index, dataUrl) {
-    const tile = photoTiles[index];
-    if (!tile) return;
+    showPage(button.dataset.page);
 
-    const image = tile.querySelector("img");
-    const plus = tile.querySelector(".upload-symbol");
-    const viewButton = tile.querySelector(".view-photo");
+  });
 
-    image.src = dataUrl;
-    image.hidden = false;
-    plus.hidden = true;
-    viewButton.hidden = false;
-  }
 
-  function loadSavedPhotos() {
-    try {
-      savedPhotos = JSON.parse(
-        localStorage.getItem(STORAGE_KEY)
-      ) || [];
-    } catch {
-      savedPhotos = [];
+  $$('[data-go="home"]').forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      event.preventDefault();
+
+      showPage("home");
+
+    });
+
+  });
+
+
+
+  /* ======================================
+     2. YOUTUBE PLAYER
+  ====================================== */
+
+  const songPlayer = $("#songPlayer");
+
+  function sendPlayerCommand(command) {
+
+    if (!songPlayer?.contentWindow) {
+      return;
     }
 
-    photoTiles.forEach((tile, index) => {
-      if (savedPhotos[index]) {
-        displayPhoto(index, savedPhotos[index]);
-      }
-    });
-  }
-
-  function compressPhoto(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onerror = () => {
-        reject(new Error("Could not read photo."));
-      };
-
-      reader.onload = () => {
-        const originalImage = new Image();
-
-        originalImage.onerror = () => {
-          reject(new Error("Invalid image."));
-        };
-
-        originalImage.onload = () => {
-          const maxWidth = 1200;
-          const scale = Math.min(
-            1,
-            maxWidth / originalImage.width
-          );
-
-          const canvas = document.createElement("canvas");
-
-          canvas.width = Math.round(
-            originalImage.width * scale
-          );
-
-          canvas.height = Math.round(
-            originalImage.height * scale
-          );
-
-          const context = canvas.getContext("2d");
-
-          context.drawImage(
-            originalImage,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-          );
-
-          resolve(
-            canvas.toDataURL("image/jpeg", 0.78)
-          );
-        };
-
-        originalImage.src = reader.result;
-      };
-
-      reader.readAsDataURL(file);
-    });
-  }
-
-  photoTiles.forEach((tile, index) => {
-    const input = tile.querySelector("input");
-
-    input.addEventListener("change", async event => {
-      const file = event.target.files[0];
-
-      if (!file) return;
-
-      if (!file.type.startsWith("image/")) {
-        event.target.value = "";
-        return;
-      }
-
-      try {
-        const compressedPhoto = await compressPhoto(file);
-
-        savedPhotos[index] = compressedPhoto;
-
-        displayPhoto(index, compressedPhoto);
-
-        try {
-          localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(savedPhotos)
-          );
-        } catch (error) {
-          console.warn("Browser storage is full.", error);
-        }
-
-      } catch (error) {
-        console.error(error);
-      }
-
-      event.target.value = "";
-    });
-  });
-
-  loadSavedPhotos();
-
-
-  // =====================================
-  // PHOTO VIEWER
-  // =====================================
-
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
-
-  let currentPhotoIndex = 0;
-
-  function getAvailablePhotos() {
-    return photoTiles
-      .map((tile, index) => ({
-        index,
-        image: tile.querySelector("img")
-      }))
-      .filter(item => !item.image.hidden && item.image.src);
-  }
-
-  function updateLightbox() {
-    const available = getAvailablePhotos();
-
-    if (!available.length) return;
-
-    currentPhotoIndex =
-      (currentPhotoIndex + available.length) % available.length;
-
-    lightboxImage.src =
-      available[currentPhotoIndex].image.src;
-  }
-
-  function openLightbox(index) {
-    const available = getAvailablePhotos();
-
-    currentPhotoIndex = available.findIndex(
-      item => item.index === index
-    );
-
-    if (currentPhotoIndex < 0) return;
-
-    updateLightbox();
-
-    lightbox.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeLightbox() {
-    lightbox.classList.add("hidden");
-    document.body.style.overflow = "";
-  }
-
-  function movePhoto(direction) {
-    const available = getAvailablePhotos();
-
-    if (!available.length) return;
-
-    currentPhotoIndex =
-      (currentPhotoIndex + direction + available.length) %
-      available.length;
-
-    updateLightbox();
-  }
-
-  photoTiles.forEach((tile, index) => {
-    tile.querySelector(".view-photo").addEventListener("click", () => {
-      openLightbox(index);
-    });
-  });
-
-  document.getElementById("closeLightbox").addEventListener(
-    "click",
-    closeLightbox
-  );
-
-  document.getElementById("previousPhoto").addEventListener(
-    "click",
-    () => movePhoto(-1)
-  );
-
-  document.getElementById("nextPhoto").addEventListener(
-    "click",
-    () => movePhoto(1)
-  );
-
-  lightbox.addEventListener("click", event => {
-    if (event.target === lightbox) {
-      closeLightbox();
-    }
-  });
-
-  document.addEventListener("keydown", event => {
-    if (lightbox.classList.contains("hidden")) return;
-
-    if (event.key === "Escape") closeLightbox();
-    if (event.key === "ArrowLeft") movePhoto(-1);
-    if (event.key === "ArrowRight") movePhoto(1);
-  });
-
-
-  // =====================================
-  // LOVE LETTER
-  // =====================================
-
-  document.getElementById("letterButton").addEventListener("click", () => {
-    document.getElementById("envelope").classList.add("hidden");
-    document.getElementById("letterContent").classList.remove("hidden");
-  });
-
-
-  // =====================================
-  // LILY GARDEN
-  // =====================================
-
-  const lilies = document.querySelectorAll(".lily");
-  const gardenMessage = document.getElementById("gardenMessage");
-
-  lilies.forEach(lily => {
-    lily.addEventListener("click", () => {
-
-      lily.classList.add("bloomed");
-
-      const allBloomed = [...lilies].every(item =>
-        item.classList.contains("bloomed")
-      );
-
-      if (allBloomed) {
-        gardenMessage.classList.remove("hidden");
-      }
-    });
-  });
-
-
-  // =====================================
-  // MUSIC: JANICE BY DILAW
-  // =====================================
-
-  const youtubePlayer = document.getElementById("youtubePlayer");
-  const playButton = document.getElementById("playButton");
-  const pauseButton = document.getElementById("pauseButton");
-  const record = document.getElementById("record");
-
-  const videoURL = new URL(
-    "https://www.youtube-nocookie.com/embed/-sNgBet587k"
-  );
-
-  videoURL.searchParams.set("enablejsapi", "1");
-  videoURL.searchParams.set("playsinline", "1");
-  videoURL.searchParams.set("rel", "0");
-  videoURL.searchParams.set(
-    "origin",
-    window.location.origin
-  );
-
-  youtubePlayer.src = videoURL.toString();
-
-  function sendYouTubeCommand(command) {
-    youtubePlayer.contentWindow.postMessage(
+    songPlayer.contentWindow.postMessage(
       JSON.stringify({
         event: "command",
         func: command,
@@ -384,84 +123,975 @@ document.addEventListener("DOMContentLoaded", () => {
       }),
       "https://www.youtube-nocookie.com"
     );
+
   }
 
-  playButton.addEventListener("click", () => {
-    sendYouTubeCommand("playVideo");
-    record.classList.add("playing");
-  });
 
-  pauseButton.addEventListener("click", () => {
-    sendYouTubeCommand("pauseVideo");
-    record.classList.remove("playing");
+  $("#playSong").addEventListener("click", () => {
+    sendPlayerCommand("playVideo");
   });
 
 
-  // =====================================
-  // CALENDAR COUNTER
-  // =====================================
+  $("#pauseSong").addEventListener("click", () => {
+    sendPlayerCommand("pauseVideo");
+  });
+
+
+
+  /* ======================================
+     3. LOVE LETTER
+  ====================================== */
+
+  const envelope = $("#envelope");
+  const letterContent = $("#letterContent");
+  const openLetterButton = $("#openLetter");
+
+
+  openLetterButton.addEventListener("click", () => {
+
+    envelope.classList.add("open");
+
+    openLetterButton.hidden = true;
+
+    window.setTimeout(() => {
+
+      letterContent.hidden = false;
+
+      letterContent.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+
+    }, 420);
+
+  });
+
+
+  $("#closeLetter").addEventListener("click", () => {
+
+    letterContent.hidden = true;
+
+    envelope.classList.remove("open");
+
+    openLetterButton.hidden = false;
+
+  });
+
+
+
+  /* ======================================
+     4. ANNIVERSARY COUNTER
+     Starting date: August 14, 2025
+  ====================================== */
+
+  const relationshipStart = new Date(2025, 7, 14);
+
+
+  function addMonthsClamped(date, amount) {
+
+    const result = new Date(
+      date.getFullYear(),
+      date.getMonth() + amount,
+      1
+    );
+
+    const finalDay = new Date(
+      result.getFullYear(),
+      result.getMonth() + 1,
+      0
+    ).getDate();
+
+    result.setDate(
+      Math.min(date.getDate(), finalDay)
+    );
+
+    return result;
+
+  }
+
 
   function updateCounter() {
-    const startDate = new Date(Date.UTC(2025, 7, 14));
 
     const now = new Date();
 
-    const today = new Date(Date.UTC(
+    const today = new Date(
       now.getFullYear(),
       now.getMonth(),
       now.getDate()
-    ));
-
-    const oneDay = 24 * 60 * 60 * 1000;
-
-    const totalDays = Math.floor(
-      (today - startDate) / oneDay
     );
 
-    let cursor = new Date(startDate);
-    let years = 0;
-    let months = 0;
+    const totalDays = Math.max(
+      0,
+      Math.floor(
+        (today - relationshipStart) / 86400000
+      )
+    );
 
-    while (true) {
-      const nextMonth = new Date(Date.UTC(
-        cursor.getUTCFullYear(),
-        cursor.getUTCMonth() + 1,
-        14
-      ));
 
-      if (nextMonth > today) break;
+    let elapsedMonths = Math.max(
+      0,
+      (today.getFullYear() - relationshipStart.getFullYear()) * 12
+      + today.getMonth()
+      - relationshipStart.getMonth()
+    );
 
-      cursor = nextMonth;
-      months++;
 
-      if (months === 12) {
-        years++;
-        months = 0;
-      }
+    let lastAnniversary = addMonthsClamped(
+      relationshipStart,
+      elapsedMonths
+    );
+
+
+    if (lastAnniversary > today) {
+
+      elapsedMonths--;
+
+      lastAnniversary = addMonthsClamped(
+        relationshipStart,
+        elapsedMonths
+      );
+
     }
 
-    const remainingDays = Math.floor(
-      (today - cursor) / oneDay
+
+    const elapsedYears = Math.floor(
+      elapsedMonths / 12
     );
 
-    document.getElementById("totalDays").textContent =
-      totalDays.toLocaleString("en-PH");
+    const remainingMonths = elapsedMonths % 12;
 
-    document.getElementById("timeTogether").textContent =
-      `${years} years, ${months} months, and ${remainingDays} days`;
+    const remainingDays = Math.max(
+      0,
+      Math.floor(
+        (today - lastAnniversary) / 86400000
+      )
+    );
+
+
+    $("#totalDays").textContent =
+      totalDays.toLocaleString();
+
+    $("#years").textContent = elapsedYears;
+
+    $("#months").textContent = remainingMonths;
+
+    $("#days").textContent = remainingDays;
+
   }
+
 
   updateCounter();
 
 
-  // =====================================
-  // SECRET GIFT
-  // =====================================
 
-  document.getElementById("giftButton").addEventListener("click", () => {
-    document.getElementById("giftButton").classList.add("hidden");
+  /* ======================================
+     5. LILY GARDEN
+  ====================================== */
 
-    document.getElementById("secretMessage").classList.remove("hidden");
+  const lilies = $$(".lily-plant");
+
+  const gardenPopup = $("#gardenPopup");
+
+  const bloomCount = $("#bloomCount");
+
+  let popupTimer = null;
+
+
+  function updateBloomCount() {
+
+    const bloomed = lilies.filter(lily =>
+      lily.classList.contains("bloomed")
+    ).length;
+
+
+    bloomCount.textContent =
+      `${bloomed} of ${lilies.length} lilies bloomed`;
+
+    return bloomed;
+
+  }
+
+
+  lilies.forEach(lily => {
+
+    lily.addEventListener("click", () => {
+
+      if (lily.classList.contains("bloomed")) {
+        return;
+      }
+
+      lily.classList.add("bloomed");
+
+      lily.setAttribute("aria-pressed", "true");
+
+      const count = updateBloomCount();
+
+
+      if (count === lilies.length) {
+
+        window.clearTimeout(popupTimer);
+
+        popupTimer = window.setTimeout(() => {
+
+          gardenPopup.hidden = false;
+
+        }, 850);
+
+      }
+
+    });
+
   });
 
-});
+
+  function closeGardenPopup() {
+    gardenPopup.hidden = true;
+  }
+
+
+  $("#closeGardenPopup").addEventListener(
+    "click",
+    closeGardenPopup
+  );
+
+
+  gardenPopup.addEventListener("click", event => {
+
+    if (event.target === gardenPopup) {
+      closeGardenPopup();
+    }
+
+  });
+
+
+  $("#resetGarden").addEventListener("click", () => {
+
+    window.clearTimeout(popupTimer);
+
+    lilies.forEach(lily => {
+
+      lily.classList.remove("bloomed");
+
+      lily.setAttribute("aria-pressed", "false");
+
+    });
+
+    updateBloomCount();
+
+    closeGardenPopup();
+
+  });
+
+
+  updateBloomCount();
+
+
+
+  /* ======================================
+     6. IMAGE DATABASE
+     Saves uploaded images in this browser.
+  ====================================== */
+
+  const DB_NAME = "monthsary-scrapbook-media";
+  const DB_STORE = "images";
+
+  let dbPromise = null;
+
+
+  function openDatabase() {
+
+    if (!("indexedDB" in window)) {
+      return Promise.resolve(null);
+    }
+
+    if (dbPromise) {
+      return dbPromise;
+    }
+
+    dbPromise = new Promise(resolve => {
+
+      let request;
+
+      try {
+
+        request = indexedDB.open(DB_NAME, 1);
+
+      } catch (error) {
+
+        resolve(null);
+
+        return;
+
+      }
+
+
+      request.onupgradeneeded = () => {
+
+        const db = request.result;
+
+        if (!db.objectStoreNames.contains(DB_STORE)) {
+
+          db.createObjectStore(DB_STORE);
+
+        }
+
+      };
+
+
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+
+
+      request.onerror = () => {
+        resolve(null);
+      };
+
+
+      request.onblocked = () => {
+        resolve(null);
+      };
+
+    });
+
+    return dbPromise;
+
+  }
+
+
+  async function saveLocalImage(key, blob) {
+
+    const db = await openDatabase();
+
+    if (!db) return false;
+
+    return new Promise(resolve => {
+
+      const transaction = db.transaction(
+        DB_STORE,
+        "readwrite"
+      );
+
+      transaction.objectStore(DB_STORE).put(
+        blob,
+        key
+      );
+
+      transaction.oncomplete = () => resolve(true);
+
+      transaction.onerror = () => resolve(false);
+
+      transaction.onabort = () => resolve(false);
+
+    });
+
+  }
+
+
+  async function getLocalImage(key) {
+
+    const db = await openDatabase();
+
+    if (!db) return null;
+
+    return new Promise(resolve => {
+
+      const request = db
+        .transaction(DB_STORE, "readonly")
+        .objectStore(DB_STORE)
+        .get(key);
+
+      request.onsuccess = () => {
+        resolve(request.result || null);
+      };
+
+      request.onerror = () => {
+        resolve(null);
+      };
+
+    });
+
+  }
+
+
+  const objectUrls = new Map();
+
+
+  function setImageSource(image, blob, key) {
+
+    const oldUrl = objectUrls.get(key);
+
+    if (oldUrl) {
+      URL.revokeObjectURL(oldUrl);
+    }
+
+    const url = URL.createObjectURL(blob);
+
+    objectUrls.set(key, url);
+
+    image.src = url;
+    image.hidden = false;
+
+
+    const placeholder = image.parentElement.querySelector(
+      ".memory-empty, .artwork-empty"
+    );
+
+    if (placeholder) {
+      placeholder.hidden = true;
+    }
+
+
+    const memoryCard = image.closest(".memory-card");
+
+    if (memoryCard) {
+      memoryCard.classList.add("has-image");
+    }
+
+  }
+
+
+
+  /* ======================================
+     7. MEMORY GALLERY
+  ====================================== */
+
+  const memoryCards = $$("[data-memory-card]");
+
+  const memoryImages = memoryCards.map(card =>
+    $("img", card)
+  );
+
+
+  memoryImages.forEach((image, index) => {
+
+    const card = memoryCards[index];
+
+
+    image.addEventListener("load", () => {
+
+      if (image.naturalWidth > 0) {
+
+        card.classList.add("has-image");
+
+      }
+
+    });
+
+
+    image.addEventListener("error", () => {
+
+      card.classList.remove("has-image");
+
+    });
+
+
+    if (image.complete && image.naturalWidth > 0) {
+
+      card.classList.add("has-image");
+
+    }
+
+  });
+
+
+  /* Restore previously uploaded pictures */
+
+  async function restoreLocalImages() {
+
+    for (let index = 0; index < memoryImages.length; index++) {
+
+      const blob = await getLocalImage(
+        `memory-${index}`
+      );
+
+      if (blob) {
+
+        setImageSource(
+          memoryImages[index],
+          blob,
+          `memory-${index}`
+        );
+
+      }
+
+    }
+
+
+    const characterIds = [
+      "woodstock",
+      "fifi",
+      "doghouse"
+    ];
+
+
+    for (const id of characterIds) {
+
+      const blob = await getLocalImage(
+        `character-${id}`
+      );
+
+      if (blob) {
+
+        applyCharacterImage(id, blob, false);
+
+      }
+
+    }
+
+  }
+
+
+  /* Upload memory photos */
+
+  $$("[data-memory-upload]").forEach(input => {
+
+    input.addEventListener("change", async () => {
+
+      const file = input.files?.[0];
+
+      if (!file) return;
+
+
+      if (!file.type.startsWith("image/")) {
+
+        alert("Please choose an image file.");
+
+        input.value = "";
+
+        return;
+
+      }
+
+
+      const index = Number(
+        input.dataset.memoryUpload
+      );
+
+
+      if (
+        !Number.isInteger(index) ||
+        !memoryImages[index]
+      ) {
+        return;
+      }
+
+
+      setImageSource(
+        memoryImages[index],
+        file,
+        `memory-${index}`
+      );
+
+      await saveLocalImage(
+        `memory-${index}`,
+        file
+      );
+
+    });
+
+  });
+    /* ======================================
+     8. PHOTO VIEWER
+  ====================================== */
+
+  const photoViewer = $("#photoViewer");
+  const expandedPhoto = $("#expandedPhoto");
+
+  let currentPhotoIndex = 0;
+
+
+  function availablePhotoIndexes() {
+
+    return memoryImages
+      .map((image, index) => ({
+        image,
+        index
+      }))
+      .filter(item =>
+        item.image.complete &&
+        item.image.naturalWidth > 0
+      )
+      .map(item => item.index);
+
+  }
+
+
+  function showPhoto(index) {
+
+    const available = availablePhotoIndexes();
+
+    if (!available.length) {
+      return;
+    }
+
+    const position = available.indexOf(index);
+
+    if (position < 0) {
+      return;
+    }
+
+    currentPhotoIndex = available[position];
+
+    expandedPhoto.src =
+      memoryImages[currentPhotoIndex].src;
+
+    photoViewer.hidden = false;
+
+  }
+
+
+  $$(".memory-open").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const index = Number(button.dataset.photo);
+
+      if (memoryImages[index]?.naturalWidth) {
+
+        showPhoto(index);
+
+      }
+
+    });
+
+  });
+
+
+  function movePhoto(direction) {
+
+    const available = availablePhotoIndexes();
+
+    if (!available.length) {
+      return;
+    }
+
+    const position = available.indexOf(
+      currentPhotoIndex
+    );
+
+    const next =
+      (position + direction + available.length) %
+      available.length;
+
+    showPhoto(available[next]);
+
+  }
+
+
+  $("#previousPhoto").addEventListener("click", () => {
+    movePhoto(-1);
+  });
+
+
+  $("#nextPhoto").addEventListener("click", () => {
+    movePhoto(1);
+  });
+
+
+  function closePhotoViewer() {
+
+    photoViewer.hidden = true;
+    expandedPhoto.src = "";
+
+  }
+
+
+  $("#closeViewer").addEventListener(
+    "click",
+    closePhotoViewer
+  );
+
+
+  photoViewer.addEventListener("click", event => {
+
+    if (event.target === photoViewer) {
+      closePhotoViewer();
+    }
+
+  });
+
+
+
+  /* ======================================
+     9. SNOOPY SCENE TABS
+  ====================================== */
+
+  const snoopyTabs = $$(".snoopy-tab");
+
+  const snoopyScenes = $$(".snoopy-scene");
+
+
+  snoopyTabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+      const id = tab.dataset.scene;
+
+
+      snoopyTabs.forEach(item => {
+
+        const selected = item === tab;
+
+        item.classList.toggle("active", selected);
+
+        item.setAttribute(
+          "aria-selected",
+          String(selected)
+        );
+
+      });
+
+
+      snoopyScenes.forEach(scene => {
+
+        const selected =
+          scene.id === `scene-${id}`;
+
+        scene.hidden = !selected;
+
+        scene.classList.toggle(
+          "active",
+          selected
+        );
+
+      });
+
+    });
+
+  });
+
+
+
+  /* ======================================
+     10. SNOOPY IMAGE UPLOADS
+  ====================================== */
+
+  function applyCharacterImage(id, blob, save = true) {
+
+    const image = document.getElementById(
+      `${id}Image`
+    );
+
+    if (!image || !blob) {
+      return;
+    }
+
+
+    const key = `character-${id}`;
+
+    const oldUrl = objectUrls.get(key);
+
+    if (oldUrl) {
+      URL.revokeObjectURL(oldUrl);
+    }
+
+
+    const url = URL.createObjectURL(blob);
+
+    objectUrls.set(key, url);
+
+
+    image.src = url;
+    image.hidden = false;
+
+
+    const empty = image.parentElement.querySelector(
+      ".artwork-empty"
+    );
+
+    if (empty) {
+      empty.hidden = true;
+    }
+
+
+    if (save) {
+      saveLocalImage(key, blob);
+    }
+
+  }
+
+
+  $$("[data-character]").forEach(input => {
+
+    input.addEventListener("change", () => {
+
+      const file = input.files?.[0];
+
+      if (!file) {
+        return;
+      }
+
+
+      if (!file.type.startsWith("image/")) {
+
+        alert("Please choose an image file.");
+
+        input.value = "";
+
+        return;
+
+      }
+
+
+      applyCharacterImage(
+        input.dataset.character,
+        file
+      );
+
+    });
+
+  });
+
+
+
+  /* ======================================
+     11. FLOATING HEARTS
+  ====================================== */
+
+  $$("[data-heart-target]").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const layer = document.getElementById(
+        button.dataset.heartTarget
+      );
+
+      if (!layer) {
+        return;
+      }
+
+
+      layer.innerHTML = "";
+
+
+      ["♡", "♥", "♡", "♥", "♡"].forEach(
+        (symbol, index) => {
+
+          const heart = document.createElement("span");
+
+          heart.className = "float-heart";
+          heart.textContent = symbol;
+
+          heart.style.left =
+            `${16 + index * 16}%`;
+
+          heart.style.animationDelay =
+            `${index * 90}ms`;
+
+
+          layer.appendChild(heart);
+
+
+          window.setTimeout(() => {
+            heart.remove();
+          }, 2100);
+
+        }
+      );
+
+    });
+
+  });
+
+
+
+  /* ======================================
+     12. DOGHOUSE INTERACTION
+  ====================================== */
+
+  const doghouse = $("#doghouseIllustration");
+
+  const doghouseButton = $("#openDoghouse");
+
+
+  doghouseButton.addEventListener("click", () => {
+
+    const isOpen =
+      doghouse.classList.toggle("opened");
+
+    doghouseButton.textContent = isOpen
+      ? "Close the doghouse"
+      : "Open the doghouse";
+
+  });
+
+
+
+  /* ======================================
+     13. SECRET GIFT
+  ====================================== */
+
+  const giftButton = $("#giftButton");
+
+  const secretMessage = $("#secretMessage");
+
+
+  giftButton.addEventListener("click", () => {
+
+    giftButton.classList.add("opened");
+
+    giftButton.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    secretMessage.hidden = false;
+
+    giftButton.disabled = true;
+
+    giftButton.setAttribute(
+      "aria-label",
+      "Gift opened"
+    );
+
+  });
+
+
+
+  /* ======================================
+     14. KEYBOARD CONTROLS
+  ====================================== */
+
+  document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+
+      closePhotoViewer();
+
+      closeGardenPopup();
+
+    }
+
+
+    if (
+      photoViewer.hidden === false &&
+      event.key === "ArrowRight"
+    ) {
+
+      movePhoto(1);
+
+    }
+
+
+    if (
+      photoViewer.hidden === false &&
+      event.key === "ArrowLeft"
+    ) {
+
+      movePhoto(-1);
+
+    }
+
+  });
+
+
+
+  /* ======================================
+     15. RESTORE SAVED PHOTOS
+  ====================================== */
+
+  restoreLocalImages();
+
+
+})();
