@@ -558,22 +558,6 @@
     stopButton.addEventListener("click", () => stopSnoopyVideo(playerElement));
   });
 
-  // The doghouse opens in place; no character is animated out of a white-backed image.
-  const doghouseButton = $("#doghouseButton");
-  const doghouseHeart = $("#doghouseHeart");
-  const openDoghouse = $("#openDoghouse");
-  function toggleDoghouse() {
-    const isOpen = doghouseButton.classList.toggle("open");
-    doghouseHeart.classList.toggle("hidden", !isOpen);
-    openDoghouse.textContent = isOpen ? "Close the Doghouse" : "Open the Doghouse";
-    doghouseButton.setAttribute("aria-label", isOpen ? "Close Snoopy's doghouse" : "Open Snoopy's doghouse");
-  }
-
-  openDoghouse.addEventListener("click", toggleDoghouse);
-  doghouseButton.addEventListener("click", toggleDoghouse);
-
-
-
   // Secret stays concealed until the gift is opened.
   const giftButton = $("#giftButton");
   const secretMessage = $("#secretMessage");
