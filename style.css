@@ -3934,3 +3934,56 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .botanical-backdrop, .backdrop-illustration, .peanuts-background { scroll-behavior: auto; }
 }
+
+
+/* Visibility correction: keep the botanical and Peanuts artwork above
+   opaque scrapbook panels, while leaving every control fully clickable. */
+.botanical-backdrop {
+  z-index: 2;
+  opacity: 1;
+}
+.home-screen, .site-shell {
+  position: relative;
+  z-index: 1;
+}
+.backdrop-illustration {
+  opacity: .52;
+}
+.peanuts-background {
+  opacity: .78;
+}
+@media (max-width: 1100px) {
+  .backdrop-illustration { opacity: .46; }
+  .peanuts-background { opacity: .66; }
+}
+@media (max-width: 680px) {
+  .backdrop-illustration {
+    width: 132px;
+    opacity: .48;
+  }
+  .backdrop-lilies {
+    top: 5%;
+    left: 0;
+  }
+  .backdrop-tulips {
+    right: 0;
+    bottom: 3%;
+  }
+  .peanuts-background {
+    width: 100px;
+    opacity: .72;
+    padding: 5px 5px 8px;
+  }
+  .peanuts-left {
+    left: 2px;
+    bottom: 7%;
+  }
+  .peanuts-right {
+    right: 2px;
+    top: 15%;
+  }
+}
+@media (max-width: 420px) {
+  .backdrop-illustration { width: 116px; opacity: .46; }
+  .peanuts-background { width: 94px; opacity: .7; }
+}
