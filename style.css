@@ -3987,3 +3987,369 @@ body {
   .backdrop-illustration { width: 116px; opacity: .46; }
   .peanuts-background { width: 94px; opacity: .7; }
 }
+
+
+/* ================================================================
+   FINAL ART DIRECTION — botanical keepsake / Peanuts scrapbook
+   Decorative only: no page copy, assets, or interactions are changed.
+   ================================================================ */
+
+:root {
+  --rose: #a65370;
+  --rose-dark: #743d52;
+  --pink: #d995a9;
+  --pink-light: #f3dce1;
+  --blush: #f8eeeb;
+  --cream: #f5eee3;
+  --paper: #fffaf1;
+  --ink: #4e3b43;
+  --muted: #91747c;
+  --leaf: #75876a;
+  --leaf-light: #bec9a9;
+  --line: #dec3c0;
+  --shadow: 0 24px 64px rgba(79, 50, 58, .12);
+}
+
+html { background: #f4ece3; }
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 7% 10%, rgba(236, 195, 204, .56), transparent 29%),
+    radial-gradient(ellipse at 92% 79%, rgba(184, 198, 166, .28), transparent 31%),
+    radial-gradient(ellipse at 55% 45%, rgba(255, 255, 255, .50), transparent 58%),
+    linear-gradient(125deg, #f2eadf 0%, #f8eeeb 48%, #eee5d9 100%);
+  background-attachment: fixed;
+}
+
+.paper-grain {
+  z-index: 0;
+  opacity: .16;
+  background-image:
+    radial-gradient(rgba(119, 82, 79, .42) .55px, transparent .85px),
+    radial-gradient(rgba(255, 255, 255, .82) .65px, transparent .9px);
+  background-size: 17px 17px, 23px 23px;
+  background-position: 0 0, 8px 11px;
+}
+
+.ambient-flower {
+  z-index: 0;
+  color: #ae7183;
+  opacity: .09;
+  filter: blur(.15px);
+}
+
+/* The art sits behind every control and card. It never intercepts taps. */
+.botanical-backdrop {
+  z-index: 0;
+  opacity: 1;
+  overflow: hidden;
+  contain: none;
+}
+.backdrop-illustration {
+  opacity: .54;
+  filter: drop-shadow(0 12px 13px rgba(94, 65, 67, .12));
+}
+.backdrop-lilies {
+  width: clamp(180px, 20vw, 286px);
+  top: 5%;
+  left: max(-26px, calc((100vw - 1510px) / 2));
+  transform: rotate(-10deg);
+}
+.backdrop-tulips {
+  width: clamp(190px, 21vw, 300px);
+  right: max(-24px, calc((100vw - 1510px) / 2));
+  bottom: 2%;
+  transform: rotate(7deg);
+}
+.peanuts-background {
+  width: clamp(125px, 10vw, 164px);
+  padding: 8px 8px 12px;
+  border: 1px solid rgba(177, 128, 135, .56);
+  background: rgba(255, 249, 241, .82);
+  box-shadow: 0 14px 28px rgba(72, 49, 55, .12), inset 0 0 0 3px rgba(255,255,255,.65);
+  opacity: .58;
+  filter: saturate(.92);
+}
+.peanuts-background img {
+  background: transparent;
+  mix-blend-mode: multiply;
+  filter: saturate(.94) contrast(1.03);
+}
+.peanuts-left {
+  left: max(10px, calc((100vw - 1510px) / 2 + 8px));
+  bottom: 8%;
+  transform: rotate(-6deg);
+}
+.peanuts-right {
+  right: max(10px, calc((100vw - 1510px) / 2 + 8px));
+  top: 12%;
+  transform: rotate(6deg);
+}
+
+/* Keep the foreground in its own layer; artwork can never cover it. */
+.home-screen,
+.site-shell {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+.home-screen {
+  padding: clamp(26px, 4.2vw, 60px) clamp(16px, 3vw, 44px);
+}
+
+/* The cover becomes a large keepsake spread rather than a floating white box. */
+.cover-card {
+  width: min(100%, 1160px);
+  min-height: min(790px, calc(100svh - 108px));
+  padding: clamp(40px, 5.2vw, 76px);
+  border: 1px solid rgba(169, 112, 126, .58);
+  border-radius: 5px 32px 5px 32px;
+  background:
+    linear-gradient(132deg, rgba(255, 251, 244, .91), rgba(250, 238, 234, .88)),
+    repeating-linear-gradient(0deg, rgba(119, 79, 78, .025) 0 1px, transparent 1px 5px);
+  box-shadow:
+    0 34px 88px rgba(76, 48, 56, .15),
+    0 8px 20px rgba(76, 48, 56, .06),
+    inset 0 0 0 7px rgba(255, 255, 255, .60),
+    inset 0 0 0 9px rgba(184, 132, 142, .14);
+}
+.cover-card::before {
+  inset: 17px;
+  border: 1px solid rgba(177, 127, 132, .32);
+}
+.cover-card::after {
+  width: 390px;
+  height: 390px;
+  right: -220px;
+  bottom: -220px;
+  border-color: rgba(174, 116, 130, .28);
+  box-shadow: 0 0 0 22px rgba(235, 207, 205, .24), 0 0 0 46px rgba(235, 207, 205, .13);
+}
+.cover-topline, .cover-bottomline { color: #a65d76; }
+.cover-topline span { background: linear-gradient(90deg, transparent, #bd8d91); }
+.cover-topline span:last-child { background: linear-gradient(90deg, #bd8d91, transparent); }
+
+.cover-art {
+  border-color: rgba(166, 103, 124, .68);
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(255,255,255,.98), rgba(250,239,235,.96) 70%),
+    #f7ebe7;
+  box-shadow:
+    0 24px 50px rgba(89, 54, 67, .17),
+    0 5px 14px rgba(89, 54, 67, .08),
+    inset 0 0 0 8px rgba(255,255,255,.76),
+    inset 0 0 0 10px rgba(190,143,151,.15);
+}
+.cover-art::before {
+  background: rgba(214, 181, 158, .68);
+  box-shadow: 0 2px 6px rgba(84, 55, 54, .10);
+}
+.cover-art::after { border-color: rgba(166, 103, 124, .35); }
+.cover-card h1 {
+  color: #704052;
+  letter-spacing: -.045em;
+  text-shadow: 0 2px 0 rgba(255,255,255,.56);
+}
+.cover-greeting {
+  color: #9d6478;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+}
+.open-button {
+  border-color: #86465f;
+  color: #fffaf3;
+  background: linear-gradient(135deg, #ba7189, #84465f 72%, #744052);
+  box-shadow: 0 12px 25px rgba(116, 64, 82, .23), inset 0 1px 0 rgba(255,255,255,.28);
+}
+.open-button:hover {
+  box-shadow: 0 16px 30px rgba(116, 64, 82, .28), inset 0 1px 0 rgba(255,255,255,.28);
+}
+
+/* Navigation: small paper tabs with a clear active state. */
+.site-header {
+  border: 1px solid rgba(190, 153, 143, .50);
+  border-top: 0;
+  border-radius: 0 0 5px 25px;
+  background:
+    repeating-linear-gradient(0deg, rgba(111,80,67,.018) 0 1px, transparent 1px 5px),
+    rgba(248, 241, 230, .94);
+  box-shadow: 0 10px 28px rgba(70, 48, 54, .09);
+  backdrop-filter: blur(16px) saturate(1.08);
+}
+.mini-brand { color: #91546a; }
+.nav-button {
+  min-height: 39px;
+  padding: 8px 15px;
+  border: 1px solid rgba(190, 153, 143, .53);
+  border-radius: 3px 13px 3px 13px;
+  color: #76515b;
+  background: rgba(255, 250, 242, .78);
+  box-shadow: 0 2px 5px rgba(79, 50, 58, .035);
+  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.nav-button:hover,
+.nav-button.active {
+  border-color: #91536a;
+  color: #fffaf3;
+  background: linear-gradient(135deg, #ac6981, #80445b);
+  box-shadow: 0 5px 13px rgba(104, 61, 78, .17);
+}
+
+/* Interior sections share the same warm paper, fine border and typography. */
+.content-wrap {
+  width: min(100%, 1040px);
+  margin: clamp(24px, 3vw, 42px) auto 0;
+}
+.section-card {
+  padding: clamp(34px, 5.4vw, 72px);
+  border: 1px solid rgba(181, 139, 137, .58);
+  border-radius: 5px 29px 5px 29px;
+  color: #514149;
+  background:
+    linear-gradient(135deg, rgba(255, 251, 244, .91), rgba(250, 240, 235, .88)),
+    repeating-linear-gradient(0deg, rgba(120, 79, 78, .022) 0 1px, transparent 1px 5px);
+  box-shadow:
+    0 28px 68px rgba(77, 49, 58, .12),
+    0 6px 16px rgba(77, 49, 58, .045),
+    inset 0 0 0 7px rgba(255,255,255,.57),
+    inset 0 0 0 9px rgba(190,143,151,.12);
+}
+.section-card::before {
+  inset: 15px;
+  border: 1px dashed rgba(177, 127, 132, .36);
+}
+.section-card::after {
+  color: #b67e86;
+  opacity: .10;
+  filter: blur(.2px);
+}
+.section-kicker {
+  color: #986778;
+  letter-spacing: 3.5px;
+}
+.section-kicker span { color: #bd7b8c; }
+.section-card h2 {
+  color: #744255;
+  letter-spacing: -.045em;
+  text-shadow: 0 2px 0 rgba(255,255,255,.48);
+}
+.section-subtitle { color: #96707b; }
+.page-flourish { color: #b47787; }
+
+/* Keep secondary feature panels from becoming flat white rectangles. */
+.music-layout,
+.letter-paper,
+.calendar-page,
+.doghouse-postcard,
+.peanuts-postcard,
+.fifi-postcard,
+.woodstock-postcard {
+  border-color: rgba(183, 139, 137, .54);
+  box-shadow: 0 17px 35px rgba(76, 49, 57, .10), inset 0 0 0 4px rgba(255,255,255,.44);
+}
+.music-layout {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.8), transparent 46%),
+    linear-gradient(135deg, rgba(249, 232, 232, .91), rgba(255, 249, 239, .90));
+}
+.letter-paper {
+  background:
+    repeating-linear-gradient(transparent 0 33px, rgba(183,139,137,.16) 34px 35px),
+    linear-gradient(135deg, rgba(255,252,244,.97), rgba(250,241,227,.96));
+}
+.memory-photo {
+  border-color: rgba(183, 139, 137, .65);
+  background: #fffaf2;
+  box-shadow: 0 12px 24px rgba(68, 49, 52, .13);
+}
+.memory-photo:hover {
+  box-shadow: 0 19px 32px rgba(68, 49, 52, .19);
+}
+.photo-tape { background: rgba(213, 175, 164, .72); }
+
+/* Make the existing Snoopy and flower artwork feel like printed keepsakes. */
+.peanuts-postcard,
+.doghouse-postcard,
+.fifi-postcard,
+.woodstock-postcard {
+  background: rgba(255, 250, 242, .94);
+}
+.character-display {
+  border-color: rgba(178, 138, 130, .62);
+  background: linear-gradient(180deg, #f3e2e5, #fff8ef 68%, #dce5d0 68%);
+}
+.secret-message {
+  border-color: rgba(178, 138, 130, .62);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.96), transparent 52%),
+    linear-gradient(145deg, #fff9f3, #f2dfe3);
+}
+
+/* Tablet and phone: keep the art visible at the edges, never over content. */
+@media (max-width: 1100px) {
+  .peanuts-background { width: 112px; opacity: .38; }
+  .backdrop-illustration { width: 170px; opacity: .43; }
+}
+@media (max-width: 760px) {
+  .home-screen { padding: 22px 14px 30px; }
+  .cover-card {
+    min-height: 0;
+    padding: 34px 22px 28px;
+    border-radius: 4px 22px 4px 22px;
+  }
+  .cover-card::before { inset: 11px; }
+  .cover-art { width: min(100%, 330px); }
+}
+@media (max-width: 680px) {
+  .botanical-backdrop { opacity: 1; }
+  .backdrop-illustration {
+    width: 126px;
+    opacity: .34;
+  }
+  .backdrop-lilies {
+    top: 3%;
+    left: -30px;
+  }
+  .backdrop-tulips {
+    right: -30px;
+    bottom: 2%;
+  }
+  .peanuts-background {
+    width: 88px;
+    padding: 5px 5px 8px;
+    opacity: .28;
+  }
+  .peanuts-left {
+    left: -24px;
+    bottom: 6%;
+  }
+  .peanuts-right {
+    right: -24px;
+    top: 13%;
+  }
+  .site-header {
+    background: rgba(248, 241, 230, .97);
+    box-shadow: 0 7px 20px rgba(70, 48, 54, .075);
+  }
+  .content-wrap { margin-top: 18px; }
+  .section-card {
+    padding: 32px 20px;
+    border-radius: 4px 21px 4px 21px;
+  }
+  .section-card::before { inset: 10px; }
+  .section-card h2 {
+    font-size: clamp(2.5rem, 9.4vw, 3.6rem);
+    line-height: .98;
+  }
+  .section-subtitle { margin-bottom: 24px; }
+}
+@media (max-width: 420px) {
+  .backdrop-illustration { width: 110px; opacity: .31; }
+  .peanuts-background { width: 78px; opacity: .25; }
+  .cover-card { padding: 30px 17px 24px; }
+  .cover-card h1 { letter-spacing: -.04em; }
+  .section-card { padding: 29px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-button, .open-button, .memory-photo { transition: none !important; }
+}
