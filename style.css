@@ -4670,3 +4670,54 @@ body {
   .backdrop-illustration { width: 132px; }
   .peanuts-background { width: 94px; opacity: .58; }
 }
+
+
+/* Mobile artwork composition: use the clear space outside the cover edges. */
+@media (max-width: 680px) {
+  .backdrop-illustration {
+    width: 164px;
+    filter: drop-shadow(0 12px 14px rgba(85, 54, 64, .16));
+  }
+  .backdrop-lilies {
+    top: 2%;
+    left: -4px;
+    opacity: .68;
+  }
+  .backdrop-tulips {
+    right: -4px;
+    bottom: 1%;
+    opacity: .66;
+  }
+  .peanuts-background {
+    width: 96px;
+    padding: 5px 5px 8px;
+    border-color: rgba(147, 91, 111, .72);
+    background: rgba(255, 247, 236, .94);
+    opacity: .94;
+    box-shadow: 0 12px 22px rgba(72, 45, 57, .15), inset 0 0 0 3px rgba(255,255,255,.78);
+  }
+  .peanuts-right {
+    top: 2px;
+    right: 7px;
+  }
+  .peanuts-left {
+    left: 7px;
+    bottom: 2px;
+  }
+  .cover-card {
+    background:
+      radial-gradient(ellipse at 5% 6%, rgba(255,255,255,.55), transparent 35%),
+      radial-gradient(ellipse at 96% 95%, rgba(218,164,174,.23), transparent 39%),
+      linear-gradient(132deg, rgba(255, 249, 240, .80), rgba(247, 229, 229, .77));
+  }
+  .section-card {
+    background:
+      radial-gradient(ellipse at 5% 4%, rgba(255,255,255,.57), transparent 35%),
+      radial-gradient(ellipse at 96% 96%, rgba(218,168,171,.23), transparent 39%),
+      linear-gradient(135deg, rgba(255, 249, 240, .82), rgba(247, 231, 229, .79));
+  }
+}
+@media (max-width: 420px) {
+  .backdrop-illustration { width: 150px; }
+  .peanuts-background { width: 88px; }
+}
