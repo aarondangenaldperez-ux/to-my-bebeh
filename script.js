@@ -325,7 +325,15 @@
   // Personal artwork uploads: saved in this browser and blended into the pastel scene.
   // White backgrounds visually merge with the scene through mix-blend-mode in CSS.
   const ART_PREFIX = "monthsaryScrapbookArtwork:";
-  const artworkInputs = $$('[data-artwork]');
+  const HOME_ARTWORK_URL = "https://i.pinimg.com/originals/52/6f/48/526f48db07768d9ec36b36c8865f1aa8.jpg";
+  const homeArtwork = $("#homeArtworkPreview");
+  if (homeArtwork) {
+    homeArtwork.src = HOME_ARTWORK_URL;
+    try { localStorage.removeItem(ART_PREFIX + "homeArtworkPreview"); } catch (error) {
+      console.warn("The old homepage artwork setting could not be cleared.", error);
+    }
+  }
+  const artworkInputs = $('[data-artwork]');
   const artworkImages = [$("#homeArtworkPreview"), $("#woodstockArtworkPreview"), $("#fifiArtworkPreview")];
 
   // If you add these image files to the repository, everyone visiting the site can see them.
