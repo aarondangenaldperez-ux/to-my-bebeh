@@ -5227,3 +5227,28 @@ body::before {
   html { scroll-behavior: auto; }
   .open-button, .nav-button, .memory-photo, .pill-button { transition: none !important; }
 }
+
+
+/* Keep margin artwork decorative without allowing the document to drift sideways. */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+#site.site-shell {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: clip;
+  box-sizing: border-box;
+}
+.site-header {
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+@media (max-width: 680px) {
+  .ambient-flower { display: none; }
+}
