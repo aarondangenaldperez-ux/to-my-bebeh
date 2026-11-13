@@ -4849,7 +4849,7 @@ body::before {
 .cover-card::before {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: 17px;
   border: 1px solid rgba(172, 126, 133, .31);
   pointer-events: none;
@@ -4857,7 +4857,7 @@ body::before {
 .cover-card::after {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   width: 350px;
   height: 350px;
   left: -245px;
@@ -4867,6 +4867,7 @@ body::before {
   box-shadow: 0 0 0 17px rgba(215,174,180,.07), 0 0 0 36px rgba(215,174,180,.05);
   pointer-events: none;
 }
+.cover-card > * { position: relative; z-index: 1; }
 .cover-card > .cover-corner { z-index: 2; color: #a66e80; opacity: .66; }
 .cover-topline {
   grid-area: top;
@@ -4881,11 +4882,12 @@ body::before {
 .cover-art {
   grid-area: art;
   position: relative;
-  align-self: stretch;
+  align-self: center;
   justify-self: stretch;
   width: 100%;
-  max-width: 465px;
-  min-height: 500px;
+  max-width: 500px;
+  min-height: 0;
+  aspect-ratio: 1.48;
   margin: 0;
   display: grid;
   place-items: center;
@@ -5139,7 +5141,8 @@ body::before {
     min-height: 620px;
     padding: 38px 34px;
   }
-  .cover-art, .cover-art .uploaded-artwork { min-height: 430px; }
+  .cover-art { min-height: 0; }
+  .cover-art .uploaded-artwork { min-height: 0; }
   .cover-card h1 { font-size: clamp(3.4rem, 6vw, 4.7rem); }
   .peanuts-background { width: 124px; }
   .backdrop-illustration { width: 205px; }
@@ -5161,7 +5164,7 @@ body::before {
   .cover-art {
     width: min(100%, 322px);
     min-height: 0;
-    aspect-ratio: .94;
+    aspect-ratio: 1.48;
     margin: 0 auto 21px;
     border-radius: 47% 47% 4px 4px / 35% 35% 4px 4px;
   }
