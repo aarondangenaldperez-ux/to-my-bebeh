@@ -3566,51 +3566,54 @@ button:focus-visible, a:focus-visible, label:focus-within {
 
 
 /* ================================================================
-   BOTANICAL PEANUTS LAYER — decorative refinement only
-   Keeps all approved copy, content, and interactions untouched.
-   ================================================================ */
+
+
+/* ============================================================
+   REBUILT ART DIRECTION — balanced botanical keepsake
+   One responsive system replaces the conflicting CSS overrides.
+   No copy, sections, photos, or interactions are changed here.
+   ============================================================ */
 
 :root {
-  --rose: #a85878;
-  --rose-dark: #773e59;
-  --pink: #e8b6c7;
-  --pink-light: #f7dfe7;
-  --blush: #fff1f5;
-  --cream: #fff8f3;
-  --paper: #fffdfb;
-  --ink: #493943;
-  --muted: #967482;
-  --leaf: #718b70;
-  --leaf-light: #bfd0b1;
-  --line: #e7c6d2;
-  --shadow: 0 24px 68px rgba(104, 57, 77, .14);
+  --paper: #fbf5eb;
+  --paper-deep: #f0e3dd;
+  --rose-ink: #694354;
+  --rose: #a96b83;
+  --rose-light: #d8a9b5;
+  --sage: #87977b;
+  --ink-soft: #55474b;
+  --rule: rgba(132, 91, 101, .27);
 }
 
-html { background: #f4e4e9; }
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 body {
-  color: var(--ink);
+  color: var(--ink-soft);
   background:
-    radial-gradient(ellipse at 8% 8%, rgba(255,255,255,.92), transparent 28%),
-    radial-gradient(ellipse at 92% 24%, rgba(232,177,196,.27), transparent 29%),
-    radial-gradient(ellipse at 8% 92%, rgba(197,214,185,.2), transparent 30%),
-    radial-gradient(ellipse at 88% 90%, rgba(255,255,255,.68), transparent 28%),
-    repeating-linear-gradient(0deg, rgba(142,91,109,.018) 0 1px, transparent 1px 6px),
-    linear-gradient(128deg, #fff7f8 0%, #f5e5ea 48%, #fff2ed 100%);
+    radial-gradient(ellipse at 8% 10%, rgba(228, 188, 195, .38), transparent 29%),
+    radial-gradient(ellipse at 91% 78%, rgba(174, 191, 157, .27), transparent 30%),
+    radial-gradient(ellipse at 50% 45%, rgba(255,255,255,.72), transparent 56%),
+    linear-gradient(130deg, #f3e9df 0%, #f7eceb 48%, #e9eadf 100%);
   background-attachment: fixed;
 }
 
 .paper-grain {
-  opacity: .17;
+  z-index: 0;
+  opacity: .13;
   background-image:
-    radial-gradient(rgba(159,101,125,.34) .55px, transparent .8px),
-    radial-gradient(rgba(255,255,255,.82) .7px, transparent 1px);
-  background-size: 17px 17px, 31px 31px;
-  mix-blend-mode: multiply;
+    radial-gradient(rgba(120, 83, 87, .33) .55px, transparent .85px),
+    radial-gradient(rgba(255,255,255,.8) .7px, transparent 1px);
+  background-size: 19px 19px, 29px 29px;
+  background-position: 0 0, 8px 12px;
 }
 
 .ambient-flower {
-  color: #b96c8d;
+  z-index: 0;
+  color: #a96c82;
   opacity: .075;
 }
 
@@ -3620,39 +3623,38 @@ body {
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  contain: layout paint;
+  contain: none;
 }
 
 .backdrop-illustration {
   position: absolute;
-  width: clamp(150px, 19vw, 260px);
+  width: clamp(170px, 19vw, 270px);
   height: auto;
-  overflow: visible;
-  opacity: .58;
-  filter: drop-shadow(0 10px 12px rgba(126,78,94,.12));
+  opacity: .28;
+  filter: drop-shadow(0 12px 14px rgba(76, 61, 57, .10));
 }
 
 .backdrop-lilies {
-  top: 8%;
-  left: max(-34px, calc((100vw - 1530px) / 2));
-  transform: rotate(-12deg);
+  top: 4%;
+  left: max(-18px, calc((100vw - 1500px) / 2));
+  transform: rotate(-9deg);
 }
 
 .backdrop-tulips {
-  right: max(-32px, calc((100vw - 1530px) / 2));
-  bottom: 4%;
-  transform: rotate(8deg);
+  right: max(-18px, calc((100vw - 1500px) / 2));
+  bottom: 3%;
+  transform: rotate(7deg);
 }
 
 .peanuts-background {
   position: absolute;
-  width: clamp(112px, 12.5vw, 166px);
+  width: clamp(118px, 10vw, 150px);
   margin: 0;
-  padding: 8px 8px 13px;
-  border: 1px solid rgba(200,151,166,.68);
-  background: linear-gradient(145deg, rgba(255,255,255,.97), rgba(255,243,246,.95));
-  box-shadow: 0 13px 27px rgba(91,56,70,.15), inset 0 0 0 3px rgba(255,255,255,.8);
-  opacity: .84;
+  padding: 7px 7px 11px;
+  border: 1px solid rgba(166, 125, 127, .48);
+  background: rgba(255, 249, 239, .88);
+  box-shadow: 0 13px 26px rgba(69, 49, 53, .13), inset 0 0 0 3px rgba(255,255,255,.72);
+  opacity: .36;
 }
 
 .peanuts-background img {
@@ -3660,1167 +3662,41 @@ body {
   width: 100%;
   aspect-ratio: 1 / 1.08;
   object-fit: contain;
-  background: #fff9f8;
+  background: #fbf4ea;
   mix-blend-mode: multiply;
-  filter: saturate(.9) contrast(1.02);
 }
 
 .peanuts-left {
-  left: max(8px, calc((100vw - 1510px) / 2));
-  bottom: 12%;
-  transform: rotate(-7deg);
-}
-
-.peanuts-right {
-  right: max(8px, calc((100vw - 1510px) / 2));
-  top: 13%;
-  transform: rotate(7deg);
-}
-
-.home-screen, .site-shell {
-  position: relative;
-  z-index: 1;
-}
-
-.cover-card {
-  border-color: rgba(184,112,143,.56);
-  background:
-    radial-gradient(ellipse at 5% 8%, rgba(255,255,255,.98), transparent 36%),
-    radial-gradient(ellipse at 95% 95%, rgba(238,190,204,.25), transparent 36%),
-    repeating-linear-gradient(0deg, rgba(151,91,116,.018) 0 1px, transparent 1px 6px),
-    linear-gradient(135deg, #fffdfb 0%, #fff4f6 54%, #f8e7eb 100%);
-  box-shadow:
-    0 38px 100px rgba(100,57,76,.16),
-    0 8px 18px rgba(100,57,76,.06),
-    inset 0 0 0 8px rgba(255,255,255,.78),
-    inset 0 0 0 9px rgba(184,126,146,.16);
-}
-
-.cover-card::before { border-color: rgba(196,143,160,.5); }
-.cover-card::after {
-  border-color: rgba(180,112,143,.2);
-  box-shadow: 0 0 0 19px rgba(225,166,187,.12), 0 0 0 41px rgba(225,166,187,.075);
-}
-.cover-corner { color: #b76b8c; opacity: .62; }
-.cover-topline, .cover-bottomline { color: #a85c7b; }
-.cover-topline span { background: linear-gradient(90deg, transparent, #d7a0b2 20%, #d7a0b2 80%, transparent); }
-.cover-art {
-  border-color: rgba(194,133,153,.72);
-  background:
-    radial-gradient(ellipse at 50% 36%, #fff 0%, #fff7f8 58%, #f2dce4 100%);
-  box-shadow:
-    0 24px 48px rgba(109,66,85,.15),
-    inset 0 0 0 8px rgba(255,255,255,.78),
-    inset 0 0 0 9px rgba(196,143,160,.17);
-}
-.cover-art::before, .cover-art::after { color: #c17a98; opacity: .48; }
-.cover-date { color: #a75f7c; border-bottom-color: rgba(196,143,160,.56); }
-.cover-card h1 { color: #713e56; }
-.cover-greeting { color: #96697c; }
-.open-button {
-  border-color: #914d6b;
-  background: linear-gradient(135deg, #c9829e, #984d70);
-  box-shadow: 0 10px 22px rgba(150,76,109,.2), inset 0 1px 0 rgba(255,255,255,.3);
-}
-.open-button:hover { box-shadow: 0 15px 28px rgba(150,76,109,.26); }
-
-.site-header {
-  border-bottom-color: rgba(212,163,179,.62);
-  background:
-    repeating-linear-gradient(0deg, rgba(151,91,116,.015) 0 1px, transparent 1px 5px),
-    rgba(255,247,249,.94);
-  box-shadow: 0 9px 24px rgba(107,61,80,.075);
-}
-.mini-brand { color: #96516e; }
-.nav-button { color: #805969; }
-.nav-button::after { background: #ad6482; }
-.nav-button:hover, .nav-button.active { color: #8b4968; }
-
-.section-card {
-  border-color: rgba(202,151,168,.65);
-  background:
-    radial-gradient(ellipse at 0% 0%, rgba(255,255,255,.98), transparent 37%),
-    radial-gradient(ellipse at 100% 100%, rgba(237,194,206,.22), transparent 34%),
-    repeating-linear-gradient(0deg, rgba(151,91,116,.014) 0 1px, transparent 1px 6px),
-    linear-gradient(135deg, #fffefd 0%, #fff7f7 59%, #f7e9eb 100%);
-  box-shadow:
-    0 30px 76px rgba(104,59,78,.13),
-    0 5px 15px rgba(104,59,78,.045),
-    inset 0 0 0 8px rgba(255,255,255,.72),
-    inset 0 0 0 9px rgba(196,143,160,.12);
-}
-.section-card::before { border-color: rgba(207,157,172,.5); }
-.section-card::after { color: #b66f8c; opacity: .065; }
-.section-kicker { color: #a16a80; }
-.section-kicker span { color: #c27d99; }
-.section-card h2 { color: #713f57; }
-.section-subtitle { color: #946d7d; }
-
-.music-layout {
-  border-color: rgba(202,151,168,.65);
-  background:
-    radial-gradient(ellipse at 15% 15%, rgba(255,255,255,.95), transparent 45%),
-    linear-gradient(135deg, #f8e8ee, #fff7f5 60%, #eaf0e6);
-  box-shadow: 0 23px 48px rgba(104,59,78,.11), inset 0 0 0 6px rgba(255,255,255,.62);
-}
-.vinyl-record { box-shadow: 0 24px 35px rgba(55,35,46,.23), 0 0 0 10px rgba(255,255,255,.46); }
-.vinyl-label { border-color: #f7e1e8; background: linear-gradient(145deg, #c9829e, #8a4a68); }
-.vinyl-flower { color: #bd7290; }
-.song-overline { color: #a66a82; }
-.song-panel h3 { color: #713e56; }
-.song-artist { color: #936d7d; }
-.video-frame { border-color: #fffafb; }
-
-.pill-button {
-  border-color: #914d6b;
-  background: linear-gradient(135deg, #c9829e, #984d70);
-  box-shadow: 0 8px 16px rgba(150,76,109,.15);
-}
-.pill-button:not(.primary) {
-  border-color: rgba(189,132,153,.7);
-  color: #914f6e;
-  background: rgba(255,249,250,.9);
-}
-.pill-button:not(.primary):hover { background: #fbeaf0; }
-
-.envelope-back { background: linear-gradient(145deg, #c9829e, #914d6b); }
-.envelope-pocket.left { background: #f0c7d3; }
-.envelope-pocket.right { background: #e6adbf; }
-.envelope-pocket.bottom { background: #edbdcd; }
-.envelope-flap { background: linear-gradient(145deg, #fff0f3, #eec9d4); }
-.envelope-paper {
-  border-color: #e7c9d2;
-  background: repeating-linear-gradient(transparent 0 22px, rgba(196,133,156,.15) 23px 24px), #fffdf9;
-}
-.envelope-seal { background: radial-gradient(circle at 35% 25%, #d28ea7, #85435f); }
-.letter-paper {
-  border-color: #e4c4cd;
-  border-left-color: #b66e8c;
-  color: #55404a;
-  background:
-    linear-gradient(90deg, rgba(192,132,153,.1) 0 1px, transparent 1px),
-    repeating-linear-gradient(transparent 0 34px, rgba(193,139,156,.16) 35px 36px),
-    #fffaf7;
-}
-.letter-paper-top, .letter-signoff { color: #ad6684; }
-.text-button { color: #95536f; }
-
-.memory-photo {
-  border-color: rgba(212,170,181,.85);
-  background: linear-gradient(145deg, #fffefe, #fff4f4);
-  box-shadow: 0 15px 25px rgba(91,55,70,.13), inset 0 0 0 4px rgba(255,255,255,.74);
-}
-.memory-photo:hover { box-shadow: 0 23px 35px rgba(91,55,70,.18); }
-.photo-placeholder {
-  color: #b16e88;
-  background: radial-gradient(ellipse at 30% 25%, #fff, transparent 50%), linear-gradient(145deg, #f6e4e8, #fff4f1);
-}
-.photo-tape {
-  background: linear-gradient(90deg, rgba(224,171,190,.55), rgba(250,218,226,.88), rgba(224,171,190,.55));
-}
-
-.calendar-page {
-  border-color: rgba(202,151,168,.72);
-  background:
-    radial-gradient(ellipse at 50% 0%, #fff, transparent 44%),
-    repeating-linear-gradient(0deg, rgba(151,91,116,.015) 0 1px, transparent 1px 6px),
-    linear-gradient(145deg, #fffdfc, #faeaf0);
-}
-.calendar-page::before { border-color: rgba(210,157,174,.65); }
-.calendar-binding i {
-  border-color: #a15b79;
-  background: linear-gradient(90deg, #fff9fa, #f0d9e1);
-}
-.calendar-month, .calendar-year { color: #946174; }
-.calendar-day { color: #874660; }
-.calendar-stamp { border-color: #d29bad; color: #b16d8a; background: rgba(255,250,250,.82); }
-.counter-area {
-  border-color: rgba(207,157,172,.68);
-  background: radial-gradient(ellipse at 90% 0%, #fff, transparent 48%), linear-gradient(145deg, #f7e8ed, #fff6f2);
-  box-shadow: 0 16px 32px rgba(104,59,78,.09), inset 0 0 0 5px rgba(255,255,255,.62);
-}
-.total-days strong, .time-unit strong { color: #874660; }
-.total-days span, .time-unit span { color: #916f7c; }
-.time-unit { border-color: rgba(213,174,186,.7); background: rgba(255,252,250,.88); }
-
-.garden-frame {
-  outline-color: rgba(196,143,160,.7);
-  box-shadow: 0 26px 48px rgba(76,91,68,.15), inset 0 0 0 1px rgba(255,255,255,.75);
-}
-.garden-footer { color: #665d59; }
-.garden-progress { color: #765665; }
-
-.snoopy-tabs {
-  border-color: rgba(202,151,168,.72);
-  background: linear-gradient(145deg, #f8e9ed, #fff8f3);
-  box-shadow: inset 0 1px 4px rgba(101,61,77,.06);
-}
-.snoopy-tab { color: #80596a; }
-.snoopy-tab.active, .snoopy-tab:hover {
-  border-color: #984e6f;
-  background: linear-gradient(135deg, #c9829e, #914d6b);
-  box-shadow: 0 6px 13px rgba(112,57,81,.16);
-}
-.snoopy-moment {
-  border-color: rgba(211,166,181,.78);
-  background:
-    radial-gradient(ellipse at 10% 0%, rgba(255,255,255,.98), transparent 48%),
-    linear-gradient(145deg, #fff7f7, #f7e9ec);
-  box-shadow: 0 14px 26px rgba(104,59,78,.085), inset 0 0 0 4px rgba(255,255,255,.62);
-}
-.snoopy-moment::before { background: rgba(224,174,190,.7); }
-.snoopy-video-player { border-color: rgba(211,166,181,.72); background: #fffafb; }
-.snoopy-personal-message {
-  border-color: rgba(211,166,181,.72);
-  border-left-color: #b16b89;
-  color: #54414b;
-  background:
-    repeating-linear-gradient(0deg, transparent 0 31px, rgba(190,139,158,.13) 32px 33px),
-    #fffaf9;
-}
-.snoopy-scene {
-  border-color: rgba(202,151,168,.7);
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.94), transparent 43%),
-    linear-gradient(180deg, #f8e9ed 0%, #fff8f2 76%, #dbe6d2 76%);
-  box-shadow: 0 21px 40px rgba(104,59,78,.1), inset 0 0 0 6px rgba(255,255,255,.66);
-}
-.peanuts-postcard, .doghouse-postcard, .fifi-postcard, .woodstock-postcard {
-  border-color: rgba(212,170,181,.88);
-  background: linear-gradient(145deg, #fffefe, #fff4f1);
-}
-.peanuts-postcard img, .doghouse-postcard img, .fifi-postcard img, .woodstock-postcard img {
-  border-color: #fff9f8;
-}
-.peanuts-postcard figcaption, .doghouse-postcard figcaption { color: #885c6b; }
-.character-display {
-  border-color: rgba(202,151,168,.68);
-  background: linear-gradient(180deg, #f5e6eb, #fff8f2 68%, #dbe6d2 68%);
-}
-.secret-message {
-  border-color: rgba(202,151,168,.72);
-  color: #773f58;
-  background:
-    radial-gradient(ellipse at 50% 0%, #fff, transparent 50%),
-    linear-gradient(145deg, #fff9f8, #f4e1e7);
-  box-shadow: 0 24px 46px rgba(104,59,78,.13), inset 0 0 0 6px rgba(255,255,255,.68);
-}
-.secret-message p { color: #773f58; }
-
-@media (max-width: 1100px) {
-  .peanuts-background { width: 116px; opacity: .28; }
-  .peanuts-left { left: -48px; }
-  .peanuts-right { right: -48px; }
-  .backdrop-illustration { width: 176px; opacity: .35; }
-}
-
-@media (max-width: 680px) {
-  .botanical-backdrop { opacity: .95; }
-  .backdrop-illustration { width: 138px; opacity: .29; }
-  .backdrop-lilies { top: 8%; left: -55px; }
-  .backdrop-tulips { right: -55px; bottom: 4%; }
-  .peanuts-background { width: 106px; opacity: .17; padding: 5px 5px 8px; }
-  .peanuts-left { left: -58px; bottom: 8%; }
-  .peanuts-right { right: -58px; top: 16%; }
-  .cover-card { background-color: rgba(255,250,250,.96); }
-  .section-card { background-color: rgba(255,250,250,.97); }
-}
-
-@media (max-width: 420px) {
-  .backdrop-illustration { width: 116px; opacity: .24; }
-  .peanuts-background { width: 92px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .botanical-backdrop, .backdrop-illustration, .peanuts-background { scroll-behavior: auto; }
-}
-
-
-/* Visibility correction: keep the botanical and Peanuts artwork above
-   opaque scrapbook panels, while leaving every control fully clickable. */
-.botanical-backdrop {
-  z-index: 2;
-  opacity: 1;
-}
-.home-screen, .site-shell {
-  position: relative;
-  z-index: 1;
-}
-.backdrop-illustration {
-  opacity: .52;
-}
-.peanuts-background {
-  opacity: .78;
-}
-@media (max-width: 1100px) {
-  .backdrop-illustration { opacity: .46; }
-  .peanuts-background { opacity: .66; }
-}
-@media (max-width: 680px) {
-  .backdrop-illustration {
-    width: 132px;
-    opacity: .48;
-  }
-  .backdrop-lilies {
-    top: 5%;
-    left: 0;
-  }
-  .backdrop-tulips {
-    right: 0;
-    bottom: 3%;
-  }
-  .peanuts-background {
-    width: 100px;
-    opacity: .72;
-    padding: 5px 5px 8px;
-  }
-  .peanuts-left {
-    left: 2px;
-    bottom: 7%;
-  }
-  .peanuts-right {
-    right: 2px;
-    top: 15%;
-  }
-}
-@media (max-width: 420px) {
-  .backdrop-illustration { width: 116px; opacity: .46; }
-  .peanuts-background { width: 94px; opacity: .7; }
-}
-
-
-/* ================================================================
-   FINAL ART DIRECTION — botanical keepsake / Peanuts scrapbook
-   Decorative only: no page copy, assets, or interactions are changed.
-   ================================================================ */
-
-:root {
-  --rose: #a65370;
-  --rose-dark: #743d52;
-  --pink: #d995a9;
-  --pink-light: #f3dce1;
-  --blush: #f8eeeb;
-  --cream: #f5eee3;
-  --paper: #fffaf1;
-  --ink: #4e3b43;
-  --muted: #91747c;
-  --leaf: #75876a;
-  --leaf-light: #bec9a9;
-  --line: #dec3c0;
-  --shadow: 0 24px 64px rgba(79, 50, 58, .12);
-}
-
-html { background: #f4ece3; }
-
-body {
-  color: var(--ink);
-  background:
-    radial-gradient(ellipse at 7% 10%, rgba(236, 195, 204, .56), transparent 29%),
-    radial-gradient(ellipse at 92% 79%, rgba(184, 198, 166, .28), transparent 31%),
-    radial-gradient(ellipse at 55% 45%, rgba(255, 255, 255, .50), transparent 58%),
-    linear-gradient(125deg, #f2eadf 0%, #f8eeeb 48%, #eee5d9 100%);
-  background-attachment: fixed;
-}
-
-.paper-grain {
-  z-index: 0;
-  opacity: .16;
-  background-image:
-    radial-gradient(rgba(119, 82, 79, .42) .55px, transparent .85px),
-    radial-gradient(rgba(255, 255, 255, .82) .65px, transparent .9px);
-  background-size: 17px 17px, 23px 23px;
-  background-position: 0 0, 8px 11px;
-}
-
-.ambient-flower {
-  z-index: 0;
-  color: #ae7183;
-  opacity: .09;
-  filter: blur(.15px);
-}
-
-/* The art sits behind every control and card. It never intercepts taps. */
-.botanical-backdrop {
-  z-index: 0;
-  opacity: 1;
-  overflow: hidden;
-  contain: none;
-}
-.backdrop-illustration {
-  opacity: .54;
-  filter: drop-shadow(0 12px 13px rgba(94, 65, 67, .12));
-}
-.backdrop-lilies {
-  width: clamp(180px, 20vw, 286px);
-  top: 5%;
-  left: max(-26px, calc((100vw - 1510px) / 2));
-  transform: rotate(-10deg);
-}
-.backdrop-tulips {
-  width: clamp(190px, 21vw, 300px);
-  right: max(-24px, calc((100vw - 1510px) / 2));
-  bottom: 2%;
-  transform: rotate(7deg);
-}
-.peanuts-background {
-  width: clamp(125px, 10vw, 164px);
-  padding: 8px 8px 12px;
-  border: 1px solid rgba(177, 128, 135, .56);
-  background: rgba(255, 249, 241, .82);
-  box-shadow: 0 14px 28px rgba(72, 49, 55, .12), inset 0 0 0 3px rgba(255,255,255,.65);
-  opacity: .58;
-  filter: saturate(.92);
-}
-.peanuts-background img {
-  background: transparent;
-  mix-blend-mode: multiply;
-  filter: saturate(.94) contrast(1.03);
-}
-.peanuts-left {
-  left: max(10px, calc((100vw - 1510px) / 2 + 8px));
-  bottom: 8%;
+  left: max(8px, calc((100vw - 1500px) / 2 + 8px));
+  bottom: 9%;
   transform: rotate(-6deg);
 }
+
 .peanuts-right {
-  right: max(10px, calc((100vw - 1510px) / 2 + 8px));
-  top: 12%;
+  right: max(8px, calc((100vw - 1500px) / 2 + 8px));
+  top: 10%;
   transform: rotate(6deg);
 }
 
-/* Keep the foreground in its own layer; artwork can never cover it. */
-.home-screen,
-.site-shell {
+.home-screen, .site-shell {
   position: relative;
   z-index: 1;
-  isolation: isolate;
 }
+
 .home-screen {
-  padding: clamp(26px, 4.2vw, 60px) clamp(16px, 3vw, 44px);
-}
-
-/* The cover becomes a large keepsake spread rather than a floating white box. */
-.cover-card {
-  width: min(100%, 1160px);
-  min-height: min(790px, calc(100svh - 108px));
-  padding: clamp(40px, 5.2vw, 76px);
-  border: 1px solid rgba(169, 112, 126, .58);
-  border-radius: 5px 32px 5px 32px;
-  background:
-    linear-gradient(132deg, rgba(255, 251, 244, .91), rgba(250, 238, 234, .88)),
-    repeating-linear-gradient(0deg, rgba(119, 79, 78, .025) 0 1px, transparent 1px 5px);
-  box-shadow:
-    0 34px 88px rgba(76, 48, 56, .15),
-    0 8px 20px rgba(76, 48, 56, .06),
-    inset 0 0 0 7px rgba(255, 255, 255, .60),
-    inset 0 0 0 9px rgba(184, 132, 142, .14);
-}
-.cover-card::before {
-  inset: 17px;
-  border: 1px solid rgba(177, 127, 132, .32);
-}
-.cover-card::after {
-  width: 390px;
-  height: 390px;
-  right: -220px;
-  bottom: -220px;
-  border-color: rgba(174, 116, 130, .28);
-  box-shadow: 0 0 0 22px rgba(235, 207, 205, .24), 0 0 0 46px rgba(235, 207, 205, .13);
-}
-.cover-topline, .cover-bottomline { color: #a65d76; }
-.cover-topline span { background: linear-gradient(90deg, transparent, #bd8d91); }
-.cover-topline span:last-child { background: linear-gradient(90deg, #bd8d91, transparent); }
-
-.cover-art {
-  border-color: rgba(166, 103, 124, .68);
-  background:
-    radial-gradient(ellipse at 50% 38%, rgba(255,255,255,.98), rgba(250,239,235,.96) 70%),
-    #f7ebe7;
-  box-shadow:
-    0 24px 50px rgba(89, 54, 67, .17),
-    0 5px 14px rgba(89, 54, 67, .08),
-    inset 0 0 0 8px rgba(255,255,255,.76),
-    inset 0 0 0 10px rgba(190,143,151,.15);
-}
-.cover-art::before {
-  background: rgba(214, 181, 158, .68);
-  box-shadow: 0 2px 6px rgba(84, 55, 54, .10);
-}
-.cover-art::after { border-color: rgba(166, 103, 124, .35); }
-.cover-card h1 {
-  color: #704052;
-  letter-spacing: -.045em;
-  text-shadow: 0 2px 0 rgba(255,255,255,.56);
-}
-.cover-greeting {
-  color: #9d6478;
-  text-shadow: 0 1px 0 rgba(255,255,255,.55);
-}
-.open-button {
-  border-color: #86465f;
-  color: #fffaf3;
-  background: linear-gradient(135deg, #ba7189, #84465f 72%, #744052);
-  box-shadow: 0 12px 25px rgba(116, 64, 82, .23), inset 0 1px 0 rgba(255,255,255,.28);
-}
-.open-button:hover {
-  box-shadow: 0 16px 30px rgba(116, 64, 82, .28), inset 0 1px 0 rgba(255,255,255,.28);
-}
-
-/* Navigation: small paper tabs with a clear active state. */
-.site-header {
-  border: 1px solid rgba(190, 153, 143, .50);
-  border-top: 0;
-  border-radius: 0 0 5px 25px;
-  background:
-    repeating-linear-gradient(0deg, rgba(111,80,67,.018) 0 1px, transparent 1px 5px),
-    rgba(248, 241, 230, .94);
-  box-shadow: 0 10px 28px rgba(70, 48, 54, .09);
-  backdrop-filter: blur(16px) saturate(1.08);
-}
-.mini-brand { color: #91546a; }
-.nav-button {
-  min-height: 39px;
-  padding: 8px 15px;
-  border: 1px solid rgba(190, 153, 143, .53);
-  border-radius: 3px 13px 3px 13px;
-  color: #76515b;
-  background: rgba(255, 250, 242, .78);
-  box-shadow: 0 2px 5px rgba(79, 50, 58, .035);
-  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
-}
-.nav-button:hover,
-.nav-button.active {
-  border-color: #91536a;
-  color: #fffaf3;
-  background: linear-gradient(135deg, #ac6981, #80445b);
-  box-shadow: 0 5px 13px rgba(104, 61, 78, .17);
-}
-
-/* Interior sections share the same warm paper, fine border and typography. */
-.content-wrap {
-  width: min(100%, 1040px);
-  margin: clamp(24px, 3vw, 42px) auto 0;
-}
-.section-card {
-  padding: clamp(34px, 5.4vw, 72px);
-  border: 1px solid rgba(181, 139, 137, .58);
-  border-radius: 5px 29px 5px 29px;
-  color: #514149;
-  background:
-    linear-gradient(135deg, rgba(255, 251, 244, .91), rgba(250, 240, 235, .88)),
-    repeating-linear-gradient(0deg, rgba(120, 79, 78, .022) 0 1px, transparent 1px 5px);
-  box-shadow:
-    0 28px 68px rgba(77, 49, 58, .12),
-    0 6px 16px rgba(77, 49, 58, .045),
-    inset 0 0 0 7px rgba(255,255,255,.57),
-    inset 0 0 0 9px rgba(190,143,151,.12);
-}
-.section-card::before {
-  inset: 15px;
-  border: 1px dashed rgba(177, 127, 132, .36);
-}
-.section-card::after {
-  color: #b67e86;
-  opacity: .10;
-  filter: blur(.2px);
-}
-.section-kicker {
-  color: #986778;
-  letter-spacing: 3.5px;
-}
-.section-kicker span { color: #bd7b8c; }
-.section-card h2 {
-  color: #744255;
-  letter-spacing: -.045em;
-  text-shadow: 0 2px 0 rgba(255,255,255,.48);
-}
-.section-subtitle { color: #96707b; }
-.page-flourish { color: #b47787; }
-
-/* Keep secondary feature panels from becoming flat white rectangles. */
-.music-layout,
-.letter-paper,
-.calendar-page,
-.doghouse-postcard,
-.peanuts-postcard,
-.fifi-postcard,
-.woodstock-postcard {
-  border-color: rgba(183, 139, 137, .54);
-  box-shadow: 0 17px 35px rgba(76, 49, 57, .10), inset 0 0 0 4px rgba(255,255,255,.44);
-}
-.music-layout {
-  background:
-    radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.8), transparent 46%),
-    linear-gradient(135deg, rgba(249, 232, 232, .91), rgba(255, 249, 239, .90));
-}
-.letter-paper {
-  background:
-    repeating-linear-gradient(transparent 0 33px, rgba(183,139,137,.16) 34px 35px),
-    linear-gradient(135deg, rgba(255,252,244,.97), rgba(250,241,227,.96));
-}
-.memory-photo {
-  border-color: rgba(183, 139, 137, .65);
-  background: #fffaf2;
-  box-shadow: 0 12px 24px rgba(68, 49, 52, .13);
-}
-.memory-photo:hover {
-  box-shadow: 0 19px 32px rgba(68, 49, 52, .19);
-}
-.photo-tape { background: rgba(213, 175, 164, .72); }
-
-/* Make the existing Snoopy and flower artwork feel like printed keepsakes. */
-.peanuts-postcard,
-.doghouse-postcard,
-.fifi-postcard,
-.woodstock-postcard {
-  background: rgba(255, 250, 242, .94);
-}
-.character-display {
-  border-color: rgba(178, 138, 130, .62);
-  background: linear-gradient(180deg, #f3e2e5, #fff8ef 68%, #dce5d0 68%);
-}
-.secret-message {
-  border-color: rgba(178, 138, 130, .62);
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.96), transparent 52%),
-    linear-gradient(145deg, #fff9f3, #f2dfe3);
-}
-
-/* Tablet and phone: keep the art visible at the edges, never over content. */
-@media (max-width: 1100px) {
-  .peanuts-background { width: 112px; opacity: .38; }
-  .backdrop-illustration { width: 170px; opacity: .43; }
-}
-@media (max-width: 760px) {
-  .home-screen { padding: 22px 14px 30px; }
-  .cover-card {
-    min-height: 0;
-    padding: 34px 22px 28px;
-    border-radius: 4px 22px 4px 22px;
-  }
-  .cover-card::before { inset: 11px; }
-  .cover-art { width: min(100%, 330px); }
-}
-@media (max-width: 680px) {
-  .botanical-backdrop { opacity: 1; }
-  .backdrop-illustration {
-    width: 126px;
-    opacity: .34;
-  }
-  .backdrop-lilies {
-    top: 3%;
-    left: -30px;
-  }
-  .backdrop-tulips {
-    right: -30px;
-    bottom: 2%;
-  }
-  .peanuts-background {
-    width: 88px;
-    padding: 5px 5px 8px;
-    opacity: .28;
-  }
-  .peanuts-left {
-    left: -24px;
-    bottom: 6%;
-  }
-  .peanuts-right {
-    right: -24px;
-    top: 13%;
-  }
-  .site-header {
-    background: rgba(248, 241, 230, .97);
-    box-shadow: 0 7px 20px rgba(70, 48, 54, .075);
-  }
-  .content-wrap { margin-top: 18px; }
-  .section-card {
-    padding: 32px 20px;
-    border-radius: 4px 21px 4px 21px;
-  }
-  .section-card::before { inset: 10px; }
-  .section-card h2 {
-    font-size: clamp(2.5rem, 9.4vw, 3.6rem);
-    line-height: .98;
-  }
-  .section-subtitle { margin-bottom: 24px; }
-}
-@media (max-width: 420px) {
-  .backdrop-illustration { width: 110px; opacity: .31; }
-  .peanuts-background { width: 78px; opacity: .25; }
-  .cover-card { padding: 30px 17px 24px; }
-  .cover-card h1 { letter-spacing: -.04em; }
-  .section-card { padding: 29px 16px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .nav-button, .open-button, .memory-photo { transition: none !important; }
-}
-
-
-/* Additional composition pass: stronger scrapbook framing and distinct paper chapters. */
-body::before {
-  content: "";
-  position: fixed;
-  z-index: 0;
-  inset: 12px;
-  border: 1px solid rgba(166, 124, 119, .20);
-  pointer-events: none;
-  box-shadow: inset 0 0 0 5px rgba(255, 251, 244, .10);
-}
-.cover-card {
-  background:
-    radial-gradient(ellipse at 9% 10%, rgba(255,255,255,.55), transparent 34%),
-    radial-gradient(ellipse at 96% 88%, rgba(210,164,167,.20), transparent 37%),
-    linear-gradient(132deg, rgba(255, 250, 242, .88), rgba(248, 232, 231, .84)),
-    repeating-linear-gradient(0deg, rgba(119, 79, 78, .025) 0 1px, transparent 1px 5px);
-}
-.cover-card h1 {
-  max-width: 8.5ch;
-  text-wrap: balance;
-}
-.cover-art {
-  border-radius: 48% 48% 4px 4px / 36% 36% 4px 4px;
-}
-.cover-art-hint {
-  border-color: rgba(185, 139, 133, .62);
-  color: #845565;
-  background: rgba(255, 249, 240, .96);
-  box-shadow: 0 6px 14px rgba(77, 49, 57, .10);
-}
-.site-header {
-  border-bottom-color: rgba(172, 131, 127, .52);
-}
-.navigation { gap: 8px; }
-.nav-button {
-  letter-spacing: .015em;
-  box-shadow: 0 3px 8px rgba(84, 54, 60, .045);
-}
-.nav-button:active { transform: translateY(1px); }
-
-.section-card {
-  background:
-    radial-gradient(ellipse at 5% 4%, rgba(255,255,255,.52), transparent 34%),
-    radial-gradient(ellipse at 95% 95%, rgba(217,177,172,.17), transparent 38%),
-    linear-gradient(135deg, rgba(255, 250, 242, .88), rgba(248, 235, 231, .86)),
-    repeating-linear-gradient(0deg, rgba(120, 79, 78, .022) 0 1px, transparent 1px 5px);
-}
-.section-card h2::after {
-  content: "";
-  display: block;
-  width: min(132px, 36%);
-  height: 1px;
-  margin: 13px auto 0;
-  background: linear-gradient(90deg, transparent, rgba(177, 119, 132, .72), transparent);
-}
-.music-section {
-  background:
-    radial-gradient(ellipse at 13% 8%, rgba(255,255,255,.58), transparent 36%),
-    linear-gradient(135deg, rgba(250, 238, 233, .90), rgba(244, 225, 228, .87));
-}
-.letter-section {
-  background:
-    repeating-linear-gradient(transparent 0 42px, rgba(184, 145, 139, .08) 43px 44px),
-    linear-gradient(135deg, rgba(255, 250, 240, .91), rgba(248, 237, 224, .89));
-}
-.memories-section {
-  background:
-    radial-gradient(ellipse at 13% 16%, rgba(240, 205, 211, .30), transparent 34%),
-    radial-gradient(ellipse at 90% 87%, rgba(216, 181, 169, .20), transparent 36%),
-    linear-gradient(135deg, rgba(255, 249, 242, .90), rgba(248, 234, 232, .88));
-}
-.calendar-section {
-  background:
-    radial-gradient(ellipse at 88% 13%, rgba(189, 205, 173, .24), transparent 35%),
-    linear-gradient(135deg, rgba(255, 250, 241, .91), rgba(244, 239, 225, .89));
-}
-.garden-section {
-  background:
-    radial-gradient(ellipse at 14% 12%, rgba(216, 229, 200, .36), transparent 36%),
-    radial-gradient(ellipse at 90% 90%, rgba(238, 200, 208, .24), transparent 38%),
-    linear-gradient(135deg, rgba(255, 250, 241, .91), rgba(239, 241, 225, .88));
-}
-.snoopy-section {
-  background:
-    radial-gradient(ellipse at 12% 10%, rgba(246, 214, 220, .35), transparent 38%),
-    radial-gradient(ellipse at 90% 90%, rgba(220, 226, 203, .27), transparent 40%),
-    linear-gradient(135deg, rgba(255, 250, 242, .91), rgba(247, 235, 230, .88));
-}
-.secret-section {
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.7), transparent 48%),
-    linear-gradient(145deg, rgba(255, 248, 242, .91), rgba(242, 222, 228, .89));
-}
-
-/* More intentional botanical framing: artwork remains behind the page. */
-.backdrop-illustration { filter: drop-shadow(0 15px 16px rgba(90, 60, 65, .15)); }
-.backdrop-lilies { opacity: .60; }
-.backdrop-tulips { opacity: .58; }
-.peanuts-background {
-  width: clamp(150px, 11vw, 184px);
-  border-color: rgba(156, 108, 118, .65);
-  background: rgba(255, 248, 238, .86);
-  box-shadow: 0 17px 32px rgba(68, 48, 54, .14), inset 0 0 0 4px rgba(255,255,255,.72);
-  opacity: .66;
-}
-.peanuts-background img { filter: saturate(1.02) contrast(1.05); }
-.peanuts-left { bottom: 9%; }
-.peanuts-right { top: 10%; }
-
-/* Keep real mobile breathing room for the decorations without crowding text. */
-@media (max-width: 680px) {
-  body::before { inset: 7px; border-color: rgba(166, 124, 119, .16); }
-  .home-screen { padding: 20px 15px 27px; }
-  .cover-card {
-    width: min(100% - 14px, 430px);
-    padding: 31px 18px 26px;
-    background:
-      radial-gradient(ellipse at 7% 7%, rgba(255,255,255,.57), transparent 34%),
-      radial-gradient(ellipse at 95% 95%, rgba(215,174,180,.20), transparent 38%),
-      linear-gradient(135deg, rgba(255, 250, 243, .87), rgba(249, 235, 234, .84));
-  }
-  .cover-card h1 { max-width: 9ch; }
-  .site-shell { width: calc(100% - 22px); }
-  .content-wrap {
-    width: calc(100% - 10px);
-    margin-top: 17px;
-  }
-  .section-card {
-    background:
-      radial-gradient(ellipse at 5% 5%, rgba(255,255,255,.56), transparent 34%),
-      radial-gradient(ellipse at 94% 95%, rgba(215,174,180,.18), transparent 38%),
-      linear-gradient(135deg, rgba(255, 250, 243, .87), rgba(249, 235, 234, .85));
-  }
-  .backdrop-illustration { width: 130px; }
-  .backdrop-lilies { top: 4%; left: -31px; opacity: .48; }
-  .backdrop-tulips { right: -31px; bottom: 3%; opacity: .46; }
-  .peanuts-background {
-    width: 96px;
-    padding: 5px 5px 8px;
-    opacity: .42;
-  }
-  .peanuts-left { left: -28px; bottom: 8%; }
-  .peanuts-right { right: -28px; top: 12%; }
-}
-@media (max-width: 420px) {
-  .cover-card { width: min(100% - 10px, 430px); }
-  .content-wrap { width: calc(100% - 6px); }
-  .backdrop-illustration { width: 116px; }
-  .peanuts-background { width: 88px; opacity: .38; }
-}
-
-
-/* Final contrast and framing pass — retain the existing layout and all content. */
-body {
-  background:
-    radial-gradient(ellipse at 4% 12%, rgba(224, 168, 181, .48), transparent 31%),
-    radial-gradient(ellipse at 96% 84%, rgba(157, 178, 143, .30), transparent 33%),
-    radial-gradient(ellipse at 50% 48%, rgba(255,255,255,.42), transparent 56%),
-    linear-gradient(128deg, #eee1d6 0%, #f3e4e2 48%, #e8e7d9 100%);
-}
-.botanical-backdrop { z-index: 0; }
-.backdrop-illustration {
-  filter: drop-shadow(0 16px 18px rgba(85, 54, 64, .18));
-}
-.backdrop-lilies {
-  width: clamp(220px, 23vw, 330px);
-  left: max(-12px, calc((100vw - 1510px) / 2));
-  opacity: .76;
-}
-.backdrop-tulips {
-  width: clamp(220px, 23vw, 330px);
-  right: max(-12px, calc((100vw - 1510px) / 2));
-  opacity: .73;
-}
-.peanuts-background {
-  width: clamp(170px, 12vw, 202px);
-  padding: 9px 9px 14px;
-  border-color: rgba(147, 91, 111, .68);
-  background: rgba(255, 247, 236, .88);
-  box-shadow: 0 18px 34px rgba(72, 45, 57, .17), inset 0 0 0 4px rgba(255,255,255,.78);
-  opacity: .82;
-}
-.peanuts-background img { filter: saturate(1.08) contrast(1.06); }
-
-.cover-card {
-  width: min(100%, 1080px);
-  border-width: 1.5px;
-  border-color: rgba(151, 91, 112, .70);
-  background:
-    radial-gradient(ellipse at 4% 6%, rgba(255,255,255,.56), transparent 34%),
-    radial-gradient(ellipse at 96% 94%, rgba(218,164,174,.23), transparent 38%),
-    linear-gradient(132deg, rgba(255, 249, 240, .89), rgba(247, 229, 229, .86));
-  box-shadow:
-    0 36px 92px rgba(76, 44, 56, .18),
-    0 9px 23px rgba(76, 44, 56, .075),
-    inset 0 0 0 7px rgba(255,255,255,.66),
-    inset 0 0 0 9px rgba(171,108,127,.17);
-}
-.cover-card::before { border-color: rgba(169, 113, 127, .43); }
-.cover-art {
-  border-color: rgba(148, 84, 107, .78);
-  box-shadow:
-    0 27px 54px rgba(79, 48, 61, .20),
-    0 6px 17px rgba(79, 48, 61, .09),
-    inset 0 0 0 8px rgba(255,255,255,.80),
-    inset 0 0 0 10px rgba(184,125,143,.20);
-}
-.cover-card h1 { color: #66394d; }
-.cover-greeting { color: #8f5369; }
-.open-button {
-  background: linear-gradient(135deg, #b96983 0%, #8b4662 68%, #71364f 100%);
-  border-color: #71364f;
-  box-shadow: 0 13px 27px rgba(113, 54, 79, .27), inset 0 1px 0 rgba(255,255,255,.30);
-}
-
-.section-card {
-  border-color: rgba(161, 111, 119, .68);
-  background:
-    radial-gradient(ellipse at 5% 4%, rgba(255,255,255,.56), transparent 35%),
-    radial-gradient(ellipse at 96% 96%, rgba(218,168,171,.20), transparent 39%),
-    linear-gradient(135deg, rgba(255, 249, 240, .88), rgba(247, 231, 229, .85));
-  box-shadow:
-    0 30px 72px rgba(76, 47, 57, .15),
-    0 7px 18px rgba(76, 47, 57, .06),
-    inset 0 0 0 7px rgba(255,255,255,.64),
-    inset 0 0 0 9px rgba(171,108,127,.15);
-}
-.section-card::before { border-color: rgba(169, 113, 127, .42); }
-.section-card h2 { color: #693c50; }
-.section-card h2::after {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(161, 91, 116, .82), transparent);
-}
-.section-kicker { color: #895367; }
-.section-subtitle { color: #825c6b; }
-.music-section {
-  background:
-    radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.62), transparent 37%),
-    linear-gradient(135deg, rgba(250, 232, 232, .91), rgba(239, 218, 224, .89));
-}
-.letter-section {
-  background:
-    repeating-linear-gradient(transparent 0 42px, rgba(174, 126, 127, .10) 43px 44px),
-    linear-gradient(135deg, rgba(255, 248, 235, .92), rgba(246, 232, 215, .90));
-}
-.memories-section {
-  background:
-    radial-gradient(ellipse at 13% 16%, rgba(237, 191, 202, .35), transparent 36%),
-    radial-gradient(ellipse at 90% 87%, rgba(202, 164, 147, .23), transparent 37%),
-    linear-gradient(135deg, rgba(255, 248, 240, .91), rgba(246, 229, 227, .88));
-}
-.calendar-section {
-  background:
-    radial-gradient(ellipse at 88% 13%, rgba(180, 197, 157, .30), transparent 36%),
-    linear-gradient(135deg, rgba(255, 249, 237, .92), rgba(237, 235, 216, .90));
-}
-.garden-section {
-  background:
-    radial-gradient(ellipse at 14% 12%, rgba(198, 216, 174, .40), transparent 37%),
-    radial-gradient(ellipse at 90% 90%, rgba(235, 187, 198, .27), transparent 38%),
-    linear-gradient(135deg, rgba(255, 249, 237, .92), rgba(232, 237, 217, .89));
-}
-.snoopy-section {
-  background:
-    radial-gradient(ellipse at 12% 10%, rgba(241, 196, 205, .42), transparent 39%),
-    radial-gradient(ellipse at 90% 90%, rgba(203, 218, 185, .30), transparent 41%),
-    linear-gradient(135deg, rgba(255, 249, 240, .92), rgba(244, 226, 226, .89));
-}
-.secret-section {
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.72), transparent 48%),
-    linear-gradient(145deg, rgba(255, 246, 238, .92), rgba(237, 213, 222, .90));
-}
-.memory-photo {
-  border-color: rgba(154, 105, 116, .62);
-  box-shadow: 0 13px 25px rgba(68, 43, 54, .15);
-}
-.photo-tape { background: rgba(211, 163, 166, .78); }
-
-@media (max-width: 760px) {
-  .cover-card { width: min(100% - 20px, 430px); }
-}
-@media (max-width: 680px) {
-  .home-screen { padding: 18px 15px 27px; }
-  .site-shell { width: calc(100% - 22px); }
-  .content-wrap { width: calc(100% - 14px); }
-  .backdrop-illustration { width: 146px; }
-  .backdrop-lilies { left: -34px; top: 3%; opacity: .58; }
-  .backdrop-tulips { right: -34px; bottom: 2%; opacity: .56; }
-  .peanuts-background {
-    width: 102px;
-    padding: 5px 5px 8px;
-    opacity: .62;
-  }
-  .peanuts-left { left: -35px; bottom: 8%; }
-  .peanuts-right { right: -35px; top: 12%; }
-  .cover-card {
-    background:
-      radial-gradient(ellipse at 5% 6%, rgba(255,255,255,.58), transparent 35%),
-      radial-gradient(ellipse at 96% 95%, rgba(218,164,174,.22), transparent 39%),
-      linear-gradient(132deg, rgba(255, 249, 240, .86), rgba(247, 229, 229, .83));
-  }
-  .section-card {
-    background:
-      radial-gradient(ellipse at 5% 4%, rgba(255,255,255,.59), transparent 35%),
-      radial-gradient(ellipse at 96% 96%, rgba(218,168,171,.22), transparent 39%),
-      linear-gradient(135deg, rgba(255, 249, 240, .86), rgba(247, 231, 229, .83));
-  }
-}
-@media (max-width: 420px) {
-  .cover-card { width: min(100% - 14px, 430px); }
-  .content-wrap { width: calc(100% - 8px); }
-  .backdrop-illustration { width: 132px; }
-  .peanuts-background { width: 94px; opacity: .58; }
-}
-
-
-/* Mobile artwork composition: use the clear space outside the cover edges. */
-@media (max-width: 680px) {
-  .backdrop-illustration {
-    width: 164px;
-    filter: drop-shadow(0 12px 14px rgba(85, 54, 64, .16));
-  }
-  .backdrop-lilies {
-    top: 2%;
-    left: -4px;
-    opacity: .68;
-  }
-  .backdrop-tulips {
-    right: -4px;
-    bottom: 1%;
-    opacity: .66;
-  }
-  .peanuts-background {
-    width: 96px;
-    padding: 5px 5px 8px;
-    border-color: rgba(147, 91, 111, .72);
-    background: rgba(255, 247, 236, .94);
-    opacity: .94;
-    box-shadow: 0 12px 22px rgba(72, 45, 57, .15), inset 0 0 0 3px rgba(255,255,255,.78);
-  }
-  .peanuts-right {
-    top: 2px;
-    right: 7px;
-  }
-  .peanuts-left {
-    left: 7px;
-    bottom: 2px;
-  }
-  .cover-card {
-    background:
-      radial-gradient(ellipse at 5% 6%, rgba(255,255,255,.55), transparent 35%),
-      radial-gradient(ellipse at 96% 95%, rgba(218,164,174,.23), transparent 39%),
-      linear-gradient(132deg, rgba(255, 249, 240, .80), rgba(247, 229, 229, .77));
-  }
-  .section-card {
-    background:
-      radial-gradient(ellipse at 5% 4%, rgba(255,255,255,.57), transparent 35%),
-      radial-gradient(ellipse at 96% 96%, rgba(218,168,171,.23), transparent 39%),
-      linear-gradient(135deg, rgba(255, 249, 240, .82), rgba(247, 231, 229, .79));
-  }
-}
-@media (max-width: 420px) {
-  .backdrop-illustration { width: 150px; }
-  .peanuts-background { width: 88px; }
-}
-
-
-/* =========================================================
-   EDITORIAL BOTANICAL REDESIGN — v12
-   A restrained keepsake cover, tactile paper and clear hierarchy.
-   All original copy, section order, photos and interactions remain.
-   ========================================================= */
-
-:root {
-  --paper-cream: #f8f0e5;
-  --paper-ivory: #fffaf2;
-  --paper-rose: #f0dce0;
-  --rose-ink: #694354;
-  --rose-muted: #9a6d7c;
-  --rose-line: rgba(143, 91, 107, .34);
-  --sage: #72816b;
-  --body-ink: #55464a;
-  --soft-shadow: 0 26px 70px rgba(66, 44, 51, .15);
-}
-
-html {
-  background: #e9e0d8;
-  scroll-behavior: smooth;
-}
-body {
-  color: var(--body-ink);
-  background:
-    radial-gradient(ellipse at 4% 10%, rgba(222, 174, 183, .34), transparent 31%),
-    radial-gradient(ellipse at 96% 88%, rgba(160, 179, 147, .28), transparent 30%),
-    radial-gradient(ellipse at 50% 42%, rgba(255,255,255,.62), transparent 57%),
-    linear-gradient(132deg, #eee4d9 0%, #f4e8e6 52%, #e8e9df 100%);
-  font-family: "DM Sans", sans-serif;
-}
-body::before {
-  inset: 12px;
-  border: 1px solid rgba(132, 99, 99, .20);
-  box-shadow: inset 0 0 0 5px rgba(255,250,242,.14);
-}
-.paper-grain {
-  opacity: .22;
-  mix-blend-mode: multiply;
-}
-.ambient-flower { opacity: .18; color: #a86e80; }
-
-.botanical-backdrop { z-index: 0; opacity: 1; }
-.backdrop-illustration {
-  width: clamp(230px, 25vw, 370px);
-  filter: drop-shadow(0 16px 18px rgba(80, 56, 61, .13));
-}
-.backdrop-lilies {
-  top: 4%;
-  left: max(0px, calc((100vw - 1580px) / 2));
-  opacity: .70;
-}
-.backdrop-tulips {
-  right: max(0px, calc((100vw - 1580px) / 2));
-  bottom: 3%;
-  opacity: .68;
-}
-.peanuts-background {
-  width: clamp(148px, 11vw, 184px);
-  padding: 7px 7px 12px;
-  border: 1px solid rgba(147, 100, 112, .46);
-  background: rgba(255, 249, 240, .97);
-  box-shadow: 0 15px 30px rgba(66, 44, 51, .17), inset 0 0 0 4px rgba(255,255,255,.72);
-  opacity: .96;
-}
-.peanuts-background img {
-  display: block;
-  width: 100%;
-  background: #f7eee7;
-  mix-blend-mode: normal;
-  filter: saturate(.96) contrast(1.02);
-}
-.peanuts-left {
-  left: max(12px, calc((100vw - 1580px) / 2));
-  bottom: 9%;
-  transform: rotate(-7deg);
-}
-.peanuts-right {
-  right: max(12px, calc((100vw - 1580px) / 2));
-  top: 9%;
-  transform: rotate(6deg);
-}
-
-/* Homepage — the original Snoopy picture is now the permanent hero artwork. */
-.home-screen {
-  position: relative;
-  z-index: 1;
   min-height: 100svh;
-  padding: clamp(30px, 5vh, 58px) 24px;
   display: grid;
   place-items: center;
+  padding: clamp(22px, 4vh, 42px) 18px;
 }
+
+/* Desktop cover: artwork and typography share the page in balanced columns. */
 .cover-card {
-  isolation: isolate;
   position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(0, 1.07fr) minmax(320px, .93fr);
-  grid-template-rows: auto 1fr auto auto auto auto;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, .88fr);
+  grid-template-rows: auto auto minmax(130px, 1fr) auto auto auto;
   grid-template-areas:
     "art top"
     "art date"
@@ -4828,465 +3704,553 @@ body::before {
     "art greeting"
     "art button"
     "art foot";
-  justify-items: center;
   align-items: center;
-  column-gap: clamp(38px, 5.5vw, 82px);
-  row-gap: 10px;
-  width: min(100%, 1080px);
-  min-height: 690px;
-  padding: clamp(42px, 5.1vw, 70px) clamp(48px, 6.2vw, 84px);
+  justify-items: center;
+  column-gap: clamp(32px, 5vw, 68px);
+  row-gap: 7px;
+  width: min(100%, 1060px);
+  min-height: 640px;
+  padding: clamp(40px, 5vw, 68px);
   overflow: hidden;
-  border: 1px solid rgba(145, 91, 108, .48);
-  border-radius: 5px 34px 5px 34px;
+  border: 1px solid rgba(158, 111, 119, .56);
+  border-radius: 4px 30px 4px 30px;
   background:
-    radial-gradient(ellipse at 2% 4%, rgba(255,255,255,.92), transparent 39%),
-    radial-gradient(ellipse at 96% 96%, rgba(224, 179, 183, .22), transparent 40%),
-    linear-gradient(128deg, rgba(255,250,242,.96), rgba(246,232,230,.94));
-  box-shadow: var(--soft-shadow), 0 5px 16px rgba(66,44,51,.06),
-    inset 0 0 0 6px rgba(255,255,255,.72),
-    inset 0 0 0 8px rgba(174,125,136,.15);
+    radial-gradient(ellipse at 7% 5%, rgba(255,255,255,.92), transparent 38%),
+    radial-gradient(ellipse at 96% 96%, rgba(221, 180, 184, .25), transparent 40%),
+    linear-gradient(132deg, rgba(255, 250, 241, .97), rgba(247, 234, 230, .96));
+  box-shadow:
+    0 28px 70px rgba(75, 49, 56, .14),
+    0 6px 18px rgba(75, 49, 56, .055),
+    inset 0 0 0 7px rgba(255,255,255,.68),
+    inset 0 0 0 9px rgba(169, 119, 130, .12);
 }
+
 .cover-card::before {
   content: "";
   position: absolute;
-  z-index: 0;
-  inset: 17px;
-  border: 1px solid rgba(172, 126, 133, .31);
+  z-index: -1;
+  inset: 16px;
+  border: 1px solid rgba(171, 128, 132, .30);
   pointer-events: none;
 }
+
 .cover-card::after {
   content: "";
   position: absolute;
-  z-index: 0;
-  width: 350px;
-  height: 350px;
-  left: -245px;
-  bottom: -245px;
-  border: 1px solid rgba(164, 118, 128, .22);
+  z-index: -1;
+  width: 330px;
+  height: 330px;
+  right: -205px;
+  bottom: -210px;
+  border: 1px solid rgba(164, 111, 126, .22);
   border-radius: 50%;
-  box-shadow: 0 0 0 17px rgba(215,174,180,.07), 0 0 0 36px rgba(215,174,180,.05);
+  box-shadow: 0 0 0 18px rgba(217, 175, 181, .10), 0 0 0 38px rgba(217, 175, 181, .07);
   pointer-events: none;
 }
-.cover-card > * { position: relative; z-index: 1; }
-.cover-card > .cover-corner { z-index: 2; color: #a66e80; opacity: .66; }
+
+.cover-corner {
+  position: absolute;
+  z-index: 2;
+  color: #a96880;
+  opacity: .58;
+  font-size: 27px;
+}
+.corner-one { left: 25px; top: 22px; }
+.corner-two { right: 26px; top: 22px; font-size: 24px; }
+.corner-three { left: 27px; bottom: 22px; font-size: 23px; }
+.corner-four { right: 25px; bottom: 22px; }
+
 .cover-topline {
   grid-area: top;
   width: 100%;
-  align-self: end;
-  margin: 0 0 9px;
-  color: var(--rose-muted);
+  margin: 0 0 8px;
+  color: #a66b80;
 }
 .cover-topline span {
-  background: linear-gradient(90deg, transparent, rgba(161,111,125,.55), transparent);
+  background: linear-gradient(90deg, transparent, rgba(163, 111, 126, .68));
 }
+.cover-topline span:last-child {
+  background: linear-gradient(90deg, rgba(163, 111, 126, .68), transparent);
+}
+
 .cover-art {
   grid-area: art;
   position: relative;
   align-self: center;
   justify-self: stretch;
   width: 100%;
-  max-width: 500px;
+  max-width: 455px;
+  height: clamp(410px, 43vw, 490px);
   min-height: 0;
-  aspect-ratio: 1.48;
   margin: 0;
-  display: grid;
-  place-items: center;
   overflow: hidden;
-  border: 1px solid rgba(145, 91, 108, .56);
-  border-radius: 48% 48% 4px 4px / 35% 35% 4px 4px;
+  border: 1px solid rgba(157, 103, 121, .58);
+  border-radius: 46% 46% 4px 4px / 34% 34% 4px 4px;
   background:
-    radial-gradient(ellipse at 50% 30%, rgba(255,255,255,.95), transparent 58%),
-    linear-gradient(158deg, #f5e3e5 0%, #f9f1e8 72%, #e8ebdf 100%);
-  box-shadow: 0 22px 46px rgba(71,48,56,.14), inset 0 0 0 8px rgba(255,255,255,.73),
-    inset 0 0 0 10px rgba(172,117,134,.16);
+    radial-gradient(ellipse at 50% 28%, #fffdf8, transparent 60%),
+    linear-gradient(150deg, #f4e4e5, #f8f0e5 70%, #e8ebdf);
+  box-shadow:
+    0 19px 42px rgba(83, 54, 64, .13),
+    inset 0 0 0 7px rgba(255,255,255,.74),
+    inset 0 0 0 9px rgba(171, 125, 138, .12);
 }
-.cover-art::before {
-  content: "";
-  position: absolute;
-  inset: 17px;
-  z-index: 1;
-  border: 1px solid rgba(175, 128, 137, .26);
-  border-radius: inherit;
-  pointer-events: none;
-}
+
+.cover-art::before,
 .cover-art::after {
-  content: "";
+  content: "✿";
   position: absolute;
-  inset: auto 11% 5% 11%;
-  height: 12%;
-  background: radial-gradient(ellipse, rgba(105,75,80,.12), transparent 70%);
-  filter: blur(12px);
+  z-index: 2;
+  color: #b7778b;
+  opacity: .45;
+  font-size: 23px;
   pointer-events: none;
 }
+.cover-art::before { top: 20px; left: 20px; }
+.cover-art::after { right: 20px; bottom: 20px; }
+
 .cover-art .uploaded-artwork {
-  position: relative;
-  z-index: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-  padding: 24px;
+  position: absolute;
+  inset: 16px;
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
   object-fit: contain;
-  object-position: center;
+  padding: 10px;
   mix-blend-mode: multiply;
-  filter: saturate(.98) contrast(1.02);
 }
+
 .cover-date {
   grid-area: date;
-  margin: 0 0 2px;
-  color: #9c6878;
+  margin: 0 0 3px;
+  color: #996577;
   font-size: .78rem;
   letter-spacing: .22em;
+  text-align: center;
 }
+
 .cover-card h1 {
   grid-area: title;
-  max-width: 8.8ch;
+  max-width: 9.4ch;
   margin: 0;
-  color: #633d4e;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(4rem, 6.3vw, 6.2rem);
-  font-weight: 600;
-  line-height: .82;
-  letter-spacing: -.055em;
+  color: var(--rose-ink);
+  font: 600 clamp(3.6rem, 5.4vw, 5.25rem)/.88 "Cormorant Garamond", serif;
+  letter-spacing: -.045em;
+  text-align: center;
   text-wrap: balance;
-  text-shadow: 0 1px 0 rgba(255,255,255,.76);
 }
+
 .cover-greeting {
   grid-area: greeting;
-  margin: 7px 0 0;
-  color: #8b5b6d;
-  font-family: "Caveat", cursive;
-  font-size: clamp(1.9rem, 2.5vw, 2.45rem);
-  line-height: 1.08;
+  margin: 4px 0 9px;
+  color: #8e6072;
+  font: 600 clamp(1.6rem, 2.4vw, 2rem)/1.08 "Caveat", cursive;
+  text-align: center;
 }
+
 .open-button {
   grid-area: button;
-  align-self: start;
-  min-width: 178px;
-  min-height: 54px;
-  margin-top: 13px;
-  border: 1px solid #78465a;
-  border-radius: 3px 17px 3px 17px;
-  color: #fff9f1;
-  background: linear-gradient(135deg, #b9788c 0%, #985c72 56%, #78465a 100%);
-  box-shadow: 0 11px 22px rgba(112,65,83,.20), inset 0 1px 0 rgba(255,255,255,.30);
-  letter-spacing: .16em;
+  min-width: 176px;
+  min-height: 52px;
+  margin: 8px 0 0;
+  padding: 12px 27px;
+  border: 1px solid #79465b;
+  border-radius: 4px 16px 4px 16px;
+  color: #fffaf2;
+  background: linear-gradient(135deg, #b9788e, #84475f);
+  box-shadow: 0 10px 22px rgba(116, 64, 82, .20), inset 0 1px 0 rgba(255,255,255,.28);
+  letter-spacing: .12em;
   text-transform: uppercase;
-  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 .open-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 26px rgba(112,65,83,.25);
-  filter: saturate(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px rgba(116, 64, 82, .24);
 }
 .cover-bottomline {
   grid-area: foot;
   width: 100%;
   margin: 13px 0 0;
-  color: #b17a88;
-  opacity: .82;
+  color: #ad7185;
 }
 
-/* Interior keepsake chapters — calm paper surfaces and clear navigation. */
-.site-shell { position: relative; z-index: 1; }
+/* Interior layout: one family of paper, typography and carefully restrained trim. */
+.site-shell {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  padding: 0 12px 48px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 20px 13px;
-  border-bottom: 1px solid rgba(157,112,119,.26);
-  background: rgba(249,241,231,.93);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 7px 22px rgba(74,50,57,.06);
+  z-index: 30;
+  margin: 0 -12px;
+  padding: 10px 16px 13px;
+  border: 1px solid rgba(175, 140, 132, .45);
+  border-top: 0;
+  border-radius: 0 0 4px 21px;
+  background: rgba(249, 242, 232, .94);
+  box-shadow: 0 8px 23px rgba(67, 48, 52, .075);
+  backdrop-filter: blur(15px);
 }
-.mini-brand { color: #9b6878; }
+
+.mini-brand {
+  margin: 0 0 8px;
+  color: #8d586d;
+  font: 600 1.28rem/1 "Caveat", cursive;
+}
+
 .navigation {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-  gap: 7px;
-  max-width: 1180px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: min(100%, 1120px);
+  margin: 0 auto;
 }
+
 .nav-button {
-  border: 1px solid rgba(162,119,127,.31);
-  border-radius: 3px 11px 3px 11px;
-  padding: 9px 13px;
-  color: #71515b;
-  background: rgba(255,250,242,.74);
-  font-family: "DM Sans", sans-serif;
-  font-size: .82rem;
-  letter-spacing: .012em;
-  box-shadow: 0 3px 8px rgba(78,53,59,.04);
-  transition: background .2s ease, border-color .2s ease, transform .2s ease, color .2s ease;
+  flex: 0 1 auto;
+  min-width: 0;
+  min-height: 38px;
+  padding: 8px 13px;
+  border: 1px solid rgba(163, 124, 128, .40);
+  border-radius: 3px 12px 3px 12px;
+  color: #76515c;
+  background: rgba(255, 250, 241, .78);
+  box-shadow: 0 2px 6px rgba(70, 48, 53, .035);
+  font-size: .78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color .18s ease, background .18s ease, border-color .18s ease, transform .18s ease;
 }
-.nav-button:hover { transform: translateY(-1px); }
-.nav-button:hover, .nav-button.active {
-  border-color: #854b61;
-  color: #fff9f1;
-  background: linear-gradient(135deg, #aa6b80, #78485e);
+.nav-button:hover,
+.nav-button.active {
+  border-color: #885267;
+  color: #fffaf2;
+  background: linear-gradient(135deg, #ad7186, #7d465d);
+  box-shadow: 0 4px 11px rgba(102, 62, 78, .15);
 }
+
 .content-wrap {
-  width: min(100% - 52px, 1050px);
-  margin: 38px auto 52px;
+  width: min(100%, 1040px);
+  margin: 26px auto 0;
 }
+
 .section-card {
   position: relative;
+  isolation: isolate;
+  min-height: 0;
+  padding: clamp(34px, 5vw, 66px);
   overflow: hidden;
-  padding: clamp(42px, 6vw, 78px);
-  border: 1px solid rgba(160,113,122,.48);
-  border-radius: 4px 30px 4px 30px;
+  border: 1px solid rgba(165, 124, 127, .52);
+  border-radius: 4px 25px 4px 25px;
   background:
-    radial-gradient(ellipse at 4% 5%, rgba(255,255,255,.78), transparent 36%),
-    radial-gradient(ellipse at 95% 96%, rgba(220,174,180,.15), transparent 40%),
-    linear-gradient(135deg, rgba(255,250,242,.96), rgba(247,235,229,.94));
-  box-shadow: 0 24px 58px rgba(76,47,57,.12), inset 0 0 0 6px rgba(255,255,255,.66),
-    inset 0 0 0 8px rgba(171,108,127,.11);
+    radial-gradient(ellipse at 5% 5%, rgba(255,255,255,.88), transparent 36%),
+    radial-gradient(ellipse at 95% 96%, rgba(220, 181, 181, .16), transparent 40%),
+    linear-gradient(135deg, rgba(255, 250, 241, .97), rgba(246, 235, 229, .96));
+  box-shadow:
+    0 24px 58px rgba(70, 49, 54, .11),
+    inset 0 0 0 6px rgba(255,255,255,.62),
+    inset 0 0 0 8px rgba(168, 126, 135, .10);
 }
+
 .section-card::before {
-  inset: 15px;
-  border: 1px dashed rgba(169,113,127,.29);
+  inset: 13px;
+  border: 1px solid rgba(174, 134, 135, .30);
+  border-radius: 2px 18px 2px 18px;
 }
+
 .section-card h2 {
-  color: #683f50;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(3rem, 6vw, 4.7rem);
-  line-height: .93;
-  letter-spacing: -.045em;
+  color: #6b4355;
+  font: 600 clamp(2.9rem, 5vw, 4.15rem)/.96 "Cormorant Garamond", serif;
+  letter-spacing: -.035em;
+  text-wrap: balance;
 }
 .section-card h2::after {
   width: 88px;
   height: 1px;
-  margin: 16px auto 0;
-  background: linear-gradient(90deg, transparent, #b77789, transparent);
+  margin-top: 13px;
+  background: linear-gradient(90deg, transparent, #ad7b87, transparent);
 }
-.section-kicker { color: #986778; letter-spacing: .20em; }
+.section-kicker { color: #966678; }
 .section-subtitle {
-  color: #8a6570;
-  font-family: "Caveat", cursive;
-  font-size: 1.7rem;
+  color: #896575;
+  font: 500 1.48rem/1.12 "Caveat", cursive;
 }
+.page-flourish { color: #a87384; opacity: .72; }
+
 .music-section {
-  background: radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.76), transparent 38%),
-    linear-gradient(135deg, #f7e9e8, #eedde2);
+  background:
+    radial-gradient(ellipse at 9% 8%, rgba(255,255,255,.85), transparent 39%),
+    linear-gradient(135deg, #f3e3e5, #f7eee4 70%, #e8ebdf);
 }
 .letter-section {
-  background: repeating-linear-gradient(transparent 0 39px, rgba(174,126,127,.09) 40px 41px),
-    linear-gradient(135deg, #fff9ed, #f4e8d9);
+  background:
+    repeating-linear-gradient(transparent 0 39px, rgba(166, 128, 126, .09) 40px 41px),
+    linear-gradient(135deg, #fff8ed, #f3e6d9);
 }
 .memories-section {
-  background: radial-gradient(ellipse at 14% 14%, rgba(238,192,202,.30), transparent 37%),
-    linear-gradient(135deg, #fff8ef, #f4e5e5);
+  background:
+    radial-gradient(ellipse at 12% 10%, rgba(225, 182, 190, .24), transparent 38%),
+    linear-gradient(135deg, #fff9f0, #f2e4e3);
 }
 .calendar-section {
-  background: radial-gradient(ellipse at 88% 12%, rgba(185,201,165,.27), transparent 37%),
-    linear-gradient(135deg, #fff9ed, #e9eadf);
+  background:
+    radial-gradient(ellipse at 88% 12%, rgba(177, 194, 157, .26), transparent 38%),
+    linear-gradient(135deg, #fff9ed, #e9ebdf);
 }
 .garden-section {
-  background: radial-gradient(ellipse at 14% 12%, rgba(193,214,175,.34), transparent 38%),
-    radial-gradient(ellipse at 90% 90%, rgba(236,190,201,.19), transparent 40%),
-    linear-gradient(135deg, #fff9ed, #e9eedf);
+  background:
+    radial-gradient(ellipse at 12% 10%, rgba(184, 204, 164, .34), transparent 38%),
+    radial-gradient(ellipse at 90% 92%, rgba(229, 185, 192, .17), transparent 40%),
+    linear-gradient(135deg, #fff9ed, #e8eddf);
 }
 .snoopy-section {
-  background: radial-gradient(ellipse at 12% 10%, rgba(241,197,207,.34), transparent 40%),
-    radial-gradient(ellipse at 90% 90%, rgba(202,218,186,.25), transparent 42%),
-    linear-gradient(135deg, #fff9f0, #f3e5e4);
+  background:
+    radial-gradient(ellipse at 12% 10%, rgba(231, 188, 197, .27), transparent 40%),
+    radial-gradient(ellipse at 90% 90%, rgba(191, 205, 177, .23), transparent 42%),
+    linear-gradient(135deg, #fff9f0, #f1e4e4);
 }
 .secret-section {
-  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.80), transparent 50%),
-    linear-gradient(145deg, #fff8ed, #efdee3);
-}
-.memory-photo {
-  border: 1px solid rgba(151,102,117,.43);
-  background: #fffaf2;
-  box-shadow: 0 10px 23px rgba(69,46,55,.12);
-  transition: transform .24s ease, box-shadow .24s ease;
-}
-.memory-photo:nth-child(odd) { transform: rotate(-1.2deg); }
-.memory-photo:nth-child(even) { transform: rotate(1.1deg); }
-.memory-photo:hover {
-  transform: translateY(-5px) rotate(0deg);
-  box-shadow: 0 17px 30px rgba(69,46,55,.18);
-}
-.photo-tape { background: rgba(211,165,166,.72); }
-.peanuts-postcard, .doghouse-postcard {
-  border-color: rgba(154,105,116,.48);
-  background: #fff9f0;
-  box-shadow: 0 16px 33px rgba(69,46,55,.13), inset 0 0 0 4px rgba(255,255,255,.72);
-}
-.pill-button {
-  border-radius: 3px 13px 3px 13px;
-  border-color: rgba(151,102,117,.44);
-  color: #764b5d;
-  background: rgba(255,249,241,.90);
-  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-}
-.pill-button:hover { transform: translateY(-2px); }
-.pill-button.primary {
-  color: #fff8ef;
-  border-color: #79485d;
-  background: linear-gradient(135deg, #b8798d, #804a60);
-  box-shadow: 0 8px 17px rgba(105,59,78,.16);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.78), transparent 50%),
+    linear-gradient(145deg, #fff7ed, #eedfe2);
 }
 
-/* Responsive layout keeps the artwork legible and the navigation usable. */
+.memory-photo {
+  border-color: rgba(160, 121, 128, .52);
+  background: #fffaf1;
+  box-shadow: 0 12px 24px rgba(69, 47, 54, .12), inset 0 0 0 4px rgba(255,255,255,.68);
+}
+.photo-tape {
+  background: linear-gradient(90deg, rgba(210, 168, 160, .55), rgba(243, 218, 206, .84), rgba(210, 168, 160, .55));
+}
+
+/* Small details in shared components stay consistent with the paper palette. */
+.pill-button {
+  border-radius: 3px 13px 3px 13px;
+  border-color: #875267;
+  color: #fffaf2;
+  background: linear-gradient(135deg, #ad7186, #7d465d);
+  box-shadow: 0 7px 16px rgba(104, 62, 79, .15);
+}
+.pill-button:not(.primary) {
+  color: #7d5061;
+  border-color: rgba(163, 124, 128, .45);
+  background: rgba(255, 250, 242, .86);
+  box-shadow: none;
+}
+.envelope-back { background: linear-gradient(145deg, #ad7186, #7d465d); }
+.envelope-flap { background: linear-gradient(145deg, #f8e6e5, #e8c4ca); }
+.envelope-pocket.left { background: #efd0d3; }
+.envelope-pocket.right { background: #dfb4c0; }
+.envelope-pocket.bottom { background: #e8c1c8; }
+.envelope-seal { background: radial-gradient(circle at 35% 25%, #bd8294, #77445c); }
+
+.calendar-page {
+  border-color: rgba(164, 122, 130, .62);
+  background:
+    radial-gradient(ellipse at 50% 0%, #fffdf8, transparent 44%),
+    repeating-linear-gradient(0deg, rgba(124, 86, 81, .018) 0 1px, transparent 1px 6px),
+    linear-gradient(145deg, #fffdf7, #f7e9eb);
+  box-shadow: 0 18px 34px rgba(70, 49, 54, .12), inset 0 0 0 6px rgba(255,255,255,.62);
+}
+.calendar-day { color: #78465a; }
+.counter-area {
+  border-color: rgba(164, 122, 130, .52);
+  background: linear-gradient(145deg, rgba(255,250,242,.94), rgba(241,230,222,.9));
+  box-shadow: 0 13px 26px rgba(70, 49, 54, .085), inset 0 0 0 4px rgba(255,255,255,.60);
+}
+.total-days strong, .time-unit strong { color: #78465a; }
+.time-unit { background: rgba(255, 251, 244, .9); }
+
+.snoopy-tabs {
+  border-color: rgba(164, 122, 130, .52);
+  background: rgba(249, 239, 230, .92);
+}
+.snoopy-tab { color: #76515c; }
+.snoopy-tab.active, .snoopy-tab:hover {
+  border-color: #885267;
+  color: #fffaf2;
+  background: linear-gradient(135deg, #ad7186, #7d465d);
+}
+.snoopy-moment {
+  border-color: rgba(164, 122, 130, .48);
+  background: linear-gradient(145deg, #fff9f1, #f2e6e2);
+  box-shadow: 0 12px 24px rgba(70, 49, 54, .09), inset 0 0 0 4px rgba(255,255,255,.60);
+}
+.snoopy-personal-message {
+  border-color: rgba(164, 122, 130, .52);
+  border-left-color: #9a6377;
+  color: #59464d;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(165, 127, 126, .12) 32px 33px),
+    #fffaf2;
+}
+.snoopy-scene {
+  border-color: rgba(164, 122, 130, .54);
+  background: linear-gradient(180deg, #f4e6e5 0%, #fff8ef 76%, #dce6d1 76%);
+}
+.peanuts-postcard, .doghouse-postcard, .fifi-postcard, .woodstock-postcard {
+  border-color: rgba(164, 122, 130, .52);
+  background: linear-gradient(145deg, #fffaf2, #f0e5dc);
+}
+.secret-message {
+  border-color: rgba(164, 122, 130, .52);
+  color: #744256;
+  background: linear-gradient(145deg, #fffaf2, #f0e1e5);
+  box-shadow: 0 19px 39px rgba(70, 49, 54, .12), inset 0 0 0 5px rgba(255,255,255,.62);
+}
+
+/* Tablet and phone: proportion first, then decoration. */
 @media (max-width: 900px) {
   .cover-card {
-    grid-template-columns: minmax(0, 1fr) minmax(260px, .92fr);
+    width: min(100%, 760px);
+    min-height: 590px;
+    grid-template-columns: minmax(0, .94fr) minmax(0, 1fr);
     column-gap: 28px;
-    min-height: 620px;
-    padding: 38px 34px;
+    padding: 38px 32px;
   }
-  .cover-art { min-height: 0; }
-  .cover-art .uploaded-artwork { min-height: 0; }
-  .cover-card h1 { font-size: clamp(3.4rem, 6vw, 4.7rem); }
-  .peanuts-background { width: 124px; }
-  .backdrop-illustration { width: 205px; }
+  .cover-art { height: 400px; }
+  .cover-card h1 { font-size: clamp(3.15rem, 6.3vw, 4.3rem); }
+  .section-card { padding: 42px 30px; }
 }
+
 @media (max-width: 680px) {
-  body::before { inset: 7px; }
-  .home-screen { padding: 25px 12px 32px; }
+  .home-screen { padding: 18px 12px 26px; }
   .cover-card {
     width: min(100%, 470px);
     min-height: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-template-areas: "top" "art" "date" "title" "greeting" "button" "foot";
     gap: 0;
-    padding: 34px 23px 29px;
-    border-radius: 4px 25px 4px 25px;
-  }
-  .cover-topline { width: 100%; margin: 0 0 15px; }
-  .cover-art {
-    width: min(100%, 322px);
-    min-height: 0;
-    aspect-ratio: 1.48;
-    margin: 0 auto 21px;
-    border-radius: 47% 47% 4px 4px / 35% 35% 4px 4px;
-  }
-  .cover-art .uploaded-artwork {
-    min-height: 0;
-    height: 100%;
-    padding: 17px;
-  }
-  .cover-date { margin: 0 0 8px; font-size: .72rem; }
-  .cover-card h1 {
-    max-width: 8.5ch;
-    font-size: clamp(3.25rem, 12.5vw, 4.4rem);
-    line-height: .86;
-  }
-  .cover-greeting { margin-top: 10px; font-size: 1.85rem; }
-  .open-button { min-height: 52px; margin-top: 17px; }
-  .cover-bottomline { margin-top: 22px; }
-  .backdrop-illustration { width: 138px; }
-  .backdrop-lilies { top: 1%; left: -42px; opacity: .52; }
-  .backdrop-tulips { right: -42px; bottom: 1%; opacity: .52; }
-  .peanuts-background {
-    width: 82px;
-    padding: 5px 5px 8px;
-    opacity: .88;
-  }
-  .peanuts-left { left: -24px; bottom: 6%; }
-  .peanuts-right { right: -24px; top: 7%; }
-  .site-shell { width: 100%; }
-  .site-header { gap: 8px; padding: 10px 9px 12px; }
-  .navigation {
-    width: 100%;
-    max-width: none;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-    padding: 2px 1px 7px;
-  }
-  .navigation::-webkit-scrollbar { display: none; }
-  .nav-button { flex: 0 0 auto; padding: 8px 11px; font-size: .76rem; }
-  .content-wrap { width: calc(100% - 18px); margin: 17px auto 34px; }
-  .section-card {
-    padding: 34px 21px;
+    padding: 27px 22px 22px;
     border-radius: 4px 23px 4px 23px;
   }
-  .section-card::before { inset: 10px; }
-  .section-card h2 { font-size: clamp(2.75rem, 10vw, 3.8rem); }
-}
-@media (max-width: 420px) {
-  .cover-card { padding: 30px 17px 25px; }
-  .cover-art { width: min(100%, 292px); }
-  .backdrop-illustration { width: 118px; }
-  .peanuts-background { width: 74px; }
-  .peanuts-left { left: -23px; }
-  .peanuts-right { right: -23px; }
-  .section-card { padding: 29px 16px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .open-button, .nav-button, .memory-photo, .pill-button { transition: none !important; }
-}
-
-
-/* Keep margin artwork decorative without allowing the document to drift sideways. */
-html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: clip;
-}
-#site.site-shell {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  overflow-x: clip;
-  box-sizing: border-box;
-}
-.site-header {
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-@media (max-width: 680px) {
-  .ambient-flower { display: none; }
-}
-
-
-/* Final proportion pass: match the cover frame to the original landscape artwork. */
-.cover-card {
-  box-sizing: border-box;
-  height: clamp(620px, 72svh, 720px);
-  min-height: 620px;
-}
-.cover-art {
-  align-self: center;
-  height: clamp(280px, 23vw, 340px);
-  min-height: 0;
-  aspect-ratio: auto;
-  border-radius: 39% 39% 4px 4px / 33% 33% 4px 4px;
-}
-.cover-art .uploaded-artwork {
-  height: 100%;
-  min-height: 0;
-  padding: 14px;
-  object-fit: contain;
-}
-@media (max-width: 680px) {
-  .cover-card {
-    height: auto;
-    min-height: 0;
-  }
+  .cover-topline { margin: 0 0 12px; }
   .cover-art {
-    height: clamp(190px, 55vw, 225px);
-    min-height: 0;
-    aspect-ratio: auto;
-    border-radius: 35% 35% 4px 4px / 32% 32% 4px 4px;
+    width: min(100%, 320px);
+    height: clamp(220px, 57vw, 255px);
+    margin: 0 auto 15px;
+    border-radius: 42% 42% 4px 4px / 34% 34% 4px 4px;
   }
   .cover-art .uploaded-artwork {
-    height: 100%;
-    min-height: 0;
-    padding: 13px;
+    inset: 12px;
+    width: calc(100% - 24px);
+    height: calc(100% - 24px);
+    padding: 7px;
   }
+  .cover-date { margin: 0 0 4px; }
+  .cover-card h1 {
+    max-width: 9.5ch;
+    margin: 0;
+    font-size: clamp(3.1rem, 11vw, 4rem);
+    line-height: .87;
+  }
+  .cover-greeting {
+    margin: 9px 0 4px;
+    font-size: clamp(1.55rem, 6.2vw, 1.85rem);
+  }
+  .open-button { min-width: 164px; min-height: 49px; margin-top: 15px; }
+  .cover-bottomline { margin-top: 17px; }
+
+  .botanical-backdrop { opacity: .92; }
+  .backdrop-illustration { width: 126px; opacity: .22; }
+  .backdrop-lilies { top: 4%; left: -43px; }
+  .backdrop-tulips { right: -44px; bottom: 3%; }
+  .peanuts-background { width: 80px; padding: 5px 5px 8px; opacity: .19; }
+  .peanuts-left { left: -30px; bottom: 8%; }
+  .peanuts-right { right: -30px; top: 12%; }
+
+  .site-shell { width: 100%; padding: 0 8px 34px; }
+  .site-header {
+    margin: 0 -8px;
+    padding: 9px 10px 11px;
+    border-radius: 0 0 4px 17px;
+  }
+  .mini-brand { margin-bottom: 8px; font-size: 1.18rem; }
+  .navigation {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+    justify-content: stretch;
+  }
+  .nav-button {
+    width: 100%;
+    min-width: 0;
+    min-height: 36px;
+    padding: 7px 4px;
+    overflow: hidden;
+    font-size: clamp(.64rem, 2.55vw, .75rem);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .content-wrap { width: 100%; margin: 17px auto 0; }
+  .section-card {
+    min-height: 0;
+    padding: 32px 20px;
+    border-radius: 4px 21px 4px 21px;
+  }
+  .section-card::before { inset: 10px; }
+  .section-card h2 { font-size: clamp(2.65rem, 10vw, 3.45rem); }
+  .section-subtitle { margin: 10px 0 25px; font-size: 1.4rem; }
+
+  .music-layout {
+    grid-template-columns: 1fr;
+    gap: 17px;
+    padding: 17px;
+  }
+  .vinyl-stage {
+    min-height: 220px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(126, 91, 88, .2);
+    padding-bottom: 18px;
+  }
+  .vinyl-record { width: 185px; }
+
+  .memory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+  }
+  .memory-photo { grid-column: span 1; }
+  .memory-photo:nth-child(n) { transform: rotate(0); }
+  .memory-photo:nth-child(odd) { transform: translateY(3px) rotate(-1deg); }
+  .memory-photo:nth-child(even) { transform: translateY(-2px) rotate(1deg); }
+
+  .calendar-section {
+    grid-template-columns: 1fr;
+    grid-template-areas: "kicker" "title" "subtitle" "calendar" "count";
+  }
+  .calendar-composition { width: min(100%, 300px); margin-top: 18px; }
+  .calendar-day { font-size: clamp(6rem, 22vw, 7.5rem); }
+  .counter-area { width: 100%; margin-top: 12px; padding: 20px 14px; }
+  .time-breakdown { gap: 7px; }
+  .time-unit { padding: 11px 4px; }
+
+  .garden-frame { min-height: 400px; }
+  .snoopy-tabs { width: 100%; justify-content: center; }
+  .snoopy-tab { padding: 8px 11px; font-size: 1rem; }
+  .snoopy-moments { grid-template-columns: 1fr; width: min(100%, 560px); gap: 15px; }
+  .snoopy-scene { min-height: 0; padding: 25px 16px 29px; }
+  .doghouse-layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 390px) {
+  .home-screen { padding-inline: 9px; }
+  .cover-card { padding: 24px 16px 20px; }
+  .cover-art { height: 214px; }
+  .cover-card h1 { font-size: clamp(2.95rem, 10.8vw, 3.35rem); }
+  .cover-greeting { font-size: 1.5rem; }
+  .nav-button { font-size: .64rem; padding-inline: 2px; }
+  .section-card { padding: 29px 15px; }
+  .counter-area { padding-inline: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .open-button, .nav-button, .memory-photo, .pill-button { transition: none !important; }
+  .page-section, .vinyl-record { animation: none !important; }
 }
