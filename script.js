@@ -58,6 +58,62 @@
   const expandedPhoto = $("#expandedPhoto");
   const pageIds = new Set(["home", ...pages.map(page => page.id)]);
 
+  // Anniversary counter from August 14, 2025.
+  // Run it near startup so later optional interactions cannot prevent the dates
+  // from being populated. UTC calendar stamps avoid daylight-saving-hour drift.
+  const relationshipStart = new Date(2025, 7, 14);
+  relationshipStart.setHours(0, 0, 0, 0);
+
+  function calendarDayStamp(date) {
+    return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+
+  function addMonthsClamped(date, count) {
+    const result = new Date(date.getFullYear(), date.getMonth() + count, 1);
+    const lastDay = new Date(result.getFullYear(), result.getMonth() + 1, 0).getDate();
+    result.setDate(Math.min(date.getDate(), lastDay));
+    result.setHours(0, 0, 0, 0);
+    return result;
+  }
+
+  function updateCounter() {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const totalDays = Math.max(0,
+      Math.round((calendarDayStamp(today) - calendarDayStamp(relationshipStart)) / 86400000)
+    );
+    let wholeMonths = Math.max(0,
+      (today.getFullYear() - relationshipStart.getFullYear()) * 12 +
+      today.getMonth() - relationshipStart.getMonth()
+    );
+    let anniversary = addMonthsClamped(relationshipStart, wholeMonths);
+    if (anniversary > today) {
+      wholeMonths -= 1;
+      anniversary = addMonthsClamped(relationshipStart, wholeMonths);
+    }
+
+    const years = Math.floor(wholeMonths / 12);
+    const months = wholeMonths % 12;
+    const days = Math.max(0,
+      Math.round((calendarDayStamp(today) - calendarDayStamp(anniversary)) / 86400000)
+    );
+
+    const totalDaysElement = $("#totalDays");
+    const yearsElement = $("#years");
+    const monthsElement = $("#months");
+    const daysElement = $("#days");
+    if (totalDaysElement) totalDaysElement.textContent = String(totalDays);
+    if (yearsElement) yearsElement.textContent = String(years);
+    if (monthsElement) monthsElement.textContent = String(months);
+    if (daysElement) daysElement.textContent = String(days);
+  }
+
+  updateCounter();
+  window.addEventListener("pageshow", updateCounter);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) updateCounter();
+  });
+
   let currentPage = pageIds.has(window.location.hash.slice(1))
     ? window.location.hash.slice(1)
     : "home";
@@ -516,40 +572,7 @@
   openDoghouse.addEventListener("click", toggleDoghouse);
   doghouseButton.addEventListener("click", toggleDoghouse);
 
-  // Anniversary counter from August 14, 2025.
-  const relationshipStart = new Date(2025, 7, 14);
-  relationshipStart.setHours(0, 0, 0, 0);
 
-  function addMonthsClamped(date, count) {
-    const result = new Date(date.getFullYear(), date.getMonth() + count, 1);
-    const lastDay = new Date(result.getFullYear(), result.getMonth() + 1, 0).getDate();
-    result.setDate(Math.min(date.getDate(), lastDay));
-    return result;
-  }
-
-  function updateCounter() {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const totalDays = Math.max(0, Math.floor((today - relationshipStart) / 86400000));
-    let wholeMonths = Math.max(0,
-      (today.getFullYear() - relationshipStart.getFullYear()) * 12 +
-      today.getMonth() - relationshipStart.getMonth()
-    );
-    let anniversary = addMonthsClamped(relationshipStart, wholeMonths);
-    if (anniversary > today) {
-      wholeMonths -= 1;
-      anniversary = addMonthsClamped(relationshipStart, wholeMonths);
-    }
-    const years = Math.floor(wholeMonths / 12);
-    const months = wholeMonths % 12;
-    const days = Math.max(0, Math.floor((today - anniversary) / 86400000));
-
-    $("#totalDays").textContent = String(totalDays);
-    $("#years").textContent = String(years);
-    $("#months").textContent = String(months);
-    $("#days").textContent = String(days);
-  }
-  updateCounter();
 
   // Secret stays concealed until the gift is opened.
   const giftButton = $("#giftButton");
