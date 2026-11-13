@@ -4254,3 +4254,168 @@ body {
   .open-button, .nav-button, .memory-photo, .pill-button { transition: none !important; }
   .page-section, .vinyl-record { animation: none !important; }
 }
+
+
+/* November 2026 correction: the Snoopy tab is a keepsake photo, not a second
+   illustrated doghouse interaction. The photo remains centered and prominent. */
+.doghouse-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: min(100%, 760px);
+  margin: 0 auto;
+}
+.doghouse-postcard {
+  width: min(100%, 680px);
+  margin: 0 auto;
+  transform: rotate(-.25deg);
+}
+.doghouse-postcard img {
+  width: 100%;
+  height: clamp(245px, 42vw, 390px);
+  object-fit: contain;
+}
+
+/* Secret gift: align the box pieces as one deliberate illustration.
+   The original click-to-open and message reveal stay unchanged. */
+.secret-section {
+  min-height: 520px;
+}
+.secret-stage {
+  min-height: 350px;
+  gap: 24px;
+  padding: 16px 10px 24px;
+}
+.gift-button {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 230px;
+  height: 230px;
+  margin: 0;
+  overflow: visible;
+  isolation: isolate;
+  filter: drop-shadow(0 16px 18px rgba(89, 50, 68, .16));
+  -webkit-tap-highlight-color: transparent;
+}
+.gift-button:focus-visible {
+  outline: 2px solid #925b70;
+  outline-offset: 7px;
+  border-radius: 12px;
+}
+.gift-body {
+  position: absolute;
+  z-index: 1;
+  left: 43px;
+  bottom: 13px;
+  width: 144px;
+  height: 112px;
+  border: 1px solid #a65c77;
+  border-radius: 4px 4px 12px 12px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.14), transparent 35%, rgba(103,45,69,.12)),
+    linear-gradient(105deg, #e7b4bd 0%, #ce8298 55%, #ae657f 100%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.32), inset -9px -5px 0 rgba(113,57,77,.08);
+}
+.gift-ribbon.vertical {
+  position: absolute;
+  z-index: 2;
+  left: 103px;
+  bottom: 13px;
+  width: 24px;
+  height: 112px;
+  background: linear-gradient(90deg, #fff8eb, #ead6c7 55%, #fff8eb);
+  box-shadow: 1px 0 2px rgba(93,57,65,.08);
+}
+.gift-lid {
+  position: absolute;
+  z-index: 4;
+  left: 31px;
+  top: 84px;
+  width: 168px;
+  height: 31px;
+  border: 1px solid #a65b76;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #edc1c5, #c77a91);
+  box-shadow: 0 7px 13px rgba(95,49,68,.19), inset 0 1px 0 rgba(255,255,255,.45);
+  transform-origin: 12% 88%;
+  transition: transform .72s cubic-bezier(.2,.8,.2,1);
+}
+.gift-bow {
+  position: absolute;
+  z-index: 5;
+  top: 48px;
+  width: 55px;
+  height: 39px;
+  border: 9px solid #fff4e8;
+  background: #c27b91;
+  box-shadow: 0 2px 4px rgba(86,48,62,.08);
+  transition: transform .72s cubic-bezier(.2,.8,.2,1), opacity .72s ease;
+}
+.gift-bow.bow-left {
+  left: 61px;
+  border-radius: 80% 20% 60% 25%;
+  transform: rotate(18deg);
+}
+.gift-bow.bow-right {
+  right: 61px;
+  border-radius: 20% 80% 25% 60%;
+  transform: rotate(-18deg);
+}
+.gift-knot {
+  position: absolute;
+  z-index: 6;
+  top: 61px;
+  left: 106px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff4e8;
+  box-shadow: 0 2px 4px rgba(86,48,62,.12);
+}
+.gift-button.opened .gift-lid {
+  transform: translate(22px,-76px) rotate(15deg);
+}
+.gift-button.opened .gift-bow.bow-left {
+  transform: translate(21px,-76px) rotate(28deg);
+  opacity: .9;
+}
+.gift-button.opened .gift-bow.bow-right {
+  transform: translate(21px,-76px) rotate(-4deg);
+  opacity: .9;
+}
+.secret-message {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 550px);
+  min-height: 104px;
+  margin: 0 auto;
+  padding: 24px clamp(16px, 4vw, 32px);
+  gap: 12px;
+  border: 1px solid rgba(168,126,116,.66);
+  border-radius: 3px 20px 3px 20px;
+  color: #6d3d50;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.84), transparent 55%),
+    linear-gradient(145deg, #fffaf0, #eddfd8);
+  box-shadow: 0 18px 38px rgba(58,39,45,.14), inset 0 0 0 5px rgba(255,255,255,.58);
+}
+.secret-message p {
+  margin: 0;
+  color: #6d3d50;
+  font: 600 clamp(2rem, 5.3vw, 3.2rem)/1 var(--hand);
+  text-align: center;
+}
+.secret-message > span {
+  flex: 0 0 auto;
+  color: #bd8291;
+  font-size: 22px;
+}
+@media (max-width: 680px) {
+  .doghouse-postcard img { height: clamp(220px, 64vw, 290px); }
+  .secret-section { min-height: 460px; }
+  .secret-stage { min-height: 325px; padding-inline: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gift-button, .gift-lid, .gift-bow { transition: none !important; }
+}
