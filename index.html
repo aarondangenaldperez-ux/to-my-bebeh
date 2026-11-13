@@ -10,7 +10,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20261113-balanced-botanical-v16">
-  <script src="script.js?v=20261114-calendar-counter-v3" defer></script>
+  <script src="script.js?v=20261114-calendar-counter-v4" defer></script>
+  <script>
+    // Independent calendar-counter safeguard: keeps the date display working
+    // even if another optional site interaction encounters a script error.
+    document.addEventListener("DOMContentLoaded", function () {
+      const start = new Date(2025, 7, 14);
+      const todayNow = new Date();
+      const today = new Date(todayNow.getFullYear(), todayNow.getMonth(), todayNow.getDate());
+      const dayStamp = date => Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+      let monthCount = Math.max(0,
+        (today.getFullYear() - start.getFullYear()) * 12 +
+        today.getMonth() - start.getMonth()
+      );
+      const addMonths = count => {
+        const date = new Date(start.getFullYear(), start.getMonth() + count, 1);
+        const last = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+        date.setDate(Math.min(start.getDate(), last));
+        return date;
+      };
+      if (addMonths(monthCount) > today) monthCount -= 1;
+      const values = {
+        totalDays: Math.max(0, Math.round((dayStamp(today) - dayStamp(start)) / 86400000)),
+        years: Math.floor(monthCount / 12),
+        months: monthCount % 12,
+        days: Math.max(0, Math.round((dayStamp(today) - dayStamp(addMonths(monthCount))) / 86400000))
+      };
+      Object.entries(values).forEach(([id, value]) => {
+        const node = document.getElementById(id);
+        if (node) node.textContent = String(value);
+      });
+    });
+  </script>
 </head>
 <body>
   <div class="paper-grain" aria-hidden="true"></div>
