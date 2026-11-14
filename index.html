@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261114-secret-gift-and-doghouse-v18">
-  <script src="script.js?v=20261114-remove-doghouse-interaction-v5" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261114-independent-gift-fix-v19">
+  <script src="script.js?v=20261114-independent-gift-fix-v6" defer></script>
   <script>
     // Independent calendar-counter safeguard: keeps the date display working
     // even if another optional site interaction encounters a script error.
@@ -40,6 +40,22 @@
         const node = document.getElementById(id);
         if (node) node.textContent = String(value);
       });
+    });
+
+    // Keep the Secret gift independent from the main site script so a problem
+    // in another section cannot prevent this button from opening.
+    document.addEventListener("DOMContentLoaded", function () {
+      const giftButton = document.getElementById("giftButton");
+      const secretMessage = document.getElementById("secretMessage");
+      if (!giftButton || !secretMessage) return;
+
+      giftButton.addEventListener("click", function () {
+        giftButton.classList.add("opened");
+        secretMessage.classList.remove("hidden");
+        giftButton.setAttribute("aria-label", "Gift opened");
+        giftButton.setAttribute("aria-expanded", "true");
+        giftButton.disabled = true;
+      }, { once: true });
     });
   </script>
 </head>
@@ -422,7 +438,6 @@
           <div class="snoopy-tabs" role="tablist" aria-label="Snoopy scenes">
             <button class="snoopy-tab active" data-scene="woodstockScene" id="tabWoodstock" role="tab" aria-controls="woodstockScene" aria-selected="true" type="button">Woodstock</button>
             <button class="snoopy-tab" data-scene="fifiScene" id="tabFifi" role="tab" aria-controls="fifiScene" aria-selected="false" type="button">Fifi</button>
-            <button class="snoopy-tab" data-scene="doghouseScene" id="tabDoghouse" role="tab" aria-controls="doghouseScene" aria-selected="false" type="button">Doghouse</button>
           </div>
 
           <div class="snoopy-moments snoopy-all-moments" aria-label="Four personal Peanuts moments">
@@ -494,20 +509,6 @@
                 <input id="fifiArtworkInput" class="visually-hidden" type="file" accept="image/*" data-artwork="fifiArtworkPreview">
               </label>
               <a class="pin-source" href="https://www.pinterest.com/pin/21040323254315944/" target="_blank" rel="noopener noreferrer">Pinterest picture ↗</a>
-            </div>
-          </div>
-
-          <div class="snoopy-scene" id="doghouseScene" role="tabpanel" aria-labelledby="tabDoghouse" hidden>
-            <div class="scene-copy"><span class="scene-number">03 / HOME SWEET HOME</span><h3>Snoopy's Doghouse</h3></div>
-            <div class="doghouse-layout">
-              <figure class="doghouse-postcard">
-                <span class="postcard-tape" aria-hidden="true"></span>
-                <img id="doghousePinArt" src="https://i.pinimg.com/originals/a4/16/57/a4165772511da53ed0ea284b11575d6d.jpg?nii=t" alt="Snoopy resting on his red doghouse with Woodstock and flowers" referrerpolicy="no-referrer" loading="eager" decoding="async">
-                <div class="artwork-fallback doghouse-art-fallback" hidden><span>🏠　🐤</span><b>Snoopy's Doghouse</b></div>
-                <figcaption>♡　 everybody's favorite little home　♡</figcaption>
-                <a class="pin-source" href="https://www.pinterest.com/ideas/snoopy-house/895583357650/" target="_blank" rel="noopener noreferrer">Pinterest picture ↗</a>
-              </figure>
-
             </div>
           </div>
 
