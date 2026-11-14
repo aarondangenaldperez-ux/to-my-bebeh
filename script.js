@@ -428,21 +428,6 @@
     }
   }
 
-  const doghousePinArt = $("#doghousePinArt");
-  if (doghousePinArt) {
-    doghousePinArt.addEventListener("error", () => {
-      doghousePinArt.classList.add("hidden");
-      $(".doghouse-art-fallback")?.removeAttribute("hidden");
-    });
-    doghousePinArt.addEventListener("load", () => {
-      $(".doghouse-art-fallback")?.setAttribute("hidden", "");
-      doghousePinArt.classList.remove("hidden");
-    });
-    if (doghousePinArt.complete && doghousePinArt.naturalWidth === 0) {
-      $(".doghouse-art-fallback")?.removeAttribute("hidden");
-    }
-  }
-
   async function compressImage(file) {
     if (typeof createImageBitmap !== "function") {
       return new Promise((resolve, reject) => {
@@ -556,16 +541,6 @@
     });
 
     stopButton.addEventListener("click", () => stopSnoopyVideo(playerElement));
-  });
-
-  // Secret stays concealed until the gift is opened.
-  const giftButton = $("#giftButton");
-  const secretMessage = $("#secretMessage");
-  giftButton.addEventListener("click", () => {
-    giftButton.classList.add("opened");
-    secretMessage.classList.remove("hidden");
-    giftButton.setAttribute("aria-label", "Gift opened");
-    giftButton.disabled = true;
   });
 
   // Keyboard dismissal for overlays.
